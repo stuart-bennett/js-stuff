@@ -1,8 +1,11 @@
 import React from 'react'
 
 class App extends React.Component {
+    test(): number {
+        return 1;
+    }
     render() {
-        return <h1>Test</h1>;
+        return <h1>Te</h1>;
     }
 }
 

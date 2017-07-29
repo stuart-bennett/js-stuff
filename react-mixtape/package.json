@@ -30,6 +30,7 @@
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-react": "^7.1.0",
     "flow-bin": "^0.51.1",
+    "flowtype-loader": "^0.2.2",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   }

@@ -1,4 +1,5 @@
 var path = require('path');
+var FlowtypePlugin = require("flowtype-loader/plugin");
 
 module.exports = {
     entry: './src/app',
@@ -18,10 +19,14 @@ module.exports = {
                         presets: ["es2015", "react"]
                     }
                 },
+                { loader: 'flowtype-loader' },
                 { loader: 'eslint-loader' }
             ],
         }]
     },
+    plugins: [
+        new FlowtypePlugin()
+    ],
     output: {
         path: path.resolve(__dirname, '.build'),
         filename: 'bundle.js'

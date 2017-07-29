@@ -7,12 +7,13 @@ import App from 'components/app';
  *  @param {object} $mount - The node which should contain the app
  *  @return {object} The app container
  */
-function init($mount) {
+function init($mount: HTMLElement) {
     const $root = document.createElement('div');
     $mount.appendChild($root);
     return $root;
 }
 
-const $root = init(document.body);
+const $body: HTMLElement = (document.body: any);
+const $root = init($body);
 
 ReactDOM.render(<App />, $root);

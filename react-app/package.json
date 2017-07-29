@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config webpack.config.js",
     "serve": "webpack-dev-server --content-base .build",
-    "build": "rm -rf .build && mkdir .build && cp src/index.html .build/",
+    "build": "rm -rf .build && mkdir .build && cp src/index.html .build/ && webpack --config webpack.config.js",
+    "dev" : "npm run build && npm run serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

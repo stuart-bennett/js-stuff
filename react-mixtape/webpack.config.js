@@ -2,6 +2,12 @@ var path = require('path');
 
 module.exports = {
     entry: './src/app',
+    resolve: {
+        modules: [
+            path.resolve(__dirname, "src"),
+            "node_modules"
+        ],
+    },
     module: {
         rules: [
             {

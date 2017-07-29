@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
  *  @return {object} The app container
  */
 function init($mount) {
-    let $root = document.createElement('div');
+    const $root = document.createElement('div');
     $mount.appendChild($root);
     return $root;
 }
@@ -19,5 +19,5 @@ class Thing extends React.Component {
     }
 }
 
-const instance = <Thing name="test" />;
+const instance = <Thing name="test name" />;
 ReactDOM.render(instance, $root);

@@ -2,7 +2,8 @@
     "env": {
         "browser": true
     },
-    "plugins": ["react"],
+    "parser": "babel-eslint",
+    "plugins": ["react", "flowtype"],
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",

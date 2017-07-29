@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from 'components/app';
 
 /*
  *  Create and add a container element for the app
@@ -13,11 +14,5 @@ function init($mount) {
 }
 
 const $root = init(document.body);
-class Thing extends React.Component {
-    render() {
-        return <h1>Testing {this.props.name}</h1>;
-    }
-}
 
-const instance = <Thing name="test name" />;
-ReactDOM.render(instance, $root);
+ReactDOM.render(<App />, $root);

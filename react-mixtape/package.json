@@ -8,7 +8,7 @@
     "serve": "webpack-dev-server --content-base .build",
     "build": "rm -rf .build && mkdir .build && cp src/index.html .build/ && webpack --config webpack.config.js",
     "dev": "npm run build && npm run serve",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "flow": "flow check"
   },
   "author": "",
@@ -31,6 +31,8 @@
     "eslint-plugin-react": "^7.1.0",
     "flow-bin": "^0.51.1",
     "flowtype-loader": "^0.2.2",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.6.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"
   }

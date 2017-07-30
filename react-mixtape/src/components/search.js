@@ -1,24 +1,36 @@
 import React from 'react'
+import {search} from 'spotifyApi'
+import SearchResults from 'components/SearchResults';
 
 type Props = {
     placeholder: string
 };
 
 type State = {
-    searchTerm: ?string
-}
+    searchTerm: string,
+    searchResults: Array<string>
+};
 
 class Search extends React.Component<Props, Props, State> {
     static defaultProps = { placeholder: 'Search...' };
-    state = { searchTerm: 'Testing' };
+    state = {
+        searchTerm: 'Testing',
+        searchResults: []
+    };
+
     constructor(props: Props) {
         super(props);
     }
 
     handleChange(input: HTMLInputElement) {
+        const searchTerm = input.value;
         this.setState({
-            searchTerm: input.value
+            searchTerm: searchTerm
         });
+
+        search(searchTerm).then((x: Array<string>) => this.setState({
+            searchResults: x
+        }));
     }
 
     render() {
@@ -30,6 +42,7 @@ class Search extends React.Component<Props, Props, State> {
                     className="form-control"
                     onChange={evt => this.handleChange(evt.target)}
                     value={this.state.searchTerm}/>
+                <SearchResults results={this.state.searchResults} />
             </div>;
 
     }

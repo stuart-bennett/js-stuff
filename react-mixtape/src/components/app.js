@@ -1,11 +1,9 @@
 import React from 'react'
+import Search from './search';
 
 class App extends React.Component {
-    test(): number {
-        return 1;
-    }
     render() {
-        return <h1>Te</h1>;
+        return <Search placeholder="Search..." />;
     }
 }
 

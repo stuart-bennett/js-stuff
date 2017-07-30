@@ -4,11 +4,21 @@ type Props = {
     placeholder: string
 };
 
-class Search extends React.Component {
-    props: Props;
-    static defaultProps: Props;
+type State = {
+    searchTerm: ?string
+}
+
+class Search extends React.Component<Props, Props, State> {
+    static defaultProps = { placeholder: 'Search...' };
+    state = { searchTerm: 'Testing' };
     constructor(props: Props) {
         super(props);
+    }
+
+    handleChange(input: HTMLInputElement) {
+        this.setState({
+            searchTerm: input.value
+        });
     }
 
     render() {
@@ -17,7 +27,9 @@ class Search extends React.Component {
                 <input
                     type="search"
                     placeholder={this.props.placeholder}
-                    className="form-control" />
+                    className="form-control"
+                    onChange={evt => this.handleChange(evt.target)}
+                    value={this.state.searchTerm}/>
             </div>;
 
     }

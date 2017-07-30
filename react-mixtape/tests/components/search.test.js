@@ -19,6 +19,18 @@ describe("Search Component", () => {
             "placeholder", expected);
     });
 
+    test('Changing value in input updates search term state', () => {
+        const expectedSearchTerm = "Something new";
+        const component = shallow(<Search placeholder="test" />);
+        const input = component.find("input");
+        const evt = {
+            target: { value: expectedSearchTerm }
+        };
+
+        input.simulate("change", evt);
+        expect(component.state()).toHaveProperty(
+            "searchTerm", expectedSearchTerm);
+    });
 });
 
 

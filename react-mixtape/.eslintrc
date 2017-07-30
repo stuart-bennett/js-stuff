@@ -14,5 +14,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
-    ]
+    ],
+    "globals": {
+        "Promise": true
+    }
 }

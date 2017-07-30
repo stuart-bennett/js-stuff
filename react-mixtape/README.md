@@ -10,3 +10,6 @@ Starts the webpack-dev-server based using whatever is in `.build`.
 
 ### npm run dev
 Convenient single command to build and start the dev server, ready to start coding.
+
+### npm run babel
+Run individual Babel process

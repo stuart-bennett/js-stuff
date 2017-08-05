@@ -1,16 +1,17 @@
-import {search} from "spotifyApi";
+import {search} from 'spotifyApi';
+import fetchMock from 'jest-fetch-mock';
 
 describe("The search function", () => {
-    describe("whilst under development", () => {
+    window.fetch = fetchMock;
+    test("should resolve to an array of strings", () => {
+        const result = search(
+            "searchTerm",
+            () => Promise.resolve([{ title: "fkfjs" }]));
 
-        test("should resolve to a 2 item array containing searchTerm with number prefix", () => {
-            const result = search("searchTerm");
-            let expected = [
-                "searchTerm#1",
-                "searchTerm#2"
-            ];
+        let expected = [
+            "fkfjs"
+        ];
 
-            expect(result).resolves.toEqual(expected);
-        });
+        expect(result).resolves.toEqual(expected);
     });
 });

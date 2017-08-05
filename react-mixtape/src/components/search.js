@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import {search} from 'spotifyApi'
 import SearchResults from 'components/SearchResults';
@@ -8,7 +10,7 @@ type Props = {
 
 type State = {
     searchTerm: string,
-    searchResults: Array<string>
+    searchResults: Array<SearchResult>
 };
 
 class Search extends React.Component<Props, Props, State> {
@@ -28,10 +30,14 @@ class Search extends React.Component<Props, Props, State> {
             searchTerm: searchTerm
         });
 
-        search(searchTerm).then((x: Array<string>) => this.setState({
-            searchResults: x
-        }));
-    }
+        const fn = (r: Either<string, SearchResult>) => {
+            if (!r.right) return;
+            this.setState({
+                searchResults: [r.right]
+            })};
+
+            search(searchTerm).then(fn);
+        }
 
     render() {
         return <div>

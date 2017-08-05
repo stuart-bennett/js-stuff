@@ -1,10 +1,8 @@
+// @flow
+
 import React from 'react'
 import Search from './search';
 
-class App extends React.Component {
-    render() {
-        return <Search placeholder="Search..." />;
-    }
-}
+const App = () => <Search placeholder="Search..." />;
 
 export default App;

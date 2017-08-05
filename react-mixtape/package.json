@@ -36,6 +36,7 @@
     "flow-bin": "^0.51.1",
     "flowtype-loader": "^0.2.2",
     "jest": "^20.0.4",
+    "jest-fetch-mock": "^1.2.1",
     "react-test-renderer": "^15.6.1",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.6.1"

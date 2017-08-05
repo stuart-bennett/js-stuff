@@ -1,5 +1,10 @@
 // @flow
 
+type Either<E,A> = {
+    left: ?E,
+    right: ?A
+};
+
 type SearchResult = {
     title: string
 };

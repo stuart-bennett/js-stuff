@@ -1,7 +1,7 @@
 import React from 'react'
 
 type Props = {
-    results: Array<string>
+    results: Array<SearchResult>
 };
 
 type State = {
@@ -13,7 +13,7 @@ class SearchResults extends React.Component<Props, Props, State> {
 
     render() {
         return <ul>
-            { this.props.results.map((x: string) => <li key={x}>{x}</li> )}
+            { this.props.results.map((x: SearchResult) => <li key={x.title}>{x.title}</li> )}
         </ul>;
     }
 }

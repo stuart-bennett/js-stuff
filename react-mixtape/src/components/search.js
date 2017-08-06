@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {search} from 'spotifyApi'
-import SearchResults from 'components/SearchResults';
+import SearchResults from 'components/SearchResults'
 
 type Props = {
     placeholder: string

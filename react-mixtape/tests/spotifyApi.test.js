@@ -4,6 +4,7 @@ import fetchMock from 'jest-fetch-mock';
 describe("The search function", () => {
     window.fetch = fetchMock;
     test("should resolve to an array of strings", () => {
+
         const result = search(
             "searchTerm",
             () => Promise.resolve([{ title: "fkfjs" }]));

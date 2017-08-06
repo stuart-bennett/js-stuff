@@ -4,12 +4,11 @@ import SearchResults from 'components/SearchResults';
 
 describe("SearchResults component", () => {
     test("should render each item from results prop", () => {
-        const prefix = "TestItem";
         const results = [
-            `${prefix}#1`,
-            `${prefix}#2`,
-            `${prefix}#3`,
-            `${prefix}#4`
+            { title: "test" },
+            { title: "test" },
+            { title: "test" },
+            { title: "test" }
         ];
 
         const component = shallow(<SearchResults results={results} />);

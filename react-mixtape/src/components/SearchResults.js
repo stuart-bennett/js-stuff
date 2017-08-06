@@ -4,18 +4,14 @@ type Props = {
     results: Array<SearchResult>
 };
 
-type State = {
-};
+const emptyView = <p>No Results</p>;
+const resultsView = (p: Props) => <ul>
+    { p.results.map((x: SearchResult) => <li key={x.title}>{x.title}</li>)}
+    </ul>;
 
-class SearchResults extends React.Component<Props, Props, State> {
-    static defaultProps = { results: [] };
-    state = {};
+const render = (p: Props) => p.results.length == 0
+    ? emptyView
+    : resultsView(p);
 
-    render() {
-        return <ul>
-            { this.props.results.map((x: SearchResult) => <li key={x.title}>{x.title}</li> )}
-        </ul>;
-    }
-}
-
+const SearchResults = render;
 export default SearchResults;

@@ -30,14 +30,18 @@ class Search extends React.Component<Props, Props, State> {
             searchTerm: searchTerm
         });
 
-        const fn = (r: Either<string, SearchResult>) => {
-            if (!r.right) return;
-            this.setState({
-                searchResults: [r.right]
-            })};
+        const fn = (r: Either<string, Array<SearchResult>>) => {
+            if (!r.hasValue) return;
 
-            search(searchTerm).then(fn);
-        }
+            const result: Array<SearchResult> = r.getOrDefault([]);
+
+            this.setState({
+                searchResults: result
+            });
+        };
+
+        search(searchTerm).then(fn);
+    }
 
     render() {
         return <div>

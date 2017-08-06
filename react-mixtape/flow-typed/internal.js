@@ -3,7 +3,8 @@
 type Either<E,A> = {
     left: ?E,
     right: ?A,
-    hasValue: bool
+    hasValue: bool,
+    getOrDefault: A => A
 };
 
 type SearchResult = {

@@ -1,41 +1,44 @@
 import {fetchMap} from 'apiWrapper';
+import {maybe} from 'maybe';
 import fetchMock from 'jest-fetch-mock';
 
 // Mock the Fetch API
 window.fetch = fetchMock;
 
-type ApiResponse = {
+type SourceType = {
     title: string,
     url: string,
     type: string
 };
 
-type SearchResult = {
-    title: string,
-    url: string
+type DestinationType = {
+    mappedTitle: string,
+    mappedUrl: string
 };
 
 describe("Given an apiWrapper", () => {
-    const anyUrl = "http://example.org";
-    const response: ApiResponse = {
+    const anyUrl: string = "http://example.org";
+    const response: SourceType = {
         title: "title.test",
         url: "url.test",
         type: "type.test"
     };
 
     test("calling fetchMap should transform result", () => {
-        const expected: SearchResult = {
-            title: "title.test",
-            url: "url.test"
-        };
+        const expected: Either<string, DestinationType> =  maybe.some({
+            mappedTitle: "title.test",
+            mappedUrl: "url.test"
+        });
 
         fetchMock.mockResponse(JSON.stringify(response));
-        const mapFn: ((a: ApiResponse) => SearchResult) = a => ({
-            title: a.title,
-            url: a.url
+        const mapFn: ((a: SourceType) => DestinationType) = a => ({
+            mappedTitle: a.title,
+            mappedUrl: a.url
         });
 
         const actual = fetchMap(anyUrl, mapFn);
+
+        // need to fix this as the getOrDefault function causes inequality
         expect(actual).resolves.toEqual(expected);
     });
 });

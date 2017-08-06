@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import Search from './search';
+import Search from 'components/Search'
 
 const App = () => <Search placeholder="Search..." />;
 

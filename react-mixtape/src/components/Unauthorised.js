@@ -1,7 +1,11 @@
 import React from 'react';
 
+type Props = {
+    clientId: string
+};
+
 const Unauthorised = (p: Props) => <div>
-        <a href="">Authorise</a>
+        <a href={p.clientId}>Authorise</a>
     </div>
 
 export default Unauthorised;

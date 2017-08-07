@@ -5,15 +5,23 @@ const maybe = {
         left: null,
         right: a,
         hasValue: true,
-        getOrDefault: () => a
     }),
 
     none: <E,A>(e: E): Either<E,A> => ({
         left: e,
         right: null,
         hasValue: false,
-        getOrDefault: d => d
     })
+};
+
+function _getOrDefault<E,A>(e: Either<E,A>, d: A): A {
+    if (e.right != null)
+        return e.right;
+
+    return d;
 }
 
-export { maybe };
+// couldn't get flow to let type the function in constant / arrow syntax so had to do this
+const getOrDefault = _getOrDefault;
+
+export { maybe, getOrDefault };

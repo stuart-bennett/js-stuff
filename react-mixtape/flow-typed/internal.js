@@ -1,10 +1,9 @@
 // @flow
 
 type Either<E,A> = {
-    left: ?E,
-    right: ?A,
-    hasValue: bool,
-    getOrDefault: A => A
+    left: E | null,
+    right: A | null,
+    hasValue: bool
 };
 
 type SearchResult = {

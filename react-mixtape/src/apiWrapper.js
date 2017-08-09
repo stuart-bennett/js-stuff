@@ -1,11 +1,11 @@
 // @flow
 
-import {maybe} from 'maybe'
+import {some, none} from 'Either'
 
 const fetchMap = <A,B>(url: string, map: ((a: A) => B)): Promise<Either<string, B>> =>
     fetch(url)
         .then(r => r.json())
-        .then(r => maybe.some(map(r)))
-        .catch(err => maybe.none(err));
+        .then(r => some(map(r)))
+        .catch(err => none(err));
 
 export { fetchMap };

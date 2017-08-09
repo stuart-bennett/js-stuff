@@ -1,5 +1,5 @@
 import {fetchMap} from 'apiWrapper';
-import {maybe} from 'maybe';
+import {some} from 'Either';
 import fetchMock from 'jest-fetch-mock';
 
 // Mock the Fetch API
@@ -25,7 +25,7 @@ describe("Given an apiWrapper", () => {
     };
 
     test("calling fetchMap should transform result", () => {
-        const expected: Either<string, DestinationType> =  maybe.some({
+        const expected: Either<string, DestinationType> = some({
             mappedTitle: "title.test",
             mappedUrl: "url.test"
         });

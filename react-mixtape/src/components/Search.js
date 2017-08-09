@@ -3,7 +3,7 @@
 import React from 'react'
 import {search} from 'spotifyApi'
 import SearchResults from 'components/SearchResults'
-import {getOrDefault} from 'maybe'
+import {getOrDefault} from 'Either'
 
 type Props = {
     placeholder: string
@@ -31,15 +31,9 @@ class Search extends React.Component<Props, Props, State> {
             searchTerm: searchTerm
         });
 
-        const fn = (r: Either<string, Array<SearchResult>>) => {
-            if (!r.hasValue) return;
-
-            const result: Array<SearchResult> = getOrDefault(r, []);
-
-            this.setState({
-                searchResults: result
-            });
-        };
+        const fn = (r: Either<string, Array<SearchResult>>) => this.setState({
+            searchResults: getOrDefault(r, [])
+        });
 
         search(searchTerm).then(fn);
     }

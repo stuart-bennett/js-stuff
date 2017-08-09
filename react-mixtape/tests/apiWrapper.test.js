@@ -36,7 +36,7 @@ describe("Given an apiWrapper", () => {
             mappedUrl: a.url
         });
 
-        const actual = fetchMap(anyUrl, mapFn);
+        const actual = fetchMap(mapFn, anyUrl);
         expect(actual).resolves.toEqual(expected);
     });
 });

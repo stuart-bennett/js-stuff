@@ -6,7 +6,8 @@ import SearchResults from 'components/SearchResults'
 import {getOrDefault} from 'Either'
 
 type Props = {
-    placeholder: string
+    placeholder: string,
+    oAuthToken: string
 };
 
 type State = {
@@ -15,7 +16,11 @@ type State = {
 };
 
 class Search extends React.Component<Props, Props, State> {
-    static defaultProps = { placeholder: 'Search...' };
+    static defaultProps = {
+        oAuthToken: "",
+        placeholder: 'Search...'
+    };
+
     state = {
         searchTerm: 'Testing',
         searchResults: []
@@ -31,11 +36,12 @@ class Search extends React.Component<Props, Props, State> {
             searchTerm: searchTerm
         });
 
-        const fn = (r: Either<string, Array<SearchResult>>) => this.setState({
-            searchResults: getOrDefault(r, [])
-        });
+        const fn = (r: Either<string, Array<SearchResult>>) =>
+            this.setState({
+                searchResults: getOrDefault(r, [])
+            });
 
-        search(searchTerm).then(fn);
+        search(searchTerm, this.props.oAuthToken).then(fn);
     }
 
     render() {

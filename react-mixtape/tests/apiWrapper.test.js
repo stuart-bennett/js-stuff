@@ -37,8 +37,6 @@ describe("Given an apiWrapper", () => {
         });
 
         const actual = fetchMap(anyUrl, mapFn);
-
-        // need to fix this as the getOrDefault function causes inequality
         expect(actual).resolves.toEqual(expected);
     });
 });

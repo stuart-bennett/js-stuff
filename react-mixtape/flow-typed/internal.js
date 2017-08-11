@@ -11,9 +11,19 @@ type Failure<E> = {
 type Either<E,A> = Success<A> | Failure<E>;
 
 type SearchResult = {
-    title: string
+    id: String,
+    title: String
+};
+
+type TracksResponse = {
+    items: Array<TracksResponse>
+};
+
+type TrackResponse = {
+    id: String,
+    name: String
 };
 
 type ApiResponse = {
-    title: string
+    tracks: TracksResponse
 };

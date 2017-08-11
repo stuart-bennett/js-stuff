@@ -13,7 +13,6 @@ const render = () => {
     return token == null
         ? <Unauthorised clientId={clientId} />
         : <Search oAuthToken={token} placeholder="Search..." />;
-
 };
 
 const App = () => render();

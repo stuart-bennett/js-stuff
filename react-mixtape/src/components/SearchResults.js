@@ -6,7 +6,7 @@ type Props = {
 
 const emptyView = <p>No Results</p>;
 const resultsView = (p: Props) => <ul>
-    { p.results.map((x: SearchResult) => <li key={x.title}>{x.title}</li>)}
+    { p.results.map((x: SearchResult) => <li key={x.id}>{x.title}</li>)}
     </ul>;
 
 const render = (p: Props) => p.results.length == 0

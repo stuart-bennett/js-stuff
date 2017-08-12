@@ -4,6 +4,7 @@ import React from 'react'
 import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import Unauthorised from 'components/Unauthorised'
+import PlaylistDetail from 'components/PlaylistDetail'
 import {getPlaylists} from 'spotifyApi'
 import {getOrDefault} from 'Either'
 
@@ -20,6 +21,7 @@ type Props = {
 
 type State = {
     playlists: Array<Playlist>,
+    selectedPlaylist: ?Playlist,
     oAuthToken: Authentication
 };
 
@@ -27,6 +29,7 @@ class App extends React.Component<Props, Props, State> {
     static defaultProps = {};
     state = {
         playlists: [],
+        selectedPlaylist: null,
         oAuthToken: { isAuthenticated: false }
     };
 
@@ -50,6 +53,12 @@ class App extends React.Component<Props, Props, State> {
         }));
     }
 
+    playlistSelected(a: Playlist) {
+        this.setState({
+            selectedPlaylist: a
+        });
+    }
+
     render() {
         if (!this.state.oAuthToken.isAuthenticated)
             return <Unauthorised clientId={clientId} />;
@@ -58,7 +67,12 @@ class App extends React.Component<Props, Props, State> {
             <Search
                 oAuthToken={this.state.oAuthToken.token}
                 placeholder="Search..." />
-            <Playlists items={this.state.playlists} />
+            { this.state.selectedPlaylist
+                ? <PlaylistDetail playlist={this.state.selectedPlaylist} />
+                : <p>Nothing selected</p> }
+            <Playlists
+                items={this.state.playlists}
+                onSelect={(p) => this.playlistSelected(p)} />
         </div>;
     }
 }

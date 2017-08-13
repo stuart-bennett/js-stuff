@@ -63,16 +63,27 @@ class App extends React.Component<Props, Props, State> {
         if (!this.state.oAuthToken.isAuthenticated)
             return <Unauthorised clientId={clientId} />;
 
-        return <div>
-            <Search
-                oAuthToken={this.state.oAuthToken.token}
-                placeholder="Search..." />
-            { this.state.selectedPlaylist
-                ? <PlaylistDetail playlist={this.state.selectedPlaylist} />
-                : <p>Nothing selected</p> }
-            <Playlists
-                items={this.state.playlists}
-                onSelect={(p) => this.playlistSelected(p)} />
+        return <div className="container-fluid fillHeight">
+            <div className="row fillHeight">
+                <div className="col-md-2 sidebar">
+                    <Playlists
+                        items={this.state.playlists}
+                        onSelect={(p) => this.playlistSelected(p)} />
+                </div>
+
+                <div className="col-md-8 pl-0 pr-0 main">
+                    <Search
+                        oAuthToken={this.state.oAuthToken.token}
+                        placeholder="Search..." />
+                </div>
+
+                <div className="col-md-2 pl-0 pr-0 sidebar">
+                    { this.state.selectedPlaylist
+                        ? <PlaylistDetail
+                            playlist={this.state.selectedPlaylist} />
+                        : <p>Nothing selected</p> }
+                </div>
+            </div>
         </div>;
     }
 }

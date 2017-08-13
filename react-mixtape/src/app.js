@@ -9,6 +9,7 @@ import App from 'components/app';
  */
 function init($mount: HTMLElement) {
     const $root = document.createElement('div');
+    $root.classList.add("fillHeight");
     $mount.appendChild($root);
     return $root;
 }

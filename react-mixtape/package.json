@@ -6,11 +6,14 @@
   "scripts": {
     "eslint": "eslint ./src/app.js",
     "serve": "webpack-dev-server --content-base .build",
-    "build": "rm -rf .build && mkdir .build && cp src/index.html .build/ && webpack --config webpack.config.js",
+    "clean": "rm -rf .build",
+    "static": "cp -r src/static/* .build/",
+    "build": "npm run clean && mkdir .build && npm run static && npm run webpack",
     "dev": "npm run build && npm run serve",
     "test": "jest",
     "flow": "flow check",
-    "babel": "babel ./src/app.js"
+    "babel": "babel ./src/app.js",
+    "webpack": "webpack --config webpack.config.js"
   },
   "author": "",
   "license": "ISC",

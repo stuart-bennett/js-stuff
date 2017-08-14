@@ -46,15 +46,21 @@ class Search extends React.Component<Props, Props, State> {
 
     render() {
         return <div>
-                <h1>Search</h1>
-                <input
-                    type="search"
-                    placeholder={this.props.placeholder}
-                    className="form-control"
-                    onChange={evt => this.handleChange(evt.target)}
-                    value={this.state.searchTerm}/>
+            <div className="mb-4 pt-5 pb-5 pt-4 pb-4 searchInput">
+                <div className="pl-4 pr-4">
+                    <input
+                        type="search"
+                        placeholder={this.props.placeholder}
+                        className="form-control"
+                        onChange={evt => this.handleChange(evt.target)}
+                        value={this.state.searchTerm}/>
+                </div>
+            </div>
+
+            <div className="pl-4 pr-4">
                 <SearchResults results={this.state.searchResults} />
-            </div>;
+            </div>
+        </div>;
 
     }
 }

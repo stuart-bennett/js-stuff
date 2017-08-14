@@ -66,15 +66,25 @@ class App extends React.Component<Props, Props, State> {
         return <div className="container-fluid fillHeight">
             <div className="row fillHeight">
                 <div className="col-md-2 sidebar">
+                    <div className="mt-4 mb-4 text-center">
+                        <div>
+                            <img src="" className="rounded-circle" />
+                            <div>user.id</div>
+                        </div>
+                    </div>
                     <Playlists
                         items={this.state.playlists}
                         onSelect={(p) => this.playlistSelected(p)} />
                 </div>
 
                 <div className="col-md-8 pl-0 pr-0 main">
-                    <Search
-                        oAuthToken={this.state.oAuthToken.token}
-                        placeholder="Search..." />
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Search
+                                oAuthToken={this.state.oAuthToken.token}
+                                placeholder="Search..." />
+                        </div>
+                    </div>
                 </div>
 
                 <div className="col-md-2 pl-0 pr-0 sidebar">

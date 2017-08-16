@@ -1,13 +1,15 @@
 import React from 'react'
 
 type Props = {
-    results: Array<SearchResult>
+    results: Array<SearchResult>,
+    onSelect: Command<SearchResult>
 };
 
-const listItemView = (x: SearchResult) =>
+const listItemView = (f: Command<SearchResult>,  x: SearchResult) =>
 <li
     key={x.id}
-    className="col-md-3 mb-4">
+    className="col-md-3 mb-4"
+    onSelect={() => f(x)}>
 
     <div className="card selectable searchResult">
         <img
@@ -25,7 +27,7 @@ const listItemView = (x: SearchResult) =>
 
 const emptyView = <p>No Results</p>;
 const resultsView = (p: Props) => <ul className="list-unstyled row">
-    { p.results.map((x: SearchResult) => listItemView(x) )}
+    { p.results.map((x: SearchResult) => listItemView(p.onSelect, x) )}
 </ul>;
 
 const render = (p: Props) => p.results.length == 0

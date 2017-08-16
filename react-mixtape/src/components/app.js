@@ -59,6 +59,18 @@ class App extends React.Component<Props, Props, State> {
         });
     }
 
+    searchResultSelected(a: SearchResult) {
+        if (this.state.selectedPlaylist == null) return;
+        const playlist: Playlist = this.state.selectedPlaylist;
+        playlist.tracks.push({
+            title: a.title
+        });
+
+        this.setState({
+            selectedPlaylist: playlist
+        });
+    }
+
     render() {
         if (!this.state.oAuthToken.isAuthenticated)
             return <Unauthorised clientId={clientId} />;

@@ -10,6 +10,8 @@ type Failure<E> = {
 
 type Either<E,A> = Success<A> | Failure<E>;
 
+type Command<A> = (a: A) => void;
+
 // Models
 type SearchResult = {
     id: string,
@@ -19,10 +21,15 @@ type SearchResult = {
     primaryArtistName: string
 };
 
+type PlaylistTrack = {
+    title: string
+};
+
 type Playlist = {
     id: string,
     name: string,
-    images: Array<string>
+    images: Array<string>,
+    tracks: Array<PlaylistTrack>
 };
 
 // Spotify Responses

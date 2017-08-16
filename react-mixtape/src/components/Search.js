@@ -7,7 +7,8 @@ import {getOrDefault} from 'Either'
 
 type Props = {
     placeholder: string,
-    oAuthToken: string
+    oAuthToken: string,
+    onSelect: Command<SearchResult>
 };
 
 type State = {
@@ -18,7 +19,8 @@ type State = {
 class Search extends React.Component<Props, Props, State> {
     static defaultProps = {
         oAuthToken: "",
-        placeholder: 'Search...'
+        placeholder: 'Search...',
+        onSelect: () => {}
     };
 
     state = {
@@ -58,7 +60,9 @@ class Search extends React.Component<Props, Props, State> {
             </div>
 
             <div className="pl-4 pr-4">
-                <SearchResults results={this.state.searchResults} />
+                <SearchResults
+                    onSelect={this.props.onSelect}
+                    results={this.state.searchResults} />
             </div>
         </div>;
 

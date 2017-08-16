@@ -4,7 +4,7 @@ import React from 'react'
 
 type Props = {
     items: Array<Playlist>,
-    onSelect: (a: Playlist) => void
+    onSelect: Command<Playlist>
 };
 
 const emptyView = <p>No playlists!</p>;

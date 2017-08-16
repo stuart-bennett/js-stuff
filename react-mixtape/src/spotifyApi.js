@@ -24,7 +24,12 @@ const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>
 const searchMap = (a: SearchResponse => Array<SearchResult>) =>
     a.tracks.items.map(x => ({
         id: x.id,
-        title: x.name
+        title: x.name,
+        albumName: x.album.name,
+        primaryArtistName: x.artists.length > 0
+            ? x.artists[0].name
+            : "",
+        images: x.album.images
     }));
 
 export { search, getPlaylists };

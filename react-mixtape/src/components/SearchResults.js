@@ -10,13 +10,15 @@ const listItemView = (x: SearchResult) =>
     className="col-md-3 mb-4">
 
     <div className="card selectable searchResult">
-        <img src="" className="card-img-top searchResult-image" />
+        <img
+            src={x.images[0].url}
+            className="card-img-top searchResult-image" />
         <div className="card-block">
             <h1 className="h6 mb-0 text-uppercase">{x.title}</h1>
             <ul className="list-unstyled">
-                <li className="small">artist.name</li>
+                <li className="small">{x.primaryArtistName}</li>
             </ul>
-            <p className="small mt-1">model.album</p>
+            <p className="small mt-1">{x.albumName}</p>
         </div>
     </div>
 </li>

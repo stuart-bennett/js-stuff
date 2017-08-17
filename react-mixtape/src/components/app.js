@@ -70,7 +70,7 @@ class App extends React.Component<Props, Props, State> {
         }
 
         getPlaylistTracks(
-            "stu.bennett",
+            this.state.user.id,
             a.id,
             this.state.oAuthToken.token).then(fn);
     }

@@ -81,7 +81,7 @@ type GetPlaylistsResponse = {
 
 type PlaylistTrackResponse = {
     id: string,
-    track: string
+    name: string
 };
 
 type PlaylistTracksResponse = {

@@ -32,7 +32,7 @@ const userMap = (a: UserResponse => User) => ({
 
 
 const playlistTracksMap = (a: PlaylistTracksResponse => Array<PlaylistTrack>) => a.items.map(x => ({
-        title: x.title
+        title: x.track.name
     }));
 
 const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>

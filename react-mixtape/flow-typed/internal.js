@@ -32,7 +32,15 @@ type Playlist = {
     tracks: Array<PlaylistTrack>
 };
 
+type User = {
+    id: string
+};
+
 // Spotify Responses
+type UserResponse = {
+    id: string
+};
+
 type TracksResponse = {
     items: Array<TracksResponse>
 };
@@ -69,4 +77,13 @@ type GetPlaylistsResponse = {
     id: string,
     name: string,
     images: Array<string>
+};
+
+type PlaylistTrackResponse = {
+    id: string,
+    track: string
+};
+
+type PlaylistTracksResponse = {
+    items: Array<PlaylistTrackResponse>
 };

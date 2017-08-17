@@ -5,7 +5,7 @@ import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import Unauthorised from 'components/Unauthorised'
 import PlaylistDetail from 'components/PlaylistDetail'
-import {getPlaylists} from 'spotifyApi'
+import {getCurrentUser, getPlaylists, getPlaylistTracks} from 'spotifyApi'
 import {getOrDefault} from 'Either'
 
 const clientId = "1f662e1ad1ae494382cd56133ebb7b14";
@@ -22,7 +22,8 @@ type Props = {
 type State = {
     playlists: Array<Playlist>,
     selectedPlaylist: ?Playlist,
-    oAuthToken: Authentication
+    oAuthToken: Authentication,
+    user: User
 };
 
 class App extends React.Component<Props, Props, State> {
@@ -30,7 +31,8 @@ class App extends React.Component<Props, Props, State> {
     state = {
         playlists: [],
         selectedPlaylist: null,
-        oAuthToken: { isAuthenticated: false }
+        oAuthToken: { isAuthenticated: false },
+        user: { id: "" }
     };
 
     constructor(props: Props) {
@@ -48,15 +50,29 @@ class App extends React.Component<Props, Props, State> {
         });
 
         if (!auth.isAuthenticated) return;
+
+        getCurrentUser(auth.token).then(e => this.setState({
+            user: getOrDefault(e, { id: "" })
+        }));
+
         getPlaylists(auth.token).then(e => this.setState({
             playlists: getOrDefault(e, [])
         }));
     }
 
     playlistSelected(a: Playlist) {
-        this.setState({
-            selectedPlaylist: a
-        });
+        if (!this.state.oAuthToken.isAuthenticated) return;
+        const fn = (t: Either<string, Array<PlaylistTrack>>) => {
+            a.tracks = getOrDefault(t, []);
+            this.setState({
+                selectedPlaylist: a
+            });
+        }
+
+        getPlaylistTracks(
+            "stu.bennett",
+            a.id,
+            this.state.oAuthToken.token).then(fn);
     }
 
     searchResultSelected(a: SearchResult) {
@@ -81,7 +97,7 @@ class App extends React.Component<Props, Props, State> {
                     <div className="mt-4 mb-4 text-center">
                         <div>
                             <img src="" className="rounded-circle" />
-                            <div>user.id</div>
+                            <div>{this.state.user.id}</div>
                         </div>
                     </div>
                     <Playlists

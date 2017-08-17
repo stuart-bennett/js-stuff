@@ -6,6 +6,16 @@ type Props = {
     playlist: Playlist
 };
 
+const trackView = (x: PlaylistTrack) => <li key={x.title} className="mt-2 mb-2">
+    <div className="media">
+        <img src="" className="d-flex mr-3" />
+        <div className="media-body">
+            <h1 className="h6 mb-0">{x.title}</h1>
+            <p className="small">track.primaryArtist</p>
+        </div>
+    </div>
+</li>
+
 const PlaylistDetail = (p: Props) => <div className="playlist">
     <div>
         <img src="" className="mw-100" />
@@ -17,24 +27,7 @@ const PlaylistDetail = (p: Props) => <div className="playlist">
         <div className="pl-3 pr-3">
             <button className="btn btn-primary">Save</button>
             <ul className="list-unstyled">
-                <li className="mt-2 mb-2">
-                    <div className="media">
-                        <img src="" className="d-flex mr-3" />
-                        <div className="media-body">
-                            <h1 className="h6 mb-0">track.title</h1>
-                            <p className="small">track.primaryArtist</p>
-                        </div>
-                    </div>
-                </li>
-                <li className="mt-2 mb-2">
-                    <div className="media">
-                        <img src="" className="d-flex mr-3" />
-                        <div className="media-body">
-                            <h1 className="h6 mb-0">track.title</h1>
-                            <p className="small">track.primaryArtist</p>
-                        </div>
-                    </div>
-                </li>
+                { p.playlist.tracks.map(x => trackView(x)) }
             </ul>
         </div>
     </div>

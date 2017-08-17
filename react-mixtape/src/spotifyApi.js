@@ -14,6 +14,27 @@ const getPlaylists = (token: string): Promise<Either<string, Array<Playlist>>> =
     `${apiBaseUrl}/me/playlists`,
     new Headers({ "Authorization": "Bearer " + token }));
 
+const getPlaylistTracks = (userId: string, playlistId: string, token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
+    fetchMap(
+        playlistTracksMap,
+        `${apiBaseUrl}/users/${userId}/playlists/${playlistId}/tracks`,
+        new Headers({ "Authorization": "Bearer " + token }));
+
+const getCurrentUser = (token: string): Promise<Either<string, User>> =>
+    fetchMap(
+        userMap,
+        `${apiBaseUrl}/me`,
+        new Headers({ "Authorization": "Bearer " + token }));
+
+const userMap = (a: UserResponse => User) => ({
+    id: a.id
+});
+
+
+const playlistTracksMap = (a: PlaylistTracksResponse => Array<PlaylistTrack>) => a.items.map(x => ({
+        title: x.title
+    }));
+
 const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>
     a.items.map(x => ({
         id: x.id,
@@ -32,4 +53,9 @@ const searchMap = (a: SearchResponse => Array<SearchResult>) =>
         images: x.album.images
     }));
 
-export { search, getPlaylists };
+export {
+    search,
+    getPlaylists,
+    getPlaylistTracks,
+    getCurrentUser
+};

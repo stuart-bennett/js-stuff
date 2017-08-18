@@ -24,7 +24,7 @@ class Search extends React.Component<Props, Props, State> {
     };
 
     state = {
-        searchTerm: 'Testing',
+        searchTerm: '',
         searchResults: []
     };
 

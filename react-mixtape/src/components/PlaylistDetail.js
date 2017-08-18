@@ -6,7 +6,7 @@ type Props = {
     playlist: Playlist
 };
 
-const trackView = (x: PlaylistTrack) => <li key={x.title} className="mt-2 mb-2">
+const trackView = (x: PlaylistTrack) => <li key={x.id} className="mt-2 mb-2">
     <div className="media">
         <img src="" className="d-flex mr-3" />
         <div className="media-body">

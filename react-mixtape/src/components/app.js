@@ -79,6 +79,7 @@ class App extends React.Component<Props, Props, State> {
         if (this.state.selectedPlaylist == null) return;
         const playlist: Playlist = this.state.selectedPlaylist;
         playlist.tracks.push({
+            id: a.id,
             title: a.title
         });
 
@@ -110,7 +111,8 @@ class App extends React.Component<Props, Props, State> {
                         <div className="col-md-12">
                             <Search
                                 oAuthToken={this.state.oAuthToken.token}
-                                placeholder="Search..." />
+                                placeholder="Search..."
+                                onSelect={(r) => this.searchResultSelected(r)} />
                         </div>
                     </div>
                 </div>

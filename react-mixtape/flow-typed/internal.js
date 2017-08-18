@@ -22,6 +22,7 @@ type SearchResult = {
 };
 
 type PlaylistTrack = {
+    id: string,
     title: string
 };
 

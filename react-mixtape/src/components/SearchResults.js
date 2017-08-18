@@ -9,7 +9,7 @@ const listItemView = (f: Command<SearchResult>,  x: SearchResult) =>
 <li
     key={x.id}
     className="col-md-3 mb-4"
-    onSelect={() => f(x)}>
+    onClick={() => f(x)}>
 
     <div className="card selectable searchResult">
         <img

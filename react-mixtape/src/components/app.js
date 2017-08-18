@@ -97,7 +97,9 @@ class App extends React.Component<Props, Props, State> {
                 <div className="col-md-2 sidebar">
                     <div className="mt-4 mb-4 text-center">
                         <div>
-                            <img src="" className="rounded-circle" />
+                            <img
+                                src="http://fillmurray.com/100/100"
+                                className="rounded-circle" />
                             <div>{this.state.user.id}</div>
                         </div>
                     </div>

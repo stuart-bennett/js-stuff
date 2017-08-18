@@ -16,7 +16,7 @@ type Command<A> = (a: A) => void;
 type SearchResult = {
     id: string,
     title: string,
-    images: Array<ImageResponse>,
+    images: Array<Image>,
     albumName: string,
     primaryArtistName: string
 };
@@ -29,12 +29,18 @@ type PlaylistTrack = {
 type Playlist = {
     id: string,
     name: string,
-    images: Array<string>,
+    images: Array<Image>,
     tracks: Array<PlaylistTrack>
 };
 
 type User = {
     id: string
+};
+
+type Image = {
+    url: string,
+    width: number,
+    height: number
 };
 
 // Spotify Responses

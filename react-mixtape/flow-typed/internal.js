@@ -23,7 +23,8 @@ type SearchResult = {
 
 type PlaylistTrack = {
     id: string,
-    title: string
+    title: string,
+    primaryArtist: string
 };
 
 type Playlist = {
@@ -88,7 +89,8 @@ type GetPlaylistsResponse = {
 
 type PlaylistTrackResponse = {
     id: string,
-    name: string
+    name: string,
+    primaryArtist: string
 };
 
 type PlaylistTracksResponse = {

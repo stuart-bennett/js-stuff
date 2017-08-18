@@ -80,7 +80,8 @@ class App extends React.Component<Props, Props, State> {
         const playlist: Playlist = this.state.selectedPlaylist;
         playlist.tracks.push({
             id: a.id,
-            title: a.title
+            title: a.title,
+            primaryArtist: a.primaryArtistName
         });
 
         this.setState({

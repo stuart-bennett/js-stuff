@@ -3,7 +3,8 @@
 import React from 'react'
 
 type Props = {
-    playlist: Playlist
+    playlist: Playlist,
+    savePlaylist: Command<Playlist>
 };
 
 const playlistImage = (a: Array<Image>) => <img
@@ -29,7 +30,9 @@ const PlaylistDetail = (p: Props) => <div className="playlist">
             </h2>
         </div>
         <div className="pl-3 pr-3">
-            <button className="btn btn-primary">Save</button>
+            <button
+                className="btn btn-primary"
+                onClick={() => p.savePlaylist(p.playlist)}>Save</button>
             <ul className="list-unstyled">
                 { p.playlist.tracks.map(x => trackView(x)) }
             </ul>

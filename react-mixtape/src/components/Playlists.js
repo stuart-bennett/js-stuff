@@ -4,7 +4,8 @@ import React from 'react'
 
 type Props = {
     items: Array<Playlist>,
-    onSelect: Command<Playlist>
+    onSelect: Command<Playlist>,
+    addNewPlaylist: Command<void>
 };
 
 const emptyView = <p>No playlists!</p>;
@@ -20,7 +21,7 @@ const view = (p: Props) => <ul className="list-unstyled">
 const Playlists = (p: Props) => <div>
     <h1 className="h4 text-uppercase text-center">Your Playlists</h1>
     { p.items.length > 0 ? view(p) : emptyView }
-    <button className="btn btn-primary">Add new...</button>
+    <button className="btn btn-primary" onClick={() => p.addNewPlaylist()}>Add new...</button>
 </div>;
 
 export default Playlists;

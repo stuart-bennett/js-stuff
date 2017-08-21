@@ -5,7 +5,13 @@ import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import Unauthorised from 'components/Unauthorised'
 import PlaylistDetail from 'components/PlaylistDetail'
-import {getCurrentUser, getPlaylists, getPlaylistTracks} from 'spotifyApi'
+import {
+    getCurrentUser,
+    getPlaylists,
+    getPlaylistTracks,
+    createPlaylist,
+    updatePlaylistTracks
+} from 'spotifyApi'
 import {getOrDefault} from 'Either'
 
 const clientId = "1f662e1ad1ae494382cd56133ebb7b14";
@@ -60,6 +66,30 @@ class App extends React.Component<Props, Props, State> {
         }));
     }
 
+    addNewPlaylist() {
+        const playlist: Playlist = {
+            id: null,
+            name: "Untitled",
+            tracks: [],
+            images: []
+        };
+
+        this.setState({
+            selectedPlaylist: playlist
+        });
+    }
+
+    savePlaylist(p: Playlist) {
+        if (!this.state.oAuthToken.isAuthenticated) return;
+        const token: string = this.state.oAuthToken.token;
+        const userId: string = this.state.user.id;
+        if (p.id == null) {
+            createPlaylist(p, userId, token);
+        } else {
+            updatePlaylistTracks(p.id, userId, p.tracks, token);
+        }
+    }
+
     playlistSelected(a: Playlist) {
         if (!this.state.oAuthToken.isAuthenticated) return;
         const fn = (t: Either<string, Array<PlaylistTrack>>) => {
@@ -69,6 +99,7 @@ class App extends React.Component<Props, Props, State> {
             });
         }
 
+        if (a.id == null) return;
         getPlaylistTracks(
             this.state.user.id,
             a.id,
@@ -106,7 +137,8 @@ class App extends React.Component<Props, Props, State> {
                     </div>
                     <Playlists
                         items={this.state.playlists}
-                        onSelect={(p) => this.playlistSelected(p)} />
+                        onSelect={(p) => this.playlistSelected(p)}
+                        addNewPlaylist={() => this.addNewPlaylist()} />
                 </div>
 
                 <div className="col-md-8 pl-0 pr-0 main">
@@ -123,7 +155,8 @@ class App extends React.Component<Props, Props, State> {
                 <div className="col-md-2 pl-0 pr-0 sidebar">
                     { this.state.selectedPlaylist
                         ? <PlaylistDetail
-                            playlist={this.state.selectedPlaylist} />
+                            playlist={this.state.selectedPlaylist}
+                            savePlaylist={p => this.savePlaylist(p)} />
                         : <p>Nothing selected</p> }
                 </div>
             </div>

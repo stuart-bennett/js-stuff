@@ -4,32 +4,67 @@ import {fetchMap} from 'apiWrapper';
 
 const apiBaseUrl = "https://api.spotify.com/v1";
 
+const makeRequest = (
+    uri: string,
+    headers: Headers = new Headers(),
+    method: string = "GET"): Request => new Request(uri, {
+        headers: headers,
+        method: method
+    });
+
+
 const search = (searchTerm: string, token: string): Promise<Either<string, Array<SearchResult>>> => fetchMap(
     searchMap,
-    `${apiBaseUrl}/search?type=track&q=${searchTerm}`,
-    new Headers({ "Authorization": "Bearer " + token }));
+    makeRequest(
+        `${apiBaseUrl}/search?type=track&q=${searchTerm}`,
+        new Headers({ "Authorization": "Bearer " + token })));
 
 const getPlaylists = (token: string): Promise<Either<string, Array<Playlist>>> => fetchMap(
     playlistMap,
-    `${apiBaseUrl}/me/playlists`,
-    new Headers({ "Authorization": "Bearer " + token }));
+    makeRequest(`${apiBaseUrl}/me/playlists`,
+    new Headers({ "Authorization": "Bearer " + token })));
 
-const getPlaylistTracks = (userId: string, playlistId: string, token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
+const getPlaylistTracks = (
+    userId: string,
+    playlistId: string,
+    token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
     fetchMap(
         playlistTracksMap,
-        `${apiBaseUrl}/users/${userId}/playlists/${playlistId}/tracks`,
-        new Headers({ "Authorization": "Bearer " + token }));
+        makeRequest(
+            `${apiBaseUrl}/users/${userId}/playlists/${playlistId}/tracks`,
+            new Headers({ "Authorization": "Bearer " + token })));
 
 const getCurrentUser = (token: string): Promise<Either<string, User>> =>
     fetchMap(
         userMap,
-        `${apiBaseUrl}/me`,
-        new Headers({ "Authorization": "Bearer " + token }));
+        makeRequest(
+            `${apiBaseUrl}/me`,
+            new Headers({ "Authorization": "Bearer " + token })));
 
+const createPlaylist = (p: Playlist, userId: string, token: string): Promise<Either<string, Playlist>> =>
+    fetchMap(
+        () => p,
+        makeRequest(
+            `${apiBaseUrl}/users/${userId}/playlists`,
+            new Headers({ "Authorization": "Bearer " + token }),
+            "POST"));
+
+const updatePlaylistTracks = (
+    id: string,
+    userId: string,
+    tracks: Array<PlaylistTrack>,
+    token: string): Promise<Either<string, bool>> =>
+    fetchMap(
+        () => true,
+        makeRequest(
+            `${apiBaseUrl}/users/${userId}/playlists/${id}/tracks`,
+            new Headers({ "Authorization": "Bearer " + token }),
+            "POST"));
+
+// Maps
 const userMap = (a: UserResponse => User) => ({
     id: a.id
 });
-
 
 const playlistTracksMap = (a: PlaylistTracksResponse => Array<PlaylistTrack>) => a.items.map(x => ({
         id: x.track.id,
@@ -59,5 +94,7 @@ export {
     search,
     getPlaylists,
     getPlaylistTracks,
-    getCurrentUser
+    getCurrentUser,
+    createPlaylist,
+    updatePlaylistTracks
 };

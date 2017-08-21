@@ -28,7 +28,7 @@ type PlaylistTrack = {
 };
 
 type Playlist = {
-    id: string,
+    id: ?string,
     name: string,
     images: Array<Image>,
     tracks: Array<PlaylistTrack>

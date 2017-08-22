@@ -61,7 +61,9 @@ const updatePlaylistTracks = (
             `${apiBaseUrl}/users/${userId}/playlists/${id}/tracks`,
             new Headers({ "Authorization": "Bearer " + token }),
             "POST",
-            JSON.stringify(tracks.map(x => x.id))));
+            JSON.stringify(tracks
+                .filter(x => x.isNew)
+                .map(x => `spotify:track:${x.id}`))));
 
 // Maps
 const userMap = (a: UserResponse => User) => ({
@@ -71,7 +73,8 @@ const userMap = (a: UserResponse => User) => ({
 const playlistTracksMap = (a: PlaylistTracksResponse => Array<PlaylistTrack>) => a.items.map(x => ({
         id: x.track.id,
         title: x.track.name,
-        primaryArtist: x.track.artists[0].name
+        primaryArtist: x.track.artists[0].name,
+        isNew: false
     }));
 
 const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>

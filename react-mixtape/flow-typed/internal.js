@@ -24,7 +24,8 @@ type SearchResult = {
 type PlaylistTrack = {
     id: string,
     title: string,
-    primaryArtist: string
+    primaryArtist: string,
+    isNew: bool
 };
 
 type Playlist = {

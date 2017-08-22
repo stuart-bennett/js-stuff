@@ -112,7 +112,8 @@ class App extends React.Component<Props, Props, State> {
         playlist.tracks.push({
             id: a.id,
             title: a.title,
-            primaryArtist: a.primaryArtistName
+            primaryArtist: a.primaryArtistName,
+            isNew: true
         });
 
         this.setState({

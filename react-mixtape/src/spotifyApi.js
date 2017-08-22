@@ -8,70 +8,88 @@ const makeRequest = (
     uri: string,
     headers: Headers = new Headers(),
     method: string = "GET",
-    body: ?string = null): Request => new Request(uri, {
-        headers: headers,
-        method: method,
-        body: body
-    });
+    body: ?string = null): Request => {
+        const absoluteUrl = `${apiBaseUrl}/${uri}`;
+        return new Request(absoluteUrl, {
+            headers: headers,
+            method: method,
+            body: body
+        });
+    }
 
-const search = (searchTerm: string, token: string): Promise<Either<string, Array<SearchResult>>> => fetchMap(
+const search = (searchTerm: string, token: string): HttpResult<Array<SearchResult>> => fetchMap(
     searchMap,
     makeRequest(
-        `${apiBaseUrl}/search?type=track&q=${searchTerm}`,
+        `search?type=track&q=${searchTerm}`,
         new Headers({ "Authorization": "Bearer " + token })));
 
-const getPlaylists = (token: string): Promise<Either<string, Array<Playlist>>> => fetchMap(
-    playlistMap,
-    makeRequest(`${apiBaseUrl}/me/playlists`,
-    new Headers({ "Authorization": "Bearer " + token })));
+const getPlaylists = (token: string): HttpResult<Array<Playlist>> =>
+    fetchMap(
+        playlistMap,
+        makeRequest(
+            "me/playlists",
+            new Headers({ "Authorization": "Bearer " + token })));
 
 const getPlaylistTracks = (
     userId: string,
     playlistId: string,
-    token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
-    fetchMap(
-        playlistTracksMap,
-        makeRequest(
-            `${apiBaseUrl}/users/${userId}/playlists/${playlistId}/tracks`,
-            new Headers({ "Authorization": "Bearer " + token })));
+    token: string): HttpResult<Array<PlaylistTrack>> => {
+        const request: Request = makeRequest(
+            `users/${userId}/playlists/${playlistId}/tracks`,
+            new Headers({ "Authorization": "Bearer " + token }));
 
-const getCurrentUser = (token: string): Promise<Either<string, User>> =>
+        return fetchMap(playlistTracksMap, request);
+    }
+
+const getCurrentUser = (token: string): HttpResult<User> =>
     fetchMap(
         userMap,
         makeRequest(
-            `${apiBaseUrl}/me`,
+            "me",
             new Headers({ "Authorization": "Bearer " + token })));
 
-const createPlaylist = (p: Playlist, userId: string, token: string): Promise<Either<string, Playlist>> =>
-    fetchMap(
-        (r: createPlaylistResponse) => Object.assign({}, p, {
+const createPlaylist = (
+    p: Playlist,
+    userId: string,
+    token: string): HttpResult<Playlist> => {
+        const mapFn = r => Object.assign({}, p, {
             id: r.id,
             isNew: false
-        }),
-        makeRequest(
-            `${apiBaseUrl}/users/${userId}/playlists`,
+        });
+
+        const requestBody: string = JSON.stringify({
+            name: p.name
+        });
+
+        const request: Request = makeRequest(
+            `users/${userId}/playlists`,
             new Headers({ "Authorization": "Bearer " + token }),
             "POST",
-            JSON.stringify({
-                name: p.name
-            })));
+            requestBody);
+
+        return fetchMap(mapFn, request);
+    };
 
 const updatePlaylistTracks = (
     id: string,
     userId: string,
     tracks: Array<PlaylistTrack>,
-    token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
-    fetchMap(
-        () => tracks.map((r: PlaylistTrack) =>
-            Object.assign({}, r, { isNew: false })
-        ),
-        makeRequest(
-            `${apiBaseUrl}/users/${userId}/playlists/${id}/tracks`,
+    token: string): HttpResult<Array<PlaylistTrack>> => {
+        const mapFn = () => tracks.map((r: PlaylistTrack) =>
+                Object.assign({}, r, { isNew: false }));
+
+        const newTracks = tracks
+            .filter(x => x.isNew)
+            .map(x => `spotify:track:${x.id}`);
+
+        const request: Request = makeRequest(
+            `users/${userId}/playlists/${id}/tracks`,
             new Headers({ "Authorization": "Bearer " + token }),
             "POST",
-            JSON.stringify(tracks
-                .filter(x => x.isNew)
-                .map(x => `spotify:track:${x.id}`))));
+            JSON.stringify(newTracks));
+
+        return fetchMap(mapFn, request);
+    }
 
 // Maps
 const userMap = (a: UserResponse => User) => ({

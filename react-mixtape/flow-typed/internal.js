@@ -12,6 +12,8 @@ type Either<E,A> = Success<A> | Failure<E>;
 
 type Command<A> = (a: A) => void;
 
+type HttpResult<A> = Promise<Either<string, A>>;
+
 // Models
 type SearchResult = {
     id: string,

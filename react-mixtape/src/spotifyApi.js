@@ -7,11 +7,12 @@ const apiBaseUrl = "https://api.spotify.com/v1";
 const makeRequest = (
     uri: string,
     headers: Headers = new Headers(),
-    method: string = "GET"): Request => new Request(uri, {
+    method: string = "GET",
+    body: ?string = null): Request => new Request(uri, {
         headers: headers,
-        method: method
+        method: method,
+        body: body
     });
-
 
 const search = (searchTerm: string, token: string): Promise<Either<string, Array<SearchResult>>> => fetchMap(
     searchMap,
@@ -59,7 +60,8 @@ const updatePlaylistTracks = (
         makeRequest(
             `${apiBaseUrl}/users/${userId}/playlists/${id}/tracks`,
             new Headers({ "Authorization": "Bearer " + token }),
-            "POST"));
+            "POST",
+            JSON.stringify(tracks.map(x => x.id))));
 
 // Maps
 const userMap = (a: UserResponse => User) => ({

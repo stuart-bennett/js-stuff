@@ -44,19 +44,27 @@ const getCurrentUser = (token: string): Promise<Either<string, User>> =>
 
 const createPlaylist = (p: Playlist, userId: string, token: string): Promise<Either<string, Playlist>> =>
     fetchMap(
-        () => p,
+        (r: createPlaylistResponse) => Object.assign({}, p, {
+            id: r.id,
+            isNew: false
+        }),
         makeRequest(
             `${apiBaseUrl}/users/${userId}/playlists`,
             new Headers({ "Authorization": "Bearer " + token }),
-            "POST"));
+            "POST",
+            JSON.stringify({
+                name: p.name
+            })));
 
 const updatePlaylistTracks = (
     id: string,
     userId: string,
     tracks: Array<PlaylistTrack>,
-    token: string): Promise<Either<string, bool>> =>
+    token: string): Promise<Either<string, Array<PlaylistTrack>>> =>
     fetchMap(
-        () => true,
+        () => tracks.map((r: PlaylistTrack) =>
+            Object.assign({}, r, { isNew: false })
+        ),
         makeRequest(
             `${apiBaseUrl}/users/${userId}/playlists/${id}/tracks`,
             new Headers({ "Authorization": "Bearer " + token }),
@@ -81,7 +89,8 @@ const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>
     a.items.map(x => ({
         id: x.id,
         name: x.name,
-        images: x.images
+        images: x.images,
+        isNew: false
     }));
 
 const searchMap = (a: SearchResponse => Array<SearchResult>) =>

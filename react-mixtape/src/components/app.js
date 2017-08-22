@@ -68,10 +68,11 @@ class App extends React.Component<Props, Props, State> {
 
     addNewPlaylist() {
         const playlist: Playlist = {
-            id: null,
+            id: "",
             name: "Untitled",
             tracks: [],
-            images: []
+            images: [],
+            isNew: true
         };
 
         this.setState({
@@ -83,10 +84,27 @@ class App extends React.Component<Props, Props, State> {
         if (!this.state.oAuthToken.isAuthenticated) return;
         const token: string = this.state.oAuthToken.token;
         const userId: string = this.state.user.id;
-        if (p.id == null) {
-            createPlaylist(p, userId, token);
+        const afterTrackUpdate =
+            (e: Either<string, Array<PlaylistTrack>>) => {
+                p.tracks = getOrDefault(e, p.tracks);
+                this.setState({
+                    selectedPlaylist: p
+                });
+            };
+
+        if (p.isNew) {
+            createPlaylist(p, userId, token).then(e => {
+                console.log(e);
+                p = getOrDefault(e, p);
+                return updatePlaylistTracks(
+                    p.id,
+                    userId,
+                    p.tracks,
+                    token);
+            }).then(afterTrackUpdate);
         } else {
-            updatePlaylistTracks(p.id, userId, p.tracks, token);
+            updatePlaylistTracks(p.id, userId, p.tracks, token)
+                .then(afterTrackUpdate);
         }
     }
 

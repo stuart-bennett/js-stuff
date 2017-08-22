@@ -29,10 +29,11 @@ type PlaylistTrack = {
 };
 
 type Playlist = {
-    id: ?string,
+    id: string,
     name: string,
     images: Array<Image>,
-    tracks: Array<PlaylistTrack>
+    tracks: Array<PlaylistTrack>,
+    isNew: bool
 };
 
 type User = {
@@ -46,6 +47,11 @@ type Image = {
 };
 
 // Spotify Responses
+type createPlaylistResponse = {
+    id: string,
+    images: Array<ImageResponse>
+};
+
 type UserResponse = {
     id: string
 };

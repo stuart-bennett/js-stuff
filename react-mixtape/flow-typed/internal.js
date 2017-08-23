@@ -86,22 +86,34 @@ type ImageResponse = {
     height: number
 };
 
+type Collection<A> = {
+    items: Array<A>
+};
+
 type SearchResponse = {
-    tracks: TracksResponse
+    tracks: Collection<TrackResponse>
+};
+
+type PlaylistResponse = {
+    id: string,
+    name: string,
+    images: Array<Image>
 };
 
 type GetPlaylistsResponse = {
-    id: string,
-    name: string,
-    images: Array<string>
+    items: Array<PlaylistResponse>
+};
+
+type PlaylistTrackItemResponse = {
+    track: PlaylistTrackResponse
 };
 
 type PlaylistTrackResponse = {
     id: string,
     name: string,
-    primaryArtist: string
+    artists: Array<ArtistResponse>
 };
 
 type PlaylistTracksResponse = {
-    items: Array<PlaylistTrackResponse>
+    items: Array<PlaylistTrackItemResponse>
 };

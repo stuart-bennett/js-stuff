@@ -25,7 +25,7 @@ const search = (searchTerm: string, token: string): HttpResult<Array<SearchResul
 
 const getPlaylists = (token: string): HttpResult<Array<Playlist>> =>
     fetchMap(
-        playlistMap,
+        playlistsMap,
         makeRequest(
             "me/playlists",
             new Headers({ "Authorization": "Bearer " + token })));
@@ -92,27 +92,32 @@ const updatePlaylistTracks = (
     }
 
 // Maps
-const userMap = (a: UserResponse => User) => ({
+const userMap = (a: UserResponse): User => ({
     id: a.id
 });
 
-const playlistTracksMap = (a: PlaylistTracksResponse => Array<PlaylistTrack>) => a.items.map(x => ({
-        id: x.track.id,
-        title: x.track.name,
-        primaryArtist: x.track.artists[0].name,
-        isNew: false
-    }));
+const playlistTracksMap =
+    (a: PlaylistTracksResponse): Array<PlaylistTrack> =>
+        a.items.map(x => ({
+            id: x.track.id,
+            title: x.track.name,
+            primaryArtist: x.track.artists[0].name,
+            isNew: false
+        }));
 
-const playlistMap = (a: GetPlaylistsResponse => Array<Playlist>) =>
-    a.items.map(x => ({
-        id: x.id,
-        name: x.name,
-        images: x.images,
-        isNew: false
-    }));
+const playlistMap = (a: PlaylistResponse): Playlist => ({
+    id: a.id,
+    name: a.name,
+    images: a.images,
+    isNew: false,
+    tracks: []
+});
 
-const searchMap = (a: SearchResponse => Array<SearchResult>) =>
-    a.tracks.items.map(x => ({
+const playlistsMap = (a: GetPlaylistsResponse): Array<Playlist> =>
+    a.items.map(playlistMap)
+
+const searchMap = (a: SearchResponse): Array<SearchResult> =>
+    a.tracks.items.map((x: TrackResponse)  => ({
         id: x.id,
         title: x.name,
         albumName: x.album.name,

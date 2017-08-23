@@ -3,16 +3,16 @@ type Success<A> = {
     right: A,
     hasValue: true
 };
+
 type Failure<E> = {
     left: E,
     hasValue: false
 };
 
 type Either<E,A> = Success<A> | Failure<E>;
-
 type Command<A> = (a: A) => void;
-
 type HttpResult<A> = Promise<Either<string, A>>;
+
 
 // Models
 type SearchResult = {

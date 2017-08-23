@@ -26,15 +26,11 @@ type OAuth = {
 };
 
 type Authentication = OAuth | Anonymous;
-
-type Props = {
-};
-
+type Props = {};
 type State = {
     playlists: Array<Playlist>,
     selectedPlaylist: ?Playlist,
     auth: Authentication,
-    user: User
 };
 
 class App extends React.Component<Props, Props, State> {
@@ -43,7 +39,6 @@ class App extends React.Component<Props, Props, State> {
         playlists: [],
         selectedPlaylist: null,
         auth: { isAuthenticated: false },
-        user: { id: "" }
     };
 
     constructor(props: Props) {
@@ -109,20 +104,21 @@ class App extends React.Component<Props, Props, State> {
         }
     }
 
-    playlistSelected(a: Playlist) {
+    playlistSelected(selectedPlaylist: Playlist) {
         if (!this.state.auth.isAuthenticated) return;
         const fn = (t: Either<string, Array<PlaylistTrack>>) => {
-            a.tracks = getOrDefault(t, []);
+            selectedPlaylist.tracks = getOrDefault(t, []);
             this.setState({
-                selectedPlaylist: a
+                selectedPlaylist: selectedPlaylist
             });
         }
 
-        if (a.id == null) return;
+        const auth = this.state.auth;
+        if (selectedPlaylist.id == null) return;
         getPlaylistTracks(
-            this.state.user.id,
-            a.id,
-            this.state.auth.token).then(fn);
+            auth.user.id,
+            selectedPlaylist.id,
+            auth.token).then(fn);
     }
 
     searchResultSelected(a: SearchResult) {
@@ -152,7 +148,7 @@ class App extends React.Component<Props, Props, State> {
                             <img
                                 src="http://fillmurray.com/100/100"
                                 className="rounded-circle" />
-                            <div>{this.state.user.id}</div>
+                            <div>{this.state.auth.user.id}</div>
                         </div>
                     </div>
                     <Playlists

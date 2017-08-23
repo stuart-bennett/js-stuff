@@ -19,7 +19,12 @@ const getToken = (w: window): ?string =>
     w.location.hash.length > 0 ? w.location.hash.split("=")[1].split("&")[0] : null;
 
 type Anonymous = { isAuthenticated: false };
-type OAuth = { isAuthenticated: true, token: string };
+type OAuth = {
+    isAuthenticated: true,
+    token: string,
+    user: User
+};
+
 type Authentication = OAuth | Anonymous;
 
 type Props = {
@@ -28,7 +33,7 @@ type Props = {
 type State = {
     playlists: Array<Playlist>,
     selectedPlaylist: ?Playlist,
-    oAuthToken: Authentication,
+    auth: Authentication,
     user: User
 };
 
@@ -37,7 +42,7 @@ class App extends React.Component<Props, Props, State> {
     state = {
         playlists: [],
         selectedPlaylist: null,
-        oAuthToken: { isAuthenticated: false },
+        auth: { isAuthenticated: false },
         user: { id: "" }
     };
 
@@ -47,21 +52,17 @@ class App extends React.Component<Props, Props, State> {
 
     componentDidMount() {
         const token: ?string = getToken(window);
-        const auth = (token != null)
-            ? { token: token, isAuthenticated: true }
-            : { isAuthenticated: false };
+        if (!token) return;
 
-        this.setState({
-            oAuthToken: auth
-        });
-
-        if (!auth.isAuthenticated) return;
-
-        getCurrentUser(auth.token).then(e => this.setState({
-            user: getOrDefault(e, { id: "" })
+        getCurrentUser(token).then(e => this.setState({
+            auth: {
+                isAuthenticated: true,
+                user: getOrDefault(e, { id: "" }),
+                token: token
+            }
         }));
 
-        getPlaylists(auth.token).then(e => this.setState({
+        getPlaylists(token).then(e => this.setState({
             playlists: getOrDefault(e, [])
         }));
     }
@@ -81,9 +82,10 @@ class App extends React.Component<Props, Props, State> {
     }
 
     savePlaylist(p: Playlist) {
-        if (!this.state.oAuthToken.isAuthenticated) return;
-        const token: string = this.state.oAuthToken.token;
-        const userId: string = this.state.user.id;
+        const auth = this.state.auth;
+        if (!auth.isAuthenticated) return;
+        const token: string = auth.token;
+        const userId: string = auth.user.id;
         const afterTrackUpdate =
             (e: Either<string, Array<PlaylistTrack>>) => {
                 p.tracks = getOrDefault(e, p.tracks);
@@ -94,7 +96,6 @@ class App extends React.Component<Props, Props, State> {
 
         if (p.isNew) {
             createPlaylist(p, userId, token).then(e => {
-                console.log(e);
                 p = getOrDefault(e, p);
                 return updatePlaylistTracks(
                     p.id,
@@ -109,7 +110,7 @@ class App extends React.Component<Props, Props, State> {
     }
 
     playlistSelected(a: Playlist) {
-        if (!this.state.oAuthToken.isAuthenticated) return;
+        if (!this.state.auth.isAuthenticated) return;
         const fn = (t: Either<string, Array<PlaylistTrack>>) => {
             a.tracks = getOrDefault(t, []);
             this.setState({
@@ -121,7 +122,7 @@ class App extends React.Component<Props, Props, State> {
         getPlaylistTracks(
             this.state.user.id,
             a.id,
-            this.state.oAuthToken.token).then(fn);
+            this.state.auth.token).then(fn);
     }
 
     searchResultSelected(a: SearchResult) {
@@ -140,7 +141,7 @@ class App extends React.Component<Props, Props, State> {
     }
 
     render() {
-        if (!this.state.oAuthToken.isAuthenticated)
+        if (!this.state.auth.isAuthenticated)
             return <Unauthorised clientId={clientId} />;
 
         return <div className="container-fluid fillHeight">
@@ -164,7 +165,7 @@ class App extends React.Component<Props, Props, State> {
                     <div className="row">
                         <div className="col-md-12">
                             <Search
-                                oAuthToken={this.state.oAuthToken.token}
+                                oAuthToken={this.state.auth.token}
                                 placeholder="Search..."
                                 onSelect={(r) => this.searchResultSelected(r)} />
                         </div>

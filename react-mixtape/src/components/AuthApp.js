@@ -105,6 +105,7 @@ class AuthApp extends React.Component<Props, Props, State> {
             id: a.id,
             title: a.title,
             primaryArtist: a.primaryArtistName,
+            images: a.images,
             isNew: true
         });
 

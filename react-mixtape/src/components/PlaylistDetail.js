@@ -13,7 +13,7 @@ const playlistImage = (a: Array<Image>) => <img
 
 const trackView = (x: PlaylistTrack) => <li key={x.id} className="mt-2 mb-2">
     <div className="media">
-        <img src="" className="d-flex mr-3" />
+        <img src={x.images[2].url} className="d-flex mr-3" />
         <div className="media-body">
             <h1 className="h6 mb-0">{x.title}</h1>
             <p className="small">{x.primaryArtist}</p>

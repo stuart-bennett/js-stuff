@@ -27,6 +27,7 @@ type PlaylistTrack = {
     id: string,
     title: string,
     primaryArtist: string,
+    images: Array<Images>,
     isNew: bool
 };
 
@@ -111,7 +112,8 @@ type PlaylistTrackItemResponse = {
 type PlaylistTrackResponse = {
     id: string,
     name: string,
-    artists: Array<ArtistResponse>
+    artists: Array<ArtistResponse>,
+    album: AlbumResponse
 };
 
 type PlaylistTracksResponse = {

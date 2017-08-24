@@ -102,6 +102,7 @@ const playlistTracksMap =
             id: x.track.id,
             title: x.track.name,
             primaryArtist: x.track.artists[0].name,
+            images: x.track.album.images,
             isNew: false
         }));
 

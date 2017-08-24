@@ -5,7 +5,10 @@ import PlaylistDetail from 'components/PlaylistDetail';
 describe("The PlaylistDetail component", () => {
     test("Should render", () => {
         const playlist: Playlist = {
+            images: [],
+            tracks: []
         };
+
         const $ = shallow(<PlaylistDetail playlist={playlist} />);
         expect($).not.toBeNull();
     });

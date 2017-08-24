@@ -2,13 +2,17 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import SearchResults from 'components/SearchResults';
 
+const makeSearchResult = () => ({
+    id: "id",
+    title: "test",
+    images: [ { url: 'http://localhost:8080' } ]
+});
+
 describe("SearchResults component", () => {
     test("should render each item from results prop", () => {
         const results = [
-            { id: "id", title: "test" },
-            { id: "id", title: "test" },
-            { id: "id", title: "test" },
-            { id: "id", title: "test" }
+            makeSearchResult(),
+            makeSearchResult()
         ];
 
         const component = shallow(<SearchResults results={results} />);

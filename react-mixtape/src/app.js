@@ -2,12 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'components/app';
 
-/*
- *  Create and add a container element for the app
- *  @param {object} $mount - The node which should contain the app
- *  @return {object} The app container
- */
-function init($mount: HTMLElement) {
+const init = ($mount: HTMLElement) => {
     const $root = document.createElement('div');
     $root.classList.add("fillHeight");
     $mount.appendChild($root);

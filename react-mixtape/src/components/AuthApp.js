@@ -5,6 +5,7 @@ import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import PlaylistDetail from 'components/PlaylistDetail'
 import {getOrDefault} from 'Either'
+import {newPlaylist} from 'models/playlist'
 import {
     getPlaylists,
     getPlaylistTracks,
@@ -44,14 +45,7 @@ class AuthApp extends React.Component<Props, Props, State> {
     }
 
     addNewPlaylist() {
-        const playlist: Playlist = {
-            id: "",
-            name: "Untitled",
-            tracks: [],
-            images: [],
-            isNew: true
-        };
-
+        const playlist: Playlist = newPlaylist();
         this.setState({
             selectedPlaylist: playlist
         });

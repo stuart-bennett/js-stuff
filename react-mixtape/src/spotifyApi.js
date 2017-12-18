@@ -67,7 +67,7 @@ const createPlaylist = (
             "POST",
             requestBody);
 
-        return fetchMap(mapFn, request);
+        return fetchMap(mapFn, request, 201);
     };
 
 const updatePlaylistTracks = (

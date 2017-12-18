@@ -8,10 +8,10 @@ import {getOrDefault} from 'Either'
 import {newPlaylist} from 'models/playlist'
 import {
     getPlaylists,
-    getPlaylistTracks,
-    createPlaylist,
-    updatePlaylistTracks
+    getPlaylistTracks
 } from 'spotifyApi'
+
+import savePlaylist from 'playlist'
 
 type Props = {
     user: User,
@@ -53,28 +53,26 @@ class AuthApp extends React.Component<Props, Props, State> {
 
     savePlaylist(p: Playlist) {
         const afterTrackUpdate =
-            (e: Either<string, Array<PlaylistTrack>>) => {
-                p.tracks = getOrDefault(e, p.tracks);
+            (p: Playlist) => {
                 this.setState({
                     selectedPlaylist: p
                 });
             };
 
-        const token: string = this.props.token;
-        const userId: string = this.props.user.id;
-        if (p.isNew) {
-            createPlaylist(p, userId, token).then(e => {
-                p = getOrDefault(e, p);
-                return updatePlaylistTracks(
-                    p.id,
-                    userId,
-                    p.tracks,
-                    token);
-            }).then(afterTrackUpdate);
-        } else {
-            updatePlaylistTracks(p.id, userId, p.tracks, token)
-                .then(afterTrackUpdate);
-        }
+        // Temporary until add playlist name textbox
+        p.name = "untitled";
+        const request: SavePlaylistRequest = {
+            playlist: p,
+            userId: this.props.user.id,
+            token: this.props.token
+        };
+
+        savePlaylist(request)
+            .then(afterTrackUpdate)
+            .catch(this.showErrorMessage);
+    }
+
+    showErrorMessage() {
     }
 
     playlistSelected(selectedPlaylist: Playlist) {

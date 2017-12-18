@@ -119,3 +119,10 @@ type PlaylistTrackResponse = {
 type PlaylistTracksResponse = {
     items: Array<PlaylistTrackItemResponse>
 };
+
+// Requests
+type SavePlaylistRequest = {
+    playlist: Playlist,
+    userId: string,
+    token: string
+}

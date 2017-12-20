@@ -2,20 +2,21 @@
 
 import {fetchMap} from 'apiWrapper';
 
-const apiBaseUrl = "https://api.spotify.com/v1";
+const apiBaseUrl: string = "https://api.spotify.com/v1";
 
-const makeRequest = (
+function makeRequest(
     uri: string,
     headers: Headers = new Headers(),
     method: string = "GET",
-    body: ?string = null): Request => {
-        const absoluteUrl = `${apiBaseUrl}/${uri}`;
-        return new Request(absoluteUrl, {
-            headers: headers,
-            method: method,
-            body: body
-        });
-    }
+    body: ?string = null): Request {
+
+    const absoluteUrl: string = `${apiBaseUrl}/${uri}`;
+    return new Request(absoluteUrl, {
+        headers: headers,
+        method: method,
+        body: body
+    });
+}
 
 function createHeaders(authToken: string) : Headers {
     return new Headers({ "Authorization": "Bearer " + authToken });
@@ -140,13 +141,15 @@ function searchMap(response: SearchResponse): Array<SearchResult> {
 }
 
 function trackResponseToSearchResultMap(response: TrackResponse) {
+    const primaryArtistName: string = response.artists.length > 0
+            ? response.artists[0].name
+            : "";
+
     return {
         id: response.id,
         title: response.name,
         albumName: response.album.name,
-        primaryArtistName: response.artists.length > 0
-            ? response.artists[0].name
-            : "",
+        primaryArtistName: primaryArtistName,
         images: response.album.images
     };
 }

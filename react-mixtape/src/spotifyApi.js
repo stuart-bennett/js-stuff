@@ -17,116 +17,139 @@ const makeRequest = (
         });
     }
 
-const search = (searchTerm: string, token: string): HttpResult<Array<SearchResult>> => fetchMap(
-    searchMap,
-    makeRequest(
-        `search?type=track&q=${searchTerm}`,
-        new Headers({ "Authorization": "Bearer " + token })));
+function createHeaders(authToken: string) : Headers {
+    return new Headers({ "Authorization": "Bearer " + authToken });
+}
 
-const getPlaylists = (token: string): HttpResult<Array<Playlist>> =>
-    fetchMap(
-        playlistsMap,
-        makeRequest(
-            "me/playlists",
-            new Headers({ "Authorization": "Bearer " + token })));
+function search(searchTerm: string, token: string)
+    : HttpResult<Array<SearchResult>> {
 
-const getPlaylistTracks = (
+    const request: Request =
+        makeRequest(`search?type=track&q=${searchTerm}`,createHeaders(token));
+
+    return fetchMap(searchMap, request);
+}
+
+function getPlaylists(token: string): HttpResult<Array<Playlist>> {
+    const request: Request = makeRequest("me/playlists", createHeaders(token));
+    return fetchMap(playlistsMap, request);
+}
+
+function getPlaylistTracks(
     userId: string,
     playlistId: string,
-    token: string): HttpResult<Array<PlaylistTrack>> => {
-        const request: Request = makeRequest(
-            `users/${userId}/playlists/${playlistId}/tracks`,
-            new Headers({ "Authorization": "Bearer " + token }));
+    token: string): HttpResult<Array<PlaylistTrack>> {
 
-        return fetchMap(playlistTracksMap, request);
-    }
+    const request: Request = makeRequest(
+        `users/${userId}/playlists/${playlistId}/tracks`,
+        new Headers({ "Authorization": "Bearer " + token }));
 
-const getCurrentUser = (token: string): HttpResult<User> =>
-    fetchMap(
-        userMap,
-        makeRequest(
-            "me",
-            new Headers({ "Authorization": "Bearer " + token })));
+    return fetchMap(playlistTracksMap, request);
+}
 
-const createPlaylist = (
+function getCurrentUser(token: string): HttpResult<User> {
+    const request = makeRequest("me", createHeaders(token));
+    return fetchMap(userMap, request);
+}
+
+function createPlaylist(
     p: Playlist,
     userId: string,
-    token: string): HttpResult<Playlist> => {
-        const mapFn = r => Object.assign({}, p, {
-            id: r.id,
-            isNew: false
-        });
+    token: string): HttpResult<Playlist> {
 
-        const requestBody: string = JSON.stringify({
-            name: p.name
-        });
+    const mapFn = r => Object.assign({}, p, {
+        id: r.id,
+        isNew: false
+    });
 
-        const request: Request = makeRequest(
-            `users/${userId}/playlists`,
-            new Headers({ "Authorization": "Bearer " + token }),
-            "POST",
-            requestBody);
+    const requestBody: string = JSON.stringify({
+        name: p.name
+    });
 
-        return fetchMap(mapFn, request, 201);
-    };
+    const request: Request = makeRequest(
+        `users/${userId}/playlists`,
+        createHeaders(token),
+        "POST",
+        requestBody);
 
-const updatePlaylistTracks = (
+    return fetchMap(mapFn, request, 201);
+}
+
+function markTrackAsSaved(track: PlaylistTrack) {
+    return Object.assign({}, track, { isNew: false });
+}
+
+function updatePlaylistTracks(
     id: string,
     userId: string,
     tracks: Array<PlaylistTrack>,
-    token: string): HttpResult<Array<PlaylistTrack>> => {
-        const mapFn = () => tracks.map((r: PlaylistTrack) =>
-                Object.assign({}, r, { isNew: false }));
+    token: string): HttpResult<Array<PlaylistTrack>> {
 
-        const newTracks = tracks
-            .filter(x => x.isNew)
-            .map(x => `spotify:track:${x.id}`);
+    const mapFn = (): Array<PlaylistTrack> => tracks.map(markTrackAsSaved);
+    const newTracks = tracks
+        .filter(x => x.isNew)
+        .map(x => `spotify:track:${x.id}`);
 
-        const request: Request = makeRequest(
-            `users/${userId}/playlists/${id}/tracks`,
-            new Headers({ "Authorization": "Bearer " + token }),
-            "POST",
-            JSON.stringify(newTracks));
+    const request: Request = makeRequest(
+        `users/${userId}/playlists/${id}/tracks`,
+        createHeaders(token),
+        "POST",
+        JSON.stringify(newTracks));
 
-        return fetchMap(mapFn, request);
-    }
+    return fetchMap(mapFn, request);
+}
 
 // Maps
-const userMap = (a: UserResponse): User => ({
-    id: a.id
-});
+function userMap(a: UserResponse): User {
+    return { id: a.id };
+}
 
-const playlistTracksMap =
-    (a: PlaylistTracksResponse): Array<PlaylistTrack> =>
-        a.items.map(x => ({
-            id: x.track.id,
-            title: x.track.name,
-            primaryArtist: x.track.artists[0].name,
-            images: x.track.album.images,
-            isNew: false
-        }));
+function playlistTracksMap (response: PlaylistTracksResponse)
+    : Array<PlaylistTrack> {
 
-const playlistMap = (a: PlaylistResponse): Playlist => ({
-    id: a.id,
-    name: a.name,
-    images: a.images,
-    isNew: false,
-    tracks: []
-});
-
-const playlistsMap = (a: GetPlaylistsResponse): Array<Playlist> =>
-    a.items.map(playlistMap)
-
-const searchMap = (a: SearchResponse): Array<SearchResult> =>
-    a.tracks.items.map((x: TrackResponse)  => ({
-        id: x.id,
-        title: x.name,
-        albumName: x.album.name,
-        primaryArtistName: x.artists.length > 0
-            ? x.artists[0].name
-            : "",
-        images: x.album.images
+    return response.items.map(x => ({
+        id: x.track.id,
+        title: x.track.name,
+        primaryArtist: x.track.artists[0].name,
+        images: x.track.album.images,
+        isNew: false
     }));
+}
+
+function playlistMap(response: PlaylistResponse): Playlist {
+    return {
+        id: response.id,
+        name: response.name,
+        images: response.images,
+        isNew: false,
+        tracks: []
+    };
+}
+
+function playlistsMap(response: GetPlaylistsResponse): Array<Playlist> {
+    return response
+        .items
+        .map(playlistMap);
+}
+
+function searchMap(response: SearchResponse): Array<SearchResult> {
+    return response
+        .tracks
+        .items
+        .map(trackResponseToSearchResultMap);
+}
+
+function trackResponseToSearchResultMap(response: TrackResponse) {
+    return {
+        id: response.id,
+        title: response.name,
+        albumName: response.album.name,
+        primaryArtistName: response.artists.length > 0
+            ? response.artists[0].name
+            : "",
+        images: response.album.images
+    };
+}
 
 export {
     search,

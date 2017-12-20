@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from 'components/app';
+import App from 'components/App';
 
 const init = ($mount: HTMLElement) => {
     const $root = document.createElement('div');

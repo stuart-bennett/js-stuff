@@ -1,5 +1,5 @@
-import {fetchMap} from 'apiWrapper';
-import {some} from 'Either';
+import {fetchMap} from 'http/apiWrapper';
+import {some} from 'utils/either';
 import fetchMock from 'jest-fetch-mock';
 
 // Mock the Fetch API

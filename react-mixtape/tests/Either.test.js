@@ -1,4 +1,4 @@
-import { some, none, getOrDefault } from 'Either'
+import { some, none, getOrDefault } from 'utils/either'
 
 describe("Given the result of the 'none' function", () => {
     const expectedError = {

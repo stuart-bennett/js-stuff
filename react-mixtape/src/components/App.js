@@ -3,9 +3,9 @@
 import React from 'react'
 import AuthApp from 'components/AuthApp'
 import Unauthorised from 'components/Unauthorised'
-import {getCurrentUser} from 'spotifyApi'
-import {getOrDefault} from 'Either'
-import {compose} from 'utils'
+import {getCurrentUser} from 'http/spotifyApi'
+import {getOrDefault} from 'utils/either'
+import {compose} from 'utils/functions'
 
 const clientId = "1f662e1ad1ae494382cd56133ebb7b14";
 const getToken: (w: window) => ?string = compose (

@@ -1,9 +1,9 @@
 // @flow
 
 import React from 'react'
-import {search} from 'spotifyApi'
+import {search} from 'http/spotifyApi'
 import SearchResults from 'components/SearchResults'
-import {getOrDefault} from 'Either'
+import {getOrDefault} from 'utils/either'
 
 type Props = {
     placeholder: string,

@@ -1,8 +1,8 @@
-import {getOrDefault} from 'Either'
+import {getOrDefault} from 'utils/either'
 import {
     createPlaylist,
     updatePlaylistTracks
-} from 'spotifyApi'
+} from 'http/spotifyApi'
 
 function savePlaylist(request: SavePlaylistRequest)
     : Promise<Playlist> {

@@ -1,6 +1,6 @@
 // @flow
 
-import {some, none} from 'Either'
+import {some, none} from 'utils/either'
 
 const fetchMap = <A,B>(
     map: (a: A) => B,

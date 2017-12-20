@@ -1,6 +1,6 @@
 // @flow
 
-import {fetchMap} from 'apiWrapper';
+import {fetchMap} from 'http/apiWrapper';
 
 const apiBaseUrl: string = "https://api.spotify.com/v1";
 

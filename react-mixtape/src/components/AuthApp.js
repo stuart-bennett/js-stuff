@@ -4,12 +4,12 @@ import React from 'react'
 import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import PlaylistDetail from 'components/PlaylistDetail'
-import {getOrDefault} from 'Either'
+import {getOrDefault} from 'utils/either'
 import {newPlaylist} from 'models/playlist'
 import {
     getPlaylists,
     getPlaylistTracks
-} from 'spotifyApi'
+} from 'http/spotifyApi'
 
 import savePlaylist from 'services/playlistService'
 

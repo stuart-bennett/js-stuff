@@ -11,7 +11,7 @@ import {
     getPlaylistTracks
 } from 'spotifyApi'
 
-import savePlaylist from 'playlist'
+import savePlaylist from 'services/playlistService'
 
 type Props = {
     user: User,

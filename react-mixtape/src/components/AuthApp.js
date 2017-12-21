@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import Message from 'components/Message'
 import Search from 'components/Search'
 import Playlists from 'components/Playlists'
 import PlaylistDetail from 'components/PlaylistDetail'
@@ -21,6 +22,7 @@ type Props = {
 type State = {
     playlists: Array<Playlist>,
     selectedPlaylist: ?Playlist,
+    message: ?FeedbackMessage
 };
 
 class AuthApp extends React.Component<Props, Props, State> {
@@ -32,6 +34,7 @@ class AuthApp extends React.Component<Props, Props, State> {
     state = {
         playlists: [],
         selectedPlaylist: null,
+        message: null
     };
 
     constructor(props: Props) {
@@ -69,10 +72,18 @@ class AuthApp extends React.Component<Props, Props, State> {
 
         savePlaylist(request)
             .then(afterTrackUpdate)
-            .catch(this.showErrorMessage);
+            .catch(err => this.showFeedback(err, true));
     }
 
-    showErrorMessage() {
+    showFeedback(messageText: string, isError: bool = false) {
+        const message: FeedbackMessage = {
+            text: messageText,
+            isError: isError
+        };
+
+        this.setState({
+            message: message
+        });
     }
 
     playlistSelected(selectedPlaylist: Playlist) {
@@ -108,6 +119,7 @@ class AuthApp extends React.Component<Props, Props, State> {
 
     render() {
         return <div className="container-fluid fillHeight">
+            <Message message="kjflkdsjfls" isError={true} />
             <div className="row fillHeight">
                 <div className="col-md-2 sidebar">
                     <div className="mt-4 mb-4 text-center">

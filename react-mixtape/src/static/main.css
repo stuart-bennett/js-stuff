@@ -6049,3 +6049,22 @@ body {
 
 .playlist-item {
   border-bottom: solid 1px #005d5b; }
+
+.message {
+    position: absolute;
+    z-index: 1;
+    width: 80%;
+    left: 10%;
+    text-align: center;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem;
+}
+
+.message-positive {
+    background-color: green;
+}
+
+.message-negative {
+    background-color: red;
+}
+

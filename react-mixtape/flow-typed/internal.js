@@ -126,3 +126,9 @@ type SavePlaylistRequest = {
     userId: string,
     token: string
 }
+
+// Components
+type FeedbackMessage = {
+    text: string,
+    isError: bool
+};

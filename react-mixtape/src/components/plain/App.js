@@ -1,8 +1,8 @@
 // @flow
 
 import React from 'react'
-import AuthApp from 'components/AuthApp'
-import Unauthorised from 'components/Unauthorised'
+import AuthApp from 'components/plain/AuthApp'
+import Unauthorised from 'components/plain/Unauthorised'
 import {getCurrentUser} from 'http/spotifyApi'
 import {getOrDefault} from 'utils/either'
 import {compose} from 'utils/functions'

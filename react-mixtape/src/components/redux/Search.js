@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {search} from 'http/spotifyApi'
-import SearchResults from 'components/SearchResults'
+import SearchResults from 'components/redux/SearchResults'
 import {getOrDefault} from 'utils/either'
 
 type Props = {

@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react'
-import Message from 'components/Message'
-import Search from 'components/Search'
-import Playlists from 'components/Playlists'
-import PlaylistDetail from 'components/PlaylistDetail'
+import Message from 'components/redux/Message'
+import Search from 'components/redux/Search'
+import Playlists from 'components/redux/Playlists'
+import PlaylistDetail from 'components/redux/PlaylistDetail'
 import {getOrDefault} from 'utils/either'
 import {newPlaylist} from 'models/playlist'
 import {

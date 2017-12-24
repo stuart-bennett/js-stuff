@@ -13,4 +13,4 @@ export function authentication(state: string, action: Action) {
     }
 }
 
-export default combineReducers({ 'authentication': authentication });
+export default combineReducers({ authentication });

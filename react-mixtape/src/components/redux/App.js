@@ -6,6 +6,8 @@ import Unauthorised from 'components/plain/Unauthorised'
 import {getCurrentUser} from 'http/spotifyApi'
 import {getOrDefault} from 'utils/either'
 import {compose} from 'utils/functions'
+import { USER_AUTHENTICATED } from 'actions'
+import store from 'store'
 
 const clientId = "1f662e1ad1ae494382cd56133ebb7b14";
 const getToken: (w: window) => ?string = compose (
@@ -36,6 +38,12 @@ class App extends React.Component<Props, Props, State> {
     componentDidMount() {
         const token: ?string = getToken(window);
         if (!token) return;
+
+        const action = {
+            type: USER_AUTHENTICATED,
+            payload: token
+        };
+        store.dispatch(action);
 
         getCurrentUser(token).then(e => this.setState({
             auth: {

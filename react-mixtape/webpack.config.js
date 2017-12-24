@@ -2,7 +2,7 @@ var path = require('path');
 var FlowtypePlugin = require("flowtype-loader/plugin");
 
 module.exports = {
-    entry: './src/app',
+    entry: './src/start/app',
     resolve: {
         modules: [
             path.resolve(__dirname, "src"),

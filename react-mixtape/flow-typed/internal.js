@@ -131,4 +131,9 @@ type SavePlaylistRequest = {
 type FeedbackMessage = {
     text: string,
     isError: bool
-};
+}
+
+// Redux
+type State = {
+    isAuthenticated: bool
+}

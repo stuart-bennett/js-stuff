@@ -137,3 +137,12 @@ type FeedbackMessage = {
 type State = {
     isAuthenticated: bool
 }
+
+type Anonymous = { isAuthenticated: false };
+type OAuth = {
+    isAuthenticated: true,
+    token: string,
+    user: User
+};
+
+type Authentication = OAuth | Anonymous;

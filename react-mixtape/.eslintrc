@@ -20,6 +20,7 @@
         "Promise": true
     },
     "rules": {
-        "flowtype/define-flow-type": 1
+        "flowtype/define-flow-type": 1,
+        "no-console": 0
     }
 }

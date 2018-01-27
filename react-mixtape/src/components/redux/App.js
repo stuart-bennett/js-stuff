@@ -1,66 +1,50 @@
 // @flow
 
 import React from 'react'
-import AuthApp from 'components/plain/AuthApp'
-import Unauthorised from 'components/plain/Unauthorised'
-import {getCurrentUser} from 'http/spotifyApi'
-import {getOrDefault} from 'utils/either'
-import {compose} from 'utils/functions'
-import { USER_AUTHENTICATED } from 'actions'
-import store from 'store'
+import {connect} from 'react-redux'
+import AuthApp from 'components/redux/AuthApp'
+import Unauthorised from 'components/redux/Unauthorised'
 
-const clientId = "1f662e1ad1ae494382cd56133ebb7b14";
-const getToken: (w: window) => ?string = compose (
-    w => w.location.hash,
-    s => s.split("=")[1].split("&")[0]);
-
-type Anonymous = { isAuthenticated: false };
-type OAuth = {
-    isAuthenticated: true,
-    token: string,
-    user: User
+type Props = {
+    auth: Authentication
 };
+type State = {};
 
-type Authentication = OAuth | Anonymous;
-type Props = {};
-type State = { auth: Authentication };
+const clientId: string = "1f662e1ad1ae494382cd56133ebb7b14";
 
 class App extends React.Component<Props, Props, State> {
-    static defaultProps = {};
-    state = {
+    static defaultProps = {
         auth: { isAuthenticated: false },
     };
+
+    state = {};
 
     constructor(props: Props) {
         super(props);
     }
 
     componentDidMount() {
-        const token: ?string = getToken(window);
-        if (!token) return;
-
-        const action = {
-            type: USER_AUTHENTICATED,
-            payload: token
-        };
-        store.dispatch(action);
-
-        getCurrentUser(token).then(e => this.setState({
-            auth: {
-                isAuthenticated: true,
-                user: getOrDefault(e, { id: "" }),
-                token: token
-            }
-        }));
     }
 
     render() {
-        return (this.state.auth.isAuthenticated)
+        return this.props.auth.isAuthenticated
             ? <AuthApp
-                user={this.state.auth.user}
-                token={this.state.auth.token} />
-            : <Unauthorised clientId={clientId} />;
+                user={this.props.auth.user}
+                token={this.props.auth.token} />
+            : <Unauthorised clientId={clientId} />
     }
 }
 
-export default App;
+function mapStateToProps(state): State {
+    console.log(state);
+    return {
+        auth: state.authentication
+    };
+}
+
+function mapDispatchToProps() {
+    return {
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

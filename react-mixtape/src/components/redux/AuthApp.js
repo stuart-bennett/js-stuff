@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import {connect} from 'react-redux'
 import Message from 'components/redux/Message'
 import Search from 'components/redux/Search'
 import Playlists from 'components/redux/Playlists'
@@ -159,4 +160,15 @@ class AuthApp extends React.Component<Props, Props, State> {
     }
 }
 
-export default AuthApp;
+function mapStateToProps(state) {
+    return {
+        auth: state
+    }
+}
+
+function mapDispatchToProps() {
+    return {
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthApp);

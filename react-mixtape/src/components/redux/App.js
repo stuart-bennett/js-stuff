@@ -20,12 +20,12 @@ const App = (props: Props) => {
         : <Unauthorised clientId={clientId} />
 }
 
-function mapStateToProps(state): Props {
+const mapStateToProps = (state) => {
     console.log(state);
     return {
         auth: state.authentication
     };
-}
+};
 
 function mapDispatchToProps() {
     return {

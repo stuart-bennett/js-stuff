@@ -1,9 +1,11 @@
-import { createStore } from 'redux'
-import { devToolsEnhancer } from 'redux-devtools-extension'
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import reducer from 'reducers/combinedReducers'
+import thunk from 'redux-thunk'
 
-const EmptyOptions = {};
 export default createStore(
     reducer,
-    devToolsEnhancer(EmptyOptions)
+    composeWithDevTools(
+        applyMiddleware(thunk)
+    )
 );

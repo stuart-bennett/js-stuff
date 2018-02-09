@@ -33,11 +33,8 @@ const AuthApp = (props: Props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
-        user: state.authentication.user,
-        token: state.authentication.token,
-        playlists: []
+        playlists: state.playlists.playlists
     };
 };
 

@@ -1,4 +1,4 @@
-import { getCurrentUser } from 'http/spotifyApi'
+import { getCurrentUser, getPlaylists } from 'http/spotifyApi'
 import { oAuth, anonymous } from 'models/authentication'
 
 export const USER_AUTHENTICATED: string = "USER_AUTHENTICATED";
@@ -17,7 +17,6 @@ type PlaylistSelected = {
 export type Action = UserAuthenticated | PlaylistSelected;
 
 export const userAuthenticatedAsync = (token: string) =>
-
     (dispatch: any) => getCurrentUser(token).then(userResult => {
         let auth: Authentication = userResult.hasValue
             ? oAuth(token, userResult.right)
@@ -27,22 +26,17 @@ export const userAuthenticatedAsync = (token: string) =>
             type: 'USER_AUTHENTICATED',
             auth
         });
-    });
 
-    // let user = getCurrentUser(token)
-    //     .then((userResult: Either<string, User>) => {
-    //         let auth: Authentication = { isAuthenticated: false };
-    //         if (userResult.hasValue) {
-    //             return {
-    //                 type: 'USER_AUTHENTICATED',
-    //                 auth: {
-    //                     isAuthenticated: true,
-    //                     user: userResult.right,
-    //                     token,
-    //                 }
-    //             }
-    //         }
-    //     });
+        getPlaylists(token).then(r => {
+            if (r.hasValue) {
+                dispatch({
+                    type: 'PLAYLISTS_FETCHED',
+                    playlists: r.right
+                });
+            }
+        });
+
+    });
 
 export const playlistSelected = (playlist: Playlist): PlaylistSelected => ({
     type: 'PLAYLIST_SELECTED',

@@ -2,13 +2,16 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
+import { playlistSelectedAsync } from 'actions'
 import Playlists from 'components/redux/Playlists'
+import PlaylistDetail from 'components/plain/PlaylistDetail'
 
 type Props = {
-    user: User,
-    token: string,
+    auth: OAuth,
     playlists: Array<Playlist>,
-    playlistSelected: (p: Playlist) => void,
+    selectedPlaylist: Playlist,
+    playlistSelected: (p: Playlist, a: OAuth) => void,
+    savePlaylist: (p: Playlist) => void,
     addNewPlaylist: () => void
 };
 
@@ -21,25 +24,39 @@ const AuthApp = (props: Props) => {
                     <img
                         src="http://fillmurray.com/100/100"
                         className="rounded-circle" />
-                    <div>{props.user.id}</div>
+                    <div>{props.auth.user.id}</div>
                 </div>
             </div>
             <Playlists
                 items={props.playlists}
-                onSelect={(p) => props.playlistSelected(p)}
+                onSelect={(p) => props.playlistSelected(p, props.auth)}
                 addNewPlaylist={() => props.addNewPlaylist()} />
+        </div>
+
+
+        <div className="col-md-2 pl-0 pr-0 sidebar">
+            { props.selectedPlaylist
+                ? <PlaylistDetail
+                    playlist={props.selectedPlaylist}
+                    savePlaylist={p => props.savePlaylist(p)} />
+                : <p>Nothing selected</p> }
         </div>
     </div>;
 }
 
 const mapStateToProps = (state) => {
     return {
-        playlists: state.playlists.playlists
+        auth: state.authentication,
+        playlists: state.playlists.playlists,
+        selectedPlaylist: state.playlists.selectedPlaylist
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<*>) => ({
-    playlistSelected: (p: Playlist) => dispatch(p)
-});
+const mapDispatchToProps = (dispatch: Dispatch<*>) => {
+    return {
+        playlistSelected: (p: Playlist, a: OAuth) =>
+            dispatch(playlistSelectedAsync(a, p))
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthApp);

@@ -1,72 +1,56 @@
 // @flow
 
 import React from 'react'
-import {search} from 'http/spotifyApi'
+import {connect} from 'react-redux'
+import { searchTermChangedAsync } from 'actions'
 import SearchResults from 'components/redux/SearchResults'
-import {getOrDefault} from 'utils/either'
 
 type Props = {
-    placeholder: string,
-    oAuthToken: string,
-    onSelect: Command<SearchResult>
-};
-
-type State = {
+    auth: OAuth,
     searchTerm: string,
-    searchResults: Array<SearchResult>
+    searchResults: Array<SearchResult>,
+    placeholder: string,
+    onSelect: Command<SearchResult>,
+    searchTermChanged: (s: string, a: OAuth) => void
 };
 
-class Search extends React.Component<Props, Props, State> {
-    static defaultProps = {
-        oAuthToken: "",
-        placeholder: 'Search...',
-        onSelect: () => {}
-    };
-
-    state = {
-        searchTerm: '',
-        searchResults: []
-    };
-
-    constructor(props: Props) {
-        super(props);
-    }
-
-    handleChange(input: HTMLInputElement) {
-        const searchTerm = input.value;
-        this.setState({
-            searchTerm: searchTerm
-        });
-
-        const fn = (r: Either<string, Array<SearchResult>>) =>
-            this.setState({
-                searchResults: getOrDefault(r, [])
-            });
-
-        search(searchTerm, this.props.oAuthToken).then(fn);
-    }
-
-    render() {
-        return <div>
-            <div className="mb-4 pt-5 pb-5 pt-4 pb-4 searchInput">
-                <div className="pl-4 pr-4">
-                    <input
-                        type="search"
-                        placeholder={this.props.placeholder}
-                        className="form-control"
-                        onChange={evt => this.handleChange(evt.target)}
-                        value={this.state.searchTerm}/>
-                </div>
-            </div>
-
+const Search = (props: Props) => {
+    return <div>
+        <div className="mb-4 pt-5 pb-5 pt-4 pb-4 searchInput">
             <div className="pl-4 pr-4">
-                <SearchResults
-                    onSelect={this.props.onSelect}
-                    results={this.state.searchResults} />
+                <input
+                    type="search"
+                    placeholder={props.placeholder}
+                    className="form-control"
+                    onChange={evt => props.searchTermChanged(evt.target.value, props.auth)}
+                    value={props.searchTerm}/>
             </div>
-        </div>;
+        </div>
 
+        <div className="pl-4 pr-4">
+            <SearchResults
+                onSelect={props.onSelect}
+                results={props.searchResults} />
+        </div>
+    </div>;
+};
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.authentication,
+        searchTerm: state.search.searchTerm,
+        searchResults: state.search.searchResults,
+        placeholder: "Placeholder",
+        onSelect: (s: SearchResult) => { console.log(s); }
     }
-}
+};
 
-export default Search;
+const mapDispatchToProps = (dispatch: Dispatch<*>) => {
+    return {
+        searchTermChanged: (s: string, a: OAuth) => {
+            dispatch(searchTermChangedAsync(s, a));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

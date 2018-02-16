@@ -1,7 +1,8 @@
 import {
     getCurrentUser,
     getPlaylists,
-    getPlaylistTracks } from 'http/spotifyApi'
+    getPlaylistTracks,
+    search } from 'http/spotifyApi'
 import { oAuth, anonymous } from 'models/authentication'
 
 export const USER_AUTHENTICATED: string = "USER_AUTHENTICATED";
@@ -17,7 +18,29 @@ type PlaylistSelected = {
     playlist: Playlist
 };
 
-export type Action = UserAuthenticated | PlaylistSelected;
+type SearchTermChanged = {
+    type: 'SEARCH_TERM_CHANGED',
+    searchTerm: string,
+    searchResults: Array<SearchResult>
+};
+
+export type Action =
+      UserAuthenticated
+    | PlaylistSelected
+    | SearchTermChanged
+
+export const searchTermChangedAsync = (s: string, a: OAuth) =>
+    (dispatch: any) => search(s, a.token).then(res => {
+        if (!res.hasValue) {
+            return;
+        }
+
+        dispatch({
+            type: 'SEARCH_TERM_CHANGED',
+            s,
+            searchResults: res.right
+        });
+    });
 
 export const userAuthenticatedAsync = (token: string) =>
     (dispatch: any) => getCurrentUser(token).then(userResult => {

@@ -1,7 +1,7 @@
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from 'components/App';
+import App from 'components/plain/App';
 
 // Provide mock implementation for Fetch API
 window.fetch = fetchMock;

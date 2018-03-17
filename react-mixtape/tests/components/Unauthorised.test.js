@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import Unauthorised from "components/Unauthorised"
+import Unauthorised from "components/plain/Unauthorised"
 
 describe("Unauthorised component", () => {
     test("should render", () => {

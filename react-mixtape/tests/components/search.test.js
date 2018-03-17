@@ -2,7 +2,7 @@ import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {shallow} from 'enzyme';
-import Search from 'components/Search';
+import Search from 'components/plain/Search';
 
 // Provide mock implementation for Fetch API
 window.fetch = fetchMock;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import PlaylistDetail from 'components/PlaylistDetail';
+import PlaylistDetail from 'components/plain/PlaylistDetail';
 
 describe("The PlaylistDetail component", () => {
     test("Should render", () => {

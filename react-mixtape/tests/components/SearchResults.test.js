@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import SearchResults from 'components/SearchResults';
+import SearchResults from 'components/plain/SearchResults';
 
 const makeSearchResult = () => ({
     id: "id",

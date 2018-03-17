@@ -1,7 +1,7 @@
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
-import {shallow} from 'enzyme';
-import Playlists from 'components/Playlists';
+import { shallow } from 'enzyme';
+import Playlists from 'components/plain/Playlists';
 
 // Provide mock implementation for Fetch API
 window.fetch = fetchMock;

@@ -1,9 +1,8 @@
 // @flow
 
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { searchTermChangedAsync } from 'actions/searchTermChanged';
-import { searchResultSelectedAsync } from 'actions';
 import SearchResults from 'components/redux/SearchResults';
 
 type Props = {
@@ -29,32 +28,22 @@ const Search = (props: Props) => {
         </div>
 
         <div className="pl-4 pr-4">
-            <SearchResults
-                onSelect={props.onSelect}
-                results={props.searchResults} />
+            <SearchResults results={props.searchResults} />
         </div>
     </div>;
 };
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.authentication,
-        searchTerm: state.search.searchTerm,
-        searchResults: state.search.searchResults,
-        placeholder: "Placeholder",
-        onSelect: (s: SearchResult) => { console.log(s); }
-    }
-};
+const mapStateToProps = (state) => ({
+    auth: state.authentication,
+    searchTerm: state.search.searchTerm,
+    searchResults: state.search.searchResults,
+    placeholder: "Placeholder"
+});
 
-const mapDispatchToProps = (dispatch: Dispatch<*>) => {
-    return {
-        searchTermChanged: (s: string, a: OAuth) => {
-            dispatch(searchTermChangedAsync(s, a));
-        },
-        searchResultSelected: (s: SearchResult) => {
-            dispatch(searchResultSelectedAsync(s));
-        }
-    };
-};
+const mapDispatchToProps = (dispatch: Dispatch<*>) => ({
+    searchTermChanged: (s: string, a: OAuth) => {
+        dispatch(searchTermChangedAsync(s, a));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

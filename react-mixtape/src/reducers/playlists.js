@@ -21,6 +21,14 @@ export function playlists(state: PlaylistsState = InitialState, action: Action):
                 ...state,
                 selectedPlaylist: action.playlist
             }
+        case 'ADD_TRACK_TO_CURRENT_PLAYLIST':
+            return {
+                ...state,
+                selectedPlaylist: {
+                    ...state.selectedPlaylist,
+                    tracks: state.selectedPlaylist.tracks.concat([action.track])
+                }
+            }
         default:
             return state;
     }

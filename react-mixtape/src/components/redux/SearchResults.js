@@ -1,4 +1,8 @@
-import React from 'react'
+// @flow
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { addTrackToCurrentPlaylist } from 'actions/addTrackToCurrentPlaylist';
 
 type Props = {
     results: Array<SearchResult>,
@@ -35,4 +39,24 @@ const render = (p: Props) => p.results.length == 0
     : resultsView(p);
 
 const SearchResults = render;
-export default SearchResults;
+
+const mapStateToProps = (state) => ({
+    auth: state.authentication,
+    searchTerm: state.search.searchTerm,
+    searchResults: state.search.searchResults
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<*>) => ({
+    onSelect: (s: SearchResult) =>
+        dispatch(addTrackToCurrentPlaylist(searchResultToTrack(s)))
+});
+
+const searchResultToTrack = (searchResult: SearchResult): PlaylistTrack => ({
+    id: searchResult.id,
+    title: searchResult.title,
+    images: searchResult.images,
+    isNew: true,
+    primaryArtist: searchResult.primaryArtistName
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

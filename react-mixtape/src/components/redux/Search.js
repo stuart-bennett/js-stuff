@@ -1,9 +1,10 @@
 // @flow
 
-import React from 'react'
-import {connect} from 'react-redux'
-import { searchTermChangedAsync } from 'actions'
-import SearchResults from 'components/redux/SearchResults'
+import React from 'react';
+import {connect} from 'react-redux';
+import { searchTermChangedAsync } from 'actions/searchTermChanged';
+import { searchResultSelectedAsync } from 'actions';
+import SearchResults from 'components/redux/SearchResults';
 
 type Props = {
     auth: OAuth,
@@ -49,6 +50,9 @@ const mapDispatchToProps = (dispatch: Dispatch<*>) => {
     return {
         searchTermChanged: (s: string, a: OAuth) => {
             dispatch(searchTermChangedAsync(s, a));
+        },
+        searchResultSelected: (s: SearchResult) => {
+            dispatch(searchResultSelectedAsync(s));
         }
     };
 };

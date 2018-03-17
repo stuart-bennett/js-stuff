@@ -1,11 +1,11 @@
 // @flow
 
-import React from 'react'
-import {connect} from 'react-redux'
-import { playlistSelectedAsync } from 'actions'
-import Playlists from 'components/redux/Playlists'
-import PlaylistDetail from 'components/plain/PlaylistDetail'
-import Search from 'components/redux/Search'
+import React from 'react';
+import {connect} from 'react-redux';
+import { playlistSelectedAsync } from 'actions/playlistSelected';
+import Playlists from 'components/redux/Playlists';
+import PlaylistDetail from 'components/plain/PlaylistDetail';
+import Search from 'components/redux/Search';
 
 type Props = {
     auth: OAuth,

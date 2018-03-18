@@ -1,3 +1,5 @@
+// @flow
+import type { Playlist, PlaylistTrack } from 'models/playlist.types';
 import {getOrDefault} from 'utils/either'
 import {
     createPlaylist,

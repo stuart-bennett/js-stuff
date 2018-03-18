@@ -1,5 +1,5 @@
 // @flow
-
+import type { Playlist } from 'models/playlist.types';
 import React from 'react';
 import {connect} from 'react-redux';
 import { playlistSelectedAsync } from 'actions/playlistSelected';

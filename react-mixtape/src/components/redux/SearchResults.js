@@ -1,5 +1,5 @@
 // @flow
-
+import type { PlaylistTrack } from 'models/playlist.types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { addTrackToCurrentPlaylist } from 'actions/addTrackToCurrentPlaylist';

@@ -1,5 +1,13 @@
 // @flow
-
+import type {
+    GetPlaylistsResponse,
+    PlaylistResponse,
+    PlaylistTracksResponse,
+    SearchResponse,
+    TrackResponse,
+    UserResponse
+} from 'http/spotifyApi.types';
+import type { Playlist, PlaylistTrack } from 'models/playlist.types';
 import {fetchMap} from 'http/apiWrapper';
 
 const apiBaseUrl: string = "https://api.spotify.com/v1";

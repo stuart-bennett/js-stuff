@@ -1,3 +1,7 @@
+// @flow
+
+import type { Playlist } from 'models/playlist.types';
+
 const newPlaylist = (): Playlist => ({
     id: "",
     name: "",

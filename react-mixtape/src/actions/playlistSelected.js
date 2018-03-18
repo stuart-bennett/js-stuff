@@ -1,5 +1,5 @@
 // @flow
-
+import type { Playlist } from 'models/playlist.types';
 import { getPlaylistTracks } from 'http/spotifyApi'
 
 export type PlaylistSelected = {

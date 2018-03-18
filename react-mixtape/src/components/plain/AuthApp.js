@@ -1,5 +1,5 @@
 // @flow
-
+import type { Playlist, PlaylistTrack } from 'models/playlist.types';
 import React from 'react'
 import Message from 'components/plain/Message'
 import Search from 'components/plain/Search'

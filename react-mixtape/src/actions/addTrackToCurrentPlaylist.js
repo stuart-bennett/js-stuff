@@ -1,5 +1,7 @@
 // @flow
 
+import type { PlaylistTrack } from 'models/playlist.types';
+
 export type AddTrackToCurrentPlaylist = {
     type: 'ADD_TRACK_TO_CURRENT_PLAYLIST',
     track: PlaylistTrack

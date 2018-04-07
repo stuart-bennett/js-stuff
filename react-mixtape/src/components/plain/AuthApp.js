@@ -25,7 +25,7 @@ type State = {
     message: ?FeedbackMessage
 };
 
-class AuthApp extends React.Component<Props, Props, State> {
+class AuthApp extends React.Component<Props, State> {
     static defaultProps = {
         user: { id: "" },
         token: ""

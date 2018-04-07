@@ -16,7 +16,7 @@ type State = {
     searchResults: Array<SearchResult>
 };
 
-class Search extends React.Component<Props, Props, State> {
+class Search extends React.Component<Props, State> {
     static defaultProps = {
         oAuthToken: "",
         placeholder: 'Search...',

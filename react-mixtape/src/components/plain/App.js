@@ -23,7 +23,7 @@ type Authentication = OAuth | Anonymous;
 type Props = {};
 type State = { auth: Authentication };
 
-class App extends React.Component<Props, Props, State> {
+class App extends React.Component<Props, State> {
     static defaultProps = {};
     state = {
         auth: { isAuthenticated: false },

@@ -27,7 +27,7 @@ type PlaylistTrack = {
     id: string,
     title: string,
     primaryArtist: string,
-    images: Array<Images>,
+    images: Array<Image>,
     isNew: bool
 };
 

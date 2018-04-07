@@ -40,7 +40,7 @@
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-react": "^7.1.0",
-    "flow-bin": "^0.51.1",
+    "flow-bin": "^0.69.0",
     "flowtype-loader": "^0.2.2",
     "jest": "^20.0.4",
     "jest-fetch-mock": "^1.2.1",

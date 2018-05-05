@@ -1,0 +1,10 @@
+{
+  "name": "react-mixtape",
+  "version": "1.0.0",
+  "description": "Manage Spotify playlists (demo app built with React)",
+  "main": "index.js",
+  "repository": "https://github.com/stuart-bennett/js-stuff",
+  "author": "Stuart Bennett",
+  "license": "MIT",
+  "private": true
+}

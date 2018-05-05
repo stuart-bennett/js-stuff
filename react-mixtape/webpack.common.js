@@ -28,6 +28,10 @@ module.exports = {
                 }
             },
             {
+                test: /\.(js|jsx)$/,
+                use: 'eslint-loader'
+            },
+            {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             }

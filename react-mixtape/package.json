@@ -6,5 +6,9 @@
   "repository": "https://github.com/stuart-bennett/js-stuff",
   "author": "Stuart Bennett",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-router": "^4.2.0"
+  }
 }

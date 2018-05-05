@@ -20,6 +20,14 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(js|jsx)$/,
+                loader: 'babel-loader',
+                options: {
+                    plugins: ['react-hot-loader/babel'],
+                    presets: ['babel-preset-react']
+                }
+            },
+            {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             }

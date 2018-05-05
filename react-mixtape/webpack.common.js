@@ -6,11 +6,6 @@ const webpack = require('webpack');
 module.exports = {
     mode: 'development',
     entry: './src/index.js',
-    devtool: 'inline-source-maps',
-    devServer: {
-        contentBase: './dist',
-        hot: true
-    },
     plugins: [
         new CleanWebPlugin(['dist']),
         new HtmlWebpackPlugin({

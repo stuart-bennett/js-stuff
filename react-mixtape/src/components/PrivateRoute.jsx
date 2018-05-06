@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as auth from '../utils/fakeAuth';
+import * as auth from '../utils/auth';
 
 class PrivateRoute extends React.Component {
 

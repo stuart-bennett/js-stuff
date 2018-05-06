@@ -5,8 +5,7 @@ import { Redirect } from 'react-router-dom';
 import ExternalRedirect from '../components/ExternalRedirect.jsx';
 import Login from '../components/Login.jsx';
 import { url, tryReceiveToken } from '../utils/spotifyOAuth';
-import { isAuthenticated } from '../utils/fakeAuth';
-
+import { isAuthenticated } from '../utils/auth';
 
 class LoginContainer extends React.Component {
 

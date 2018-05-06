@@ -1,5 +1,5 @@
 import * as queryString from './url';
-import { login } from './fakeAuth';
+import { login } from './auth';
 
 const baseUrl = 'https://accounts.spotify.com/authorize';
 const oAuthSettings = {

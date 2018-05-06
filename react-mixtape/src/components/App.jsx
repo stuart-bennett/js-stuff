@@ -7,7 +7,7 @@ import PlaylistContainer from '../containers/PlaylistContainer.jsx';
 
 const App = () => (
 <div>
-    <Route path="/" exact component={PlaylistsContainer} />
+    <PlaylistsContainer />
     <Route path="/:playlistId" component={PlaylistContainer} />
 </div>
 );

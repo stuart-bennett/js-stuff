@@ -9,7 +9,7 @@ module.exports = {
     plugins: [
         new CleanWebPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: "React Mixtape fkjds"
+            title: "React Mixtape"
         }),
         new webpack.HotModuleReplacementPlugin()
     ],

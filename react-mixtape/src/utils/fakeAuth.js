@@ -15,13 +15,22 @@
 const fakeAuth = {
     isAuthenticated: false,
     userId: null,
+    token: null,
     onChangeCallbacks: []
 }
 
-const login = () => {
+const login = (token) => {
+    if (!token) {
+        fakeAuth.isAuthenticated = false;
+        fakeAuth.onChangeCallbacks.forEach(f => f(fakeAuth.isAuthenticated));
+        return;
+    }
+
     fakeAuth.isAuthenticated = true;
+    fakeAuth.token = token;
 
     // This should come from token endpoint API response
+    // Could do the http call to /me endpoint here?
     fakeAuth.userId = 'test.user';
     fakeAuth.onChangeCallbacks.forEach(f => f(fakeAuth.isAuthenticated));
 };

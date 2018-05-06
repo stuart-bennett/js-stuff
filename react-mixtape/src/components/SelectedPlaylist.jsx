@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Search from './Search.jsx';
 
 const SelectedPlaylist = ({ name, numberOfFollowers }) => (
 <header>
     <h1>{name}</h1>
     <span>Has { numberOfFollowers } followers</span>
-    <input type="text" placeholder="Search & add new track..." />
+    <br />
+    <Search />
 </header>
 );
 

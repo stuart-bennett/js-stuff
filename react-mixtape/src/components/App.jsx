@@ -1,8 +1,8 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
-import SelectedPlaylist from './components/SelectedPlaylist.jsx';
-import SearchResults from './components/SearchResults.jsx';
-import PlaylistTracks from './components/PlaylistTracks.jsx';
+import SelectedPlaylist from './SelectedPlaylist.jsx';
+import SearchResults from './SearchResults.jsx';
+import PlaylistTracks from './PlaylistTracks.jsx';
 
 const fakeTracks = [
     { id: '001', songTitle: 'Band on the run', artist: 'Wings'},

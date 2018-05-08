@@ -36,7 +36,10 @@ const login = (token) => {
 };
 
 const isAuthenticated = () => auth.isAuthenticated;
-const loggedInUser = () => { auth.userId };
+const getLoggedInUser = () => ({
+    id: auth.userId,
+    token: auth.token
+});
 
 // Enable clients to register functions to run
 // when a login (or eventually logout) occurs
@@ -46,5 +49,5 @@ export {
     registerOnChange,
     login,
     isAuthenticated,
-    loggedInUser
+    getLoggedInUser
 };

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PlaylistSelector from '../components/PlaylistSelector.jsx';
 

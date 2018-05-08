@@ -6,7 +6,7 @@ const fakePlaylists = [
     { id: "2002", name: "In the garden" }
 ];
 
-class PlaylistContainer extends React.Component {
+class PlaylistSelectorContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -23,5 +23,5 @@ class PlaylistContainer extends React.Component {
     }
 }
 
-export default PlaylistContainer;
+export default PlaylistSelectorContainer;
 

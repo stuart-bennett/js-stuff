@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import SearchResults from '../components/SearchResults.jsx';
 import SelectedPlaylist from '../components/SelectedPlaylist.jsx';
 import PlaylistTracks from '../components/PlaylistTracks.jsx';
+import * as spotify from '../utils/spotifyApi';
+import { getLoggedInUser } from '../utils/auth';
 
 const fakeTracks = [
     { id: '001', songTitle: 'Band on the run', artist: 'Wings'},
@@ -18,22 +20,41 @@ const fakeSearchResults = [
 class PlaylistContainer extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    componentWillMount() {
-        // Eventually...
-        // 1. fetch playlist
-        // 2. fetch playlist tracks
-
-        // injected by React Router
-        const { playlistId } = this.props.match.params;
-        console.log(playlistId);
-        this.setState({
+        this.state = ({
             name: "test",
             numberOfFollowers: 103,
             searchResults: fakeSearchResults,
             tracks: fakeTracks
         });
+    }
+
+    fetchAndUpdate(playlistId) {
+        spotify
+            .get(`/playlists/${playlistId}`, getLoggedInUser().token)
+            .then(r => r.json())
+            .then(r => this.setState({
+                name: r.name,
+                numberOfFollowers: r.followers.total,
+            }));
+    }
+
+    componentDidUpdate(prevProps) {
+        const { playlistId } = this.props.match.params;
+        if (prevProps.match.params.playlistId === playlistId) {
+            return;
+        }
+
+        // 1. fetch playlist
+        this.fetchAndUpdate(playlistId);
+
+        // 2. fetch playlist tracks
+    }
+
+    componentDidMount() {
+        const { playlistId } = this.props.match.params;
+
+        // 1. fetch playlist
+        this.fetchAndUpdate(playlistId);
     }
 
     // not sure if this is rendering too many components

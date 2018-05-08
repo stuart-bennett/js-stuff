@@ -1,20 +1,27 @@
+/* eslint-disable no-console */
 import React from 'react';
 import PlaylistSelector from '../components/PlaylistSelector.jsx';
-
-const fakePlaylists = [
-    { id: "2001", name: "Roadtrip" },
-    { id: "2002", name: "In the garden" }
-];
+import * as spotify from '../utils/spotifyApi';
+import { getLoggedInUser } from '../utils/auth';
 
 class PlaylistSelectorContainer extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        spotify
+            .get("/me/playlists", getLoggedInUser().token)
+            .then(r => r.json())
+            .then(r => r.items.map(i => ({ id: i.id, name: i.name })))
+            .then(m => this.setState({
+                playlists: m
+            }));
+    }
+
     componentWillMount() {
-        // 1. fetch playlists for the current user
         this.setState({
-            playlists: fakePlaylists
+            playlists: []
         });
     }
 

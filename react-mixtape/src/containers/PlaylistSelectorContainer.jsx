@@ -1,8 +1,13 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { fetchPlaylists } from '../actions/playlistSelector';
 import PlaylistSelector from '../components/PlaylistSelector.jsx';
-import * as spotify from '../utils/spotifyApi';
 import { getLoggedInUser } from '../utils/auth';
+import { reducer } from '../reducers';
+import thunk from 'redux-thunk';
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 class PlaylistSelectorContainer extends React.Component {
     constructor(props) {
@@ -10,13 +15,8 @@ class PlaylistSelectorContainer extends React.Component {
     }
 
     componentDidMount() {
-        spotify
-            .get("/me/playlists", getLoggedInUser().token)
-            .then(r => r.json())
-            .then(r => r.items.map(i => ({ id: i.id, name: i.name })))
-            .then(m => this.setState({
-                playlists: m
-            }));
+        store.subscribe(() => this.setState(store.getState()));
+        store.dispatch(fetchPlaylists(getLoggedInUser().token));
     }
 
     componentWillMount() {

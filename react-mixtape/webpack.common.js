@@ -23,7 +23,10 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 options: {
-                    plugins: ['react-hot-loader/babel'],
+                    plugins: [
+                        'react-hot-loader/babel',
+                        'transform-object-rest-spread'
+                    ],
                     presets: ['babel-preset-react']
                 }
             },

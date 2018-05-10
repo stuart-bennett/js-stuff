@@ -1,6 +1,9 @@
 import * as actions from '../actionTypes';
 
 const initialState = {
+    playlist: null,
+    tracks: [],
+    searchResults: [],
     playlists: [],
     token: null,
     userId: null,
@@ -37,6 +40,11 @@ export function reducer(state = initialState, action) {
                 ...state,
                playlists: action.playlists
             };
+        case actions.FETCH_PLAYLIST_SUCCESS:
+            return {
+                ...state,
+                playlist: action.playlist
+            }
         default:
             return state;
     }

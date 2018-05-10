@@ -1,12 +1,12 @@
 import * as actions from '../actionTypes';
 import * as spotify from '../utils/spotifyApi';
 
-const fetchPlaylistsSuccess = (data) => ({
+const fetchPlaylistsSuccess = data => ({
     type: actions.FETCH_PLAYLISTS_SUCCESS,
     playlists: data
 });
 
-const fetchPlaylistsFail = (err) => ({
+const fetchPlaylistsFail = err => ({
     type: actions.FETCH_PLAYLISTS_FAIL,
     reason: err
 });

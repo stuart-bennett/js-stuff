@@ -2,25 +2,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import * as actions from '../actions/login';
 import ExternalRedirect from '../components/ExternalRedirect.jsx';
 import Login from '../components/Login.jsx';
-import { url, tryReceiveToken } from '../utils/spotifyOAuth';
-import { isAuthenticated } from '../utils/auth';
+import { url } from '../utils/spotifyOAuth';
+import store from '../store';
 
 class LoginContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = store.getState();
+        store.subscribe(() => this.setState(store.getState()));
+    }
 
-    componentWillMount() {
-        tryReceiveToken(this.props.location.hash);
-        this.setState({
-            shouldRedirect: false,
-            isAuthenticated: isAuthenticated()
-        });
+    componentDidMount() {
+        store.dispatch(actions.tryReceiveToken(this.props.location.hash));
     }
 
     handleLogin() {
-        this.setState({
-            shouldRedirect: true
-        });
+        store.dispatch(actions.redirectToSpotifyLogin());
     }
 
     render() {

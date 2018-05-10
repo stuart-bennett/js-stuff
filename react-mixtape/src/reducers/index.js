@@ -1,14 +1,42 @@
-import * as actions from '../actionTypes/playlistSelector';
+import * as actions from '../actionTypes';
 
-const initialState = { playlists: [] };
+const initialState = {
+    playlists: [],
+    token: null,
+    userId: null,
+    isAuthenticated: false,
+    shouldRedirect: false
+};
+
 export function reducer(state = initialState, action) {
 
     switch (action.type) {
+        case actions.LOGIN_REDIRECT:
+            return {
+                ...state,
+                shouldRedirect: true
+            };
+        case actions.LOGIN_NO_TOKEN:
+            return {
+                ...state,
+                isAuthenticated: false,
+                token: null,
+                userId: null,
+                shouldRedirect: false
+            };
+        case actions.LOGIN_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                userId: 'test.user',
+                token: action.token,
+                shouldRedirect: false
+            };
         case actions.FETCH_PLAYLISTS_SUCCESS:
             return {
                 ...state,
                playlists: action.playlists
-            }
+            };
         default:
             return state;
     }

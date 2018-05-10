@@ -8,9 +8,7 @@ const initialState = {
     token: null,
     userId: null,
     isAuthenticated: false,
-    shouldRedirect: false
-};
-
+    shouldRedirect: false }; 
 export function reducer(state = initialState, action) {
 
     switch (action.type) {
@@ -44,6 +42,11 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 playlist: action.playlist
+            }
+        case actions.SEARCH_SUCCESS:
+            return {
+                ...state,
+                searchResults: action.searchResults
             }
         default:
             return state;

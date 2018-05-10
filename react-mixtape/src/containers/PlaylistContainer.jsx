@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
+import SearchContainer from './SearchContainer.jsx';
 import SearchResults from '../components/SearchResults.jsx';
 import SelectedPlaylist from '../components/SelectedPlaylist.jsx';
 import PlaylistTracks from '../components/PlaylistTracks.jsx';
@@ -45,6 +46,7 @@ class PlaylistContainer extends React.Component {
         return (
             <div>
                 <SelectedPlaylist {...this.state.playlist } />
+                <SearchContainer />
                 <SearchResults results={this.state.searchResults} />
                 <PlaylistTracks tracks={this.state.tracks} />
             </div>

@@ -11,3 +11,7 @@ export const FETCH_PLAYLISTS_FAIL = 'fetchPlaylistsFail';
 // Individual Playlist
 export const FETCH_PLAYLIST_SUCCESS = 'fetchPlaylistSuccess';
 export const FETCH_PLAYLIST_FAIL = 'fetchPlaylistFail';
+
+// Search
+export const SEARCH_SUCCESS = 'searchSuccess';
+export const SEARCH_FAIL = 'searchFail';

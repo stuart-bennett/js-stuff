@@ -1,4 +1,4 @@
-import * as actions from '../actionTypes/playlistSelector';
+import * as actions from '../actionTypes';
 import * as spotify from '../utils/spotifyApi';
 
 const fetchPlaylistsSuccess = (data) => ({

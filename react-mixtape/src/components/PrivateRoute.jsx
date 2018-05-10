@@ -1,18 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as auth from '../utils/auth';
+import store from '../store';
 
 class PrivateRoute extends React.Component {
-
-    componentWillMount() {
-        auth.registerOnChange((isAuthenticated) => this.setState({
-            isAuthenticated
-        }));
-
-        this.setState({
-            isAuthenticated: auth.isAuthenticated()
-        })
+    constructor(props) {
+        super(props);
+        this.state = store.getState();
+        store.subscribe(() => this.setState(store.getState()));
     }
 
     render() {

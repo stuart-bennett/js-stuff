@@ -36,7 +36,10 @@ export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
                 id: r.id,
                 name: r.name,
                 numberOfFollowers: r.followers.total,
-                image: r.images[0].url
+                numberOfTracks: r.tracks.total,
+                image: r.images[0].url,
+                url: r.external_urls.spotify,
+                isPublic: r.public
             };
             dispatch(fetchPlaylistSuccess(playlist));
         })

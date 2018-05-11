@@ -1,2 +1,6 @@
-@value playlistImageHeight: 480px;
+/* General */
 @value spacing: 1rem;
+@value playlistImageHeight: 480px;
+
+/* Colours */
+@value white: #FFF;

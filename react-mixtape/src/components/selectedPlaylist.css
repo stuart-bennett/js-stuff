@@ -1,11 +1,11 @@
 @value variables: '../styles/variables.css';
-@value spacing, playlistImageHeight from variables;
+@value playlistImageHeight, spacing, white from variables;
 @import url('https://fonts.googleapis.com/css?family=Bitter:400,700|Crimson+Text:400,700|Roboto+Condensed:400,700');
 
 .header {
     position: relative;
     height: playlistImageHeight;
-    color: #FFF;
+    color: white;
 }
 
 .statsBlock > *,
@@ -26,6 +26,15 @@
 
 .statsBlock a {
     color: #FFF;
+}
+
+.statsBlock > li {
+    list-style: none;
+}
+
+.statsBlock > li > svg {
+    padding-right: spacing;
+    fill: white;
 }
 
 .metaData {

@@ -35,7 +35,8 @@ export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
             const playlist = {
                 id: r.id,
                 name: r.name,
-                numberOfFollowers: r.followers.total
+                numberOfFollowers: r.followers.total,
+                image: r.images[0].url
             };
             dispatch(fetchPlaylistSuccess(playlist));
         })

@@ -1,14 +1,11 @@
 /* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
-import SearchContainer from './SearchContainer.jsx';
-import SearchResults from '../components/SearchResults.jsx';
-import SelectedPlaylist from '../components/SelectedPlaylist.jsx';
-import PlaylistTracks from '../components/PlaylistTracks.jsx';
-import store from '../store';
 import * as actions from '../actions/playlist';
+import PlaylistDetail from '../components/PlaylistDetail.jsx';
+import store from '../store';
 
-class PlaylistContainer extends React.Component {
+class PlaylistDetailContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = store.getState();
@@ -53,18 +50,15 @@ class PlaylistContainer extends React.Component {
             return null;
         }
 
-        return (
-            <div>
-                <SelectedPlaylist {...this.state.playlist } />
-                <SearchContainer />
-                <SearchResults results={this.state.searchResults} />
-                <PlaylistTracks tracks={this.state.tracks} />
-            </div>
-        );
+        return <PlaylistDetail
+            playlist={this.state.playlist}
+            searchResults={this.state.searchResults}
+            tracks={this.state.tracks}
+        />;
     }
 }
 
-PlaylistContainer.propTypes = {
+PlaylistDetailContainer.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
             playlistId: PropTypes.string.isRequired
@@ -72,4 +66,4 @@ PlaylistContainer.propTypes = {
     }).isRequired
 }
 
-export default PlaylistContainer;
+export default PlaylistDetailContainer;

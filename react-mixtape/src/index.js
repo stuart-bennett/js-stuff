@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import 'normalize.css/normalize.css';
 
 const $root = document.createElement('div');
-document.documentElement.appendChild($root);
+document.body.appendChild($root);
 
 ReactDOM.render(
 <Router>

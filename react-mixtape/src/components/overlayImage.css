@@ -1,0 +1,21 @@
+@value variables: '../styles/variables.css';
+@value playlistImageHeight from variables;
+
+.container {
+    position: absolute;
+    width: 100%;
+}
+
+.overlay {
+    background-color: purple;
+    position: absolute;
+    width: 100%;
+    height: playlistImageHeight;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+.container > img {
+    width: 100%;
+    filter: blur(10px) grayscale(70%);
+}

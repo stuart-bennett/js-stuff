@@ -1,11 +1,16 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Container, Row } from 'react-grid-system';
 
 const Login = ({ login }) => (
-    <div>
-        <p>You are about to be redirected to Spotify to log into your account.</p>
-        <button onClick={login}>Login</button>
-    </div>
+    <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+        <Row debug>
+            <p>You are about to be redirected to Spotify to log into your account.</p>
+        </Row>
+        <Row>
+            <button onClick={login}>Login</button>
+        </Row>
+    </Container>
 );
 
 Login.propTypes = {

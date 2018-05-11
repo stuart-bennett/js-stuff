@@ -8,7 +8,8 @@ const initialState = {
     token: null,
     userId: null,
     isAuthenticated: false,
-    shouldRedirect: false }; 
+    shouldRedirect: false };
+
 export function reducer(state = initialState, action) {
 
     switch (action.type) {
@@ -29,7 +30,6 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                userId: 'test.user',
                 token: action.token,
                 shouldRedirect: false
             };
@@ -47,6 +47,11 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 searchResults: action.searchResults
+            }
+        case actions.FETCH_CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                userId: action.userId
             }
         default:
             return state;

@@ -11,9 +11,9 @@ const fetchPlaylistFail = err => ({
     reason: err
 });
 
-export const fetchPlaylist = (id, oAuthToken) => dispatch =>
+export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
     spotify
-        .get(`/playlists/${id}`, oAuthToken)
+        .get(`/users/${userId}/playlists/${playlistId}`, oAuthToken)
         .then(r => r.json())
         .then(r => {
             const playlist = {
@@ -24,5 +24,3 @@ export const fetchPlaylist = (id, oAuthToken) => dispatch =>
             dispatch(fetchPlaylistSuccess(playlist));
         })
         .catch(err => dispatch(fetchPlaylistFail(err)));
-
-

@@ -1,3 +1,4 @@
+import { fetchCurrentUser } from './user';
 import * as actions from '../actionTypes';
 
 const extractToken = (fragment) => fragment.split('=')[1];
@@ -14,9 +15,13 @@ export const redirectToSpotifyLogin = () => ({
     type: actions.LOGIN_REDIRECT
 });
 
-export const tryReceiveToken = (fragment) => {
+export const tryReceiveToken = fragment => dispatch => {
     const token = extractToken(fragment);
-    return token
-        ? loginSuccess(token)
-        : tokenNotPresent();
+    if (!token) {
+        dispatch(tokenNotPresent);
+        return;
+    }
+
+    dispatch(loginSuccess(token));
+    dispatch(fetchCurrentUser(token));
 };

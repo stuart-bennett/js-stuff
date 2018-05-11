@@ -5,6 +5,10 @@ const createHeaders = (authToken) => new Headers({
 });
 
 export function get(url, token) {
+    if (!token) {
+        throw 'Parameter "token" is required';
+    }
+
     const requestOptions = {
         headers: createHeaders(token)
     };

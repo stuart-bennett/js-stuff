@@ -3,6 +3,10 @@ export const LOGIN_REDIRECT = 'loginRedirect';
 export const LOGIN_SUCCESS = 'loginSuccess';
 export const LOGIN_NO_TOKEN = 'loginNoToken';
 
+// Current User
+export const FETCH_CURRENT_USER_SUCCESS = 'fetchCurrentUserSuccess';
+export const FETCH_CURRENT_USER_FAIL = 'fetchCurrentUserFail';
+
 // Playlists
 export const FETCH_PLAYLISTS = 'fetchPlaylists';
 export const FETCH_PLAYLISTS_SUCCESS = 'fetchPlaylistsSuccess';

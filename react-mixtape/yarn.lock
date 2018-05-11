@@ -5279,6 +5279,13 @@ react-dom@^16.3.2:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-grid-system@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-3.2.3.tgz#5a67256c63ab3f17801fe903791428f3de174975"
+  dependencies:
+    lodash "^4.17.5"
+    prop-types "^15.6.1"
+
 react-hot-loader@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.1.2.tgz#5e8025f5bc5605506586b46eb2c6cc4006fd54d7"

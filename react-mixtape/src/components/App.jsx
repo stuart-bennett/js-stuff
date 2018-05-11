@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-grid-system';
 import { hot } from 'react-hot-loader';
 import { Route } from 'react-router-dom';
 import LoginContainer from '../containers/LoginContainer.jsx';
@@ -7,11 +8,11 @@ import PlaylistDetailContainer from '../containers/PlaylistDetailContainer.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 
 const App = () => (
-<div>
+<Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
     <Route path="/" component={LoginContainer} />
-    <PrivateRoute path="/" component={PlaylistSelectorContainer} />
     <PrivateRoute path="/:playlistId" component={PlaylistDetailContainer} />
-</div>
+    <PrivateRoute path="/" component={PlaylistSelectorContainer} />
+</Container>
 );
 
 export default hot(module)(App);

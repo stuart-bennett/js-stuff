@@ -7,7 +7,6 @@
 }
 
 .overlay {
-    background-color: purple;
     position: absolute;
     width: 100%;
     height: playlistImageHeight;

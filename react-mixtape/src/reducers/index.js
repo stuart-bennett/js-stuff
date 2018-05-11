@@ -53,6 +53,11 @@ export function reducer(state = initialState, action) {
                 ...state,
                 userId: action.userId
             }
+        case actions.FETCH_PLAYLIST_TRACKS_SUCCESS:
+            return {
+                ...state,
+                tracks: action.tracks
+            }
         default:
             return state;
     }

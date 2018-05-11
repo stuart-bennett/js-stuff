@@ -25,12 +25,21 @@ class PlaylistContainer extends React.Component {
             this.state.userId,
             playlistId,
             this.state.token));
+
+        store.dispatch(actions.fetchPlaylistTracks(
+            this.state.userId,
+            playlistId,
+            this.state.token));
     }
 
     componentDidMount() {
         const { playlistId } = this.props.match.params;
-
         store.dispatch(actions.fetchPlaylist(
+            this.state.userId,
+            playlistId,
+            this.state.token));
+
+        store.dispatch(actions.fetchPlaylistTracks(
             this.state.userId,
             playlistId,
             this.state.token));

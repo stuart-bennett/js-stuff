@@ -12,8 +12,9 @@ import PrivateRoute from './PrivateRoute.jsx';
 const App = ({ isShowingMenu }) => (
 <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
     <Route path="/" component={LoginContainer} />
-    <Row>
+    <Row nogutter>
         <Col
+            debug
             md={ isShowingMenu ? 1 : 0 }
             style={{ display: isShowingMenu ? 'block' : 'none' }}>
             <PrivateRoute path="/" component={PlaylistSelectorContainer} />

@@ -13,8 +13,8 @@ const PlaylistDetail = ({ playlist, searchResults, tracks }) =>
                 <SelectedPlaylist {...playlist} />
             </Col>
         </Row>
-        <Row>
-            <Col md={12}>
+        <Row nogutter>
+            <Col md={6} offset={{ md: 3 }}>
                 <SearchContainer />
             </Col>
         </Row>

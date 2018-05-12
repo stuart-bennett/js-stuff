@@ -24,7 +24,7 @@ const fetchPlaylistTracksFail = err => ({
 const mapTrack = t => ({
     id: t.track.id,
     songTitle: t.track.name,
-    artistName: t.track.artists[0].name
+    artist: t.track.artists[0].name
 });
 
 export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>

@@ -20,12 +20,12 @@ const PlaylistDetail = ({ playlist, searchResults, tracks }) =>
         </Row>
         <Row>
             <Col md={12}>
-            <SearchResults results={searchResults} />
+                <SearchResults results={searchResults} />
             </Col>
         </Row>
         <Row>
-            <Col md={12}>
-            <PlaylistTracks tracks={tracks} />
+            <Col md={6} offset={{ md: 3 }}>
+                <PlaylistTracks tracks={tracks} />
             </Col>
         </Row>
     </Container>;

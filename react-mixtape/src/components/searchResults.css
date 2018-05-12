@@ -1,0 +1,39 @@
+@value variables: '../styles/variables.css';
+@value spacing from variables;
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // background: orange;
+}
+
+.container > li {
+    list-style: none;
+    // background: purple;
+    margin: spacing;
+    width: 600px;
+}
+
+.container > li > img {
+    border-radius: 50%;
+    width: 15%;
+    border: solid #EEE 1px;
+}
+
+.details {
+    font-family: 'Bitter';
+    display: inline-block;
+    vertical-align: top;
+    margin-left: spacing;
+}
+
+.songName {
+    font-size: 1.25rem;
+    font-weight: normal;
+}
+
+.artist {
+    font-size: 1rem;
+    font-weight: normal;
+}

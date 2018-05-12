@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import AppContainer from './containers/AppContainer.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'normalize.css/normalize.css';
 
@@ -9,5 +9,5 @@ document.body.appendChild($root);
 
 ReactDOM.render(
 <Router>
-    <App />
+    <AppContainer />
 </Router>, $root);

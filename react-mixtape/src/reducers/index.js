@@ -8,7 +8,9 @@ const initialState = {
     token: null,
     userId: null,
     isAuthenticated: false,
-    shouldRedirect: false };
+    shouldRedirect: false,
+    isShowingMenu: true
+};
 
 export function reducer(state = initialState, action) {
 
@@ -57,6 +59,11 @@ export function reducer(state = initialState, action) {
             return {
                 ...state,
                 tracks: action.tracks
+            }
+        case actions.TOGGLE_MENU:
+            return {
+                ...state,
+                isShowingMenu: !state.isShowingMenu
             }
         default:
             return state;

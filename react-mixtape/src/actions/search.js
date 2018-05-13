@@ -12,6 +12,10 @@ const searchFail = err => ({
     reason: err
 });
 
+export const clearSearch = () => ({
+    type: actions.SEARCH_CLEAR
+});
+
 export const search = (searchTerm, oAuthToken) => dispatch =>
     spotify
         .get(`/search?q=${searchTerm}&type=track`, oAuthToken)

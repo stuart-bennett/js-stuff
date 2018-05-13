@@ -50,6 +50,11 @@ export function reducer(state = initialState, action) {
                 ...state,
                 searchResults: action.searchResults
             }
+        case actions.SEARCH_CLEAR:
+            return {
+                ...state,
+                searchResults: []
+            }
         case actions.FETCH_CURRENT_USER_SUCCESS:
             return {
                 ...state,

@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Row } from 'react-grid-system';
 
 const Login = ({ login }) => (
-    <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+    <Container fluid>
         <Row debug>
             <p>You are about to be redirected to Spotify to log into your account.</p>
         </Row>

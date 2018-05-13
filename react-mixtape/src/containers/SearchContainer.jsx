@@ -4,14 +4,34 @@ import Search from '../components/Search.jsx';
 import store from '../store';
 import * as actions from '../actions/search';
 
-const handleInput = searchTerm => {
-    if (searchTerm.length >=3 ) {
-        store.dispatch(actions.search(
-            searchTerm,
-            store.getState().token));
+const NUM_CHARS_BEFORE_SEARCH_BEGINS = 3;
+
+class SearchContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { searchTerm: '' };
+    }
+
+    handleInput(searchTerm) {
+        this.setState({ searchTerm });
+        if (searchTerm.length >= NUM_CHARS_BEFORE_SEARCH_BEGINS) {
+            store.dispatch(actions.search(
+                searchTerm,
+                store.getState().token));
+        }
+    }
+
+    handleOnClear() {
+        this.setState({ searchTerm: '' });
+        store.dispatch(actions.clearSearch());
+    }
+
+    render() {
+        return <Search
+        searchTerm={this.state.searchTerm}
+        onChange={ searchTerm => this.handleInput(searchTerm) }
+        onClear={ () => this.handleOnClear() } />;
     }
 }
-
-const SearchContainer = () => <Search onChange={handleInput} />
 
 export default SearchContainer;

@@ -1,9 +1,10 @@
 import * as actions from '../actionTypes';
+import * as remoteData from '../utils/remoteData';
 
 const initialState = {
     playlist: null,
     tracks: [],
-    searchResults: [],
+    searchResults: remoteData.initial,
     playlists: [],
     token: null,
     userId: null,
@@ -45,6 +46,16 @@ export function reducer(state = initialState, action) {
                 ...state,
                 playlist: action.playlist
             }
+        case actions.SEARCH_FETCHING:
+            return {
+                ...state,
+                searchResults: remoteData.fetching
+            }
+        case actions.SEARCH_FAIL:
+            return {
+                ...state,
+                searchResults: action.searchResults
+            }
         case actions.SEARCH_SUCCESS:
             return {
                 ...state,
@@ -53,7 +64,7 @@ export function reducer(state = initialState, action) {
         case actions.SEARCH_CLEAR:
             return {
                 ...state,
-                searchResults: []
+                searchResults: remoteData.initial
             }
         case actions.FETCH_CURRENT_USER_SUCCESS:
             return {

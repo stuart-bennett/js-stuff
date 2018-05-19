@@ -18,6 +18,7 @@ export const FETCH_PLAYLIST_SUCCESS = 'fetchPlaylistSuccess';
 export const FETCH_PLAYLIST_FAIL = 'fetchPlaylistFail';
 
 // Search
+export const SEARCH_FETCHING = 'searchFetching';
 export const SEARCH_SUCCESS = 'searchSuccess';
 export const SEARCH_FAIL = 'searchFail';
 export const SEARCH_CLEAR = 'searchClear';

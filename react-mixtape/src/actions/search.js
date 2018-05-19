@@ -1,23 +1,29 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-unreachable */
 import * as actions from '../actionTypes';
 import * as spotify from '../utils/spotifyApi';
+import { success, fail } from '../utils/remoteData';
 
 const searchSuccess = results => ({
     type: actions.SEARCH_SUCCESS,
-    searchResults: results
+    searchResults: success(results)
 });
 
 const searchFail = err => ({
     type: actions.SEARCH_FAIL,
-    reason: err
+    searchResults: fail(err)
 });
 
 export const clearSearch = () => ({
     type: actions.SEARCH_CLEAR
 });
 
-export const search = (searchTerm, oAuthToken) => dispatch =>
-    spotify
+export const searchFetching = () => ({
+    type: actions.SEARCH_FETCHING
+});
+
+export const search = (searchTerm, oAuthToken) => dispatch => {
+    dispatch(searchFetching());
+    return spotify
         .get(`/search?q=${searchTerm}&type=track`, oAuthToken)
         .then(r => r.json())
         .then(r => {
@@ -31,3 +37,4 @@ export const search = (searchTerm, oAuthToken) => dispatch =>
             dispatch(searchSuccess(tracks));
         })
         .catch(err => dispatch(searchFail(err)));
+};

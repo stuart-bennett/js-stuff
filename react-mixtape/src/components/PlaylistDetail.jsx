@@ -5,6 +5,8 @@ import SearchContainer from '../containers/SearchContainer.jsx';
 import SearchResults from './SearchResults.jsx';
 import SelectedPlaylist from './SelectedPlaylist.jsx';
 import PlaylistTracks from './PlaylistTracks.jsx';
+import RemoteData from './RemoteData.jsx';
+import Spinner from './Spinner.jsx';
 
 const PlaylistDetail = ({ playlist, searchResults, tracks }) =>
     <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
@@ -20,7 +22,12 @@ const PlaylistDetail = ({ playlist, searchResults, tracks }) =>
         </Row>
         <Row>
             <Col md={12}>
-                <SearchResults results={searchResults} />
+                <RemoteData
+                    data={searchResults}
+                    success={data => <SearchResults results={data} />}
+                    fetching={<Spinner />}
+                    fail={msg => <div>{msg}</div>}
+                />
             </Col>
         </Row>
         <Row>
@@ -36,7 +43,9 @@ PlaylistDetail.propTypes = {
         name: PropTypes.string.isRequired,
         numberOfFollowers: PropTypes.number.isRequired
     }).isRequired,
-    searchResults: PropTypes.array.isRequired,
+    searchResults: PropTypes.shape({
+        state: PropTypes.number.isRequired
+    }).isRequired,
     tracks: PropTypes.array.isRequired
 };
 

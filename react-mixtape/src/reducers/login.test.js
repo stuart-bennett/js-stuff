@@ -1,10 +1,7 @@
 import { LOGIN_REDIRECT, LOGIN_NO_TOKEN, LOGIN_SUCCESS } from '../actionTypes';
 import reducer from './login';
+import { action } from '../utils/testHelpers';
 
-const action = (type, data) => ({
-    type,
-    ...data
-});
 
 describe("login reducer", () => {
     const loggedOutState = {

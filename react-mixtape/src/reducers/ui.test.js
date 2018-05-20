@@ -5,7 +5,7 @@ const action = type => ({
     type
 });
 
-describe("login reducer", () => {
+describe("ui reducer", () => {
     describe("the initial action", () => {
         const action = {};
         it("should be showing the menu", () => {

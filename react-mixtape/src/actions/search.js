@@ -24,7 +24,7 @@ export const searchFetching = () => ({
 export const search = (searchTerm, oAuthToken) => dispatch => {
     dispatch(searchFetching());
     return spotify
-        .get(`/search?q=${searchTerm}&type=track`, oAuthToken)
+        .get(`/search?q=${searchTerm}&type=track&limit=6`, oAuthToken)
         .then(r => r.json())
         .then(r => {
             const tracks = r.tracks.items.map(t => ({

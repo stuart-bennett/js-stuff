@@ -14,7 +14,6 @@ const App = ({ isShowingMenu }) => (
     <Route path="/" component={LoginContainer} />
     <Row nogutter>
         <Col
-            debug
             md={ isShowingMenu ? 1 : 0 }
             style={{ display: isShowingMenu ? 'block' : 'none' }}>
             <PrivateRoute path="/" component={PlaylistSelectorContainer} />

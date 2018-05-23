@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AppContainer from './containers/AppContainer.jsx';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'normalize.css/normalize.css';
+import './app.css';
 
 const $root = document.createElement('div');
 document.body.appendChild($root);

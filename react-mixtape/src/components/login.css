@@ -1,0 +1,25 @@
+@value variables: '../styles/variables.css';
+@value spacing from variables;
+
+.container {
+    text-align: center;
+    padding: 1rem;
+}
+
+.container > h1 {
+    font-size: 3rem;
+    font-family: 'Roboto Condensed';
+}
+
+.container > p {
+    margin: 0 0 spacing 0;
+}
+
+.container > p > a,
+.container > p > a:visited {
+    color: green;
+}
+
+.container > button {
+    margin: 2rem 0 1rem 0;
+}

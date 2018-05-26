@@ -4,6 +4,10 @@ body > div {
     height: 100%;
 }
 
+body {
+    background-color: #EEE;
+}
+
 button {
     border: none;
     background: green;

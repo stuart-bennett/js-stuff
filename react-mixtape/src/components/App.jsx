@@ -4,18 +4,16 @@ import { Container, Row, Col } from 'react-grid-system';
 import { hot } from 'react-hot-loader';
 import { Route } from 'react-router-dom';
 import LoginContainer from '../containers/LoginContainer.jsx';
-import MenuContainer from '../containers/MenuContainer.jsx';
 import PlaylistSelectorContainer from '../containers/PlaylistSelectorContainer.jsx';
 import PlaylistDetailContainer from '../containers/PlaylistDetailContainer.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 
 const App = ({ isShowingMenu }) => (
-<Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
+<Container fluid>
     <Route path="/" component={LoginContainer} />
-    <Row nogutter>
+    <Row>
         <Col md={3}>
             <PrivateRoute render={() => <div>Logged in as stu.bennett</div>} />
-            
         </Col>
         <Col
             md={3}
@@ -23,9 +21,6 @@ const App = ({ isShowingMenu }) => (
             <PrivateRoute path="/" component={PlaylistSelectorContainer} />
         </Col>
         <Col md={3}>
-            <PrivateRoute path="/" component={MenuContainer} />
-        </Col>
-        <Col>
             <PrivateRoute path="/:playlistId" component={PlaylistDetailContainer} />
         </Col>
     </Row>

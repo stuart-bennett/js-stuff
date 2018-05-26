@@ -13,13 +13,19 @@ const App = ({ isShowingMenu }) => (
 <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
     <Route path="/" component={LoginContainer} />
     <Row nogutter>
+        <Col md={3}>
+            <PrivateRoute render={() => <div>Logged in as stu.bennett</div>} />
+            
+        </Col>
         <Col
-            md={ isShowingMenu ? 1 : 0 }
+            md={3}
             style={{ display: isShowingMenu ? 'block' : 'none' }}>
             <PrivateRoute path="/" component={PlaylistSelectorContainer} />
         </Col>
-        <Col md={ isShowingMenu ? 11 : 12}>
+        <Col md={3}>
             <PrivateRoute path="/" component={MenuContainer} />
+        </Col>
+        <Col>
             <PrivateRoute path="/:playlistId" component={PlaylistDetailContainer} />
         </Col>
     </Row>

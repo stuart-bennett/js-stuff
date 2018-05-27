@@ -1,9 +1,10 @@
 @value variables: '../styles/variables.css';
-@value spacing from variables;
+@value spacing, white from variables;
 
 .container {
     text-align: center;
     padding: 1rem;
+    color: white;
 }
 
 .container > h1,

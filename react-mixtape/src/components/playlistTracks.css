@@ -1,2 +1,22 @@
 @value variables: '../styles/variables.css';
-@value spacing, white from variables;
+@value primary-font, spacing, spacing-h, spacing-3q from variables;
+
+.container {
+    font-family: primary-font;
+}
+
+.container h1 {
+    border-bottom: solid #000 3px;
+    font-size: 1.75rem;
+    padding-bottom: spacing-h;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.container > ol {
+    font-size: 1.25rem;
+}
+
+.container > ol > li {
+    margin-bottom: spacing;
+}

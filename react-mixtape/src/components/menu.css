@@ -1,11 +1,11 @@
 @value variables: '../styles/variables.css';
-@value spacing, yellow, white from variables;
+@value primary-font, spacing, yellow, white from variables;
 
 .container {
     margin-top: spacing;
     padding: spacing;
     background-color: yellow;
-    font-family: 'Roboto Condensed';
+    font-family: primary-font;
 }
 
 .profile {

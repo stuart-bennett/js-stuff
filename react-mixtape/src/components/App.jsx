@@ -13,7 +13,7 @@ const App = () => (
 <Container fluid>
     <Route path="/" component={LoginContainer} />
     <Row>
-        <Col md={3}>
+        <Col md={2}>
             <PrivateRoute path="/" component={MenuContainer} />
         </Col>
         <Col md={3}>

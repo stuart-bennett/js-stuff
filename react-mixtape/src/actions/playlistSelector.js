@@ -11,12 +11,18 @@ const fetchPlaylistsFail = err => ({
     reason: err
 });
 
+const mapResponse = response => ({
+    id: response.id,
+    name: response.name,
+    image: response.images[0].url
+});
+
 export const fetchPlaylists = oAuthToken => dispatch =>
     spotify
         .get("/me/playlists", oAuthToken)
         .then(r => r.json())
         .then(r => {
-            const playlists = r.items.map(i => ({ id: i.id, name: i.name }));
+            const playlists = r.items.map(mapResponse);
             dispatch(fetchPlaylistsSuccess(playlists));
         })
         .catch(err => dispatch(fetchPlaylistsFail(err)));

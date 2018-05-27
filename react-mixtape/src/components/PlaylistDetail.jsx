@@ -11,13 +11,13 @@ import styles from './playlistDetail.css';
 const PlaylistDetail = ({ playlist, searchResults, tracks }) => (
     <div className={styles.container}>
         <SelectedPlaylist {...playlist} />
+        <PlaylistTracks tracks={tracks} />
         <SearchContainer />
         <RemoteData
             data={searchResults}
             success={data => <SearchResults results={data} />}
             fetching={<Spinner />}
             fail={msg => <div>{msg}</div>} />
-        <PlaylistTracks tracks={tracks} />
     </div>
 );
 

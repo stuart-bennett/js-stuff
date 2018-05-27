@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { hot } from 'react-hot-loader';
 import { Route } from 'react-router-dom';
 import LoginContainer from '../containers/LoginContainer.jsx';
-import Menu from './Menu.jsx';
+import MenuContainer from '../containers/MenuContainer.jsx';
 import PlaylistSelectorContainer from '../containers/PlaylistSelectorContainer.jsx';
 import PlaylistDetailContainer from '../containers/PlaylistDetailContainer.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
@@ -14,7 +14,7 @@ const App = () => (
     <Route path="/" component={LoginContainer} />
     <Row>
         <Col md={3}>
-            <PrivateRoute path="/" component={Menu} />
+            <PrivateRoute path="/" component={MenuContainer} />
         </Col>
         <Col md={3}>
             <PrivateRoute path="/" component={PlaylistSelectorContainer} />

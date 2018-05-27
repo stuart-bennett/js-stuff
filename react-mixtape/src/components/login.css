@@ -25,5 +25,16 @@
 }
 
 .container > button {
-    margin: 2rem 0 1rem 0;
+    border: none;
+    background: green;
+    color: white;
+    padding: 1rem 3rem;
+    text-transform: uppercase;
+    font-family: 'Bitter';
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+}
+
+.container > button:hover {
+    cursor: pointer;
 }

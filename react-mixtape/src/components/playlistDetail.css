@@ -1,5 +1,5 @@
 @value variables: '../styles/variables.css';
-@value spacing from variables;
+@value playlistImageHeight, spacing, white from variables;
 
 .container {
     margin-top: spacing;
@@ -7,6 +7,3 @@
     background-color: #CCC;
 }
 
-.container > h1 {
-    margin-top: 0;
-}

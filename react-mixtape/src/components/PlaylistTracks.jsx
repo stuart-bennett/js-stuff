@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './playlistTracks.css';
 
 const PlaylistTracks = ({ tracks }) => (
-    <div className={styles.container}>
+    <div>
         <ol>
         { tracks.map((t, i) => <li key={`${t.id}_${i}`}>
                 <div>

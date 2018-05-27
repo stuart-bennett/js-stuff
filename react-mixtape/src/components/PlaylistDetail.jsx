@@ -1,41 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Container, Row, Col } from 'react-grid-system';
 import SearchContainer from '../containers/SearchContainer.jsx';
 import SearchResults from './SearchResults.jsx';
 import SelectedPlaylist from './SelectedPlaylist.jsx';
 import PlaylistTracks from './PlaylistTracks.jsx';
 import RemoteData from './RemoteData.jsx';
 import Spinner from './Spinner.jsx';
+import styles from './playlistDetail.css';
 
-const PlaylistDetail = ({ playlist, searchResults, tracks }) =>
-    <Container fluid style={{ paddingLeft: 0, paddingRight: 0 }}>
-        <Row>
-            <Col md={12}>
-                <SelectedPlaylist {...playlist} />
-            </Col>
-        </Row>
-        <Row nogutter>
-            <Col md={6} offset={{ md: 3 }}>
-                <SearchContainer />
-            </Col>
-        </Row>
-        <Row>
-            <Col md={12}>
-                <RemoteData
-                    data={searchResults}
-                    success={data => <SearchResults results={data} />}
-                    fetching={<Spinner />}
-                    fail={msg => <div>{msg}</div>}
-                />
-            </Col>
-        </Row>
-        <Row>
-            <Col md={6} offset={{ md: 3 }}>
-                <PlaylistTracks tracks={tracks} />
-            </Col>
-        </Row>
-    </Container>;
+const PlaylistDetail = ({ playlist, searchResults, tracks }) => (
+    <div className={styles.container}>
+        <SelectedPlaylist {...playlist} />
+        <SearchContainer />
+        <RemoteData
+            data={searchResults}
+            success={data => <SearchResults results={data} />}
+            fetching={<Spinner />}
+            fail={msg => <div>{msg}</div>} />
+        <PlaylistTracks tracks={tracks} />
+    </div>
+);
 
 PlaylistDetail.propTypes = {
     playlist: PropTypes.shape({

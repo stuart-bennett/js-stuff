@@ -6,7 +6,8 @@ export default function(state = initialState, action) {
        case actions.FETCH_CURRENT_USER_SUCCESS:
             return {
                 ...state,
-                userId: action.userId
+                userId: action.userId,
+                profileImage: action.profileImage
             }
         default:
             return state;

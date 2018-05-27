@@ -1,9 +1,10 @@
 import * as actions from '../actionTypes';
 import * as spotify from '../utils/spotifyApi';
 
-const fetchCurrentUserSuccess = userId => ({
+const fetchCurrentUserSuccess = ({ userId, profileImage }) => ({
     type: actions.FETCH_CURRENT_USER_SUCCESS,
-    userId
+    userId,
+    profileImage
 });
 
 const fetchCurrentUserFail = err => ({
@@ -11,9 +12,16 @@ const fetchCurrentUserFail = err => ({
     reason: err
 });
 
+const mapResponse = (response) => ({
+    userId: response.id,
+    profileImage: response.images && response.images.length > 0
+        ? response.images[0].url
+        : null
+});
+
 export const fetchCurrentUser = oAuthToken => dispatch =>
     spotify
         .get("/me", oAuthToken)
         .then(r => r.json())
-        .then(r => dispatch(fetchCurrentUserSuccess(r.id)))
+        .then(r => dispatch(fetchCurrentUserSuccess(mapResponse(r))))
         .catch(err => dispatch(fetchCurrentUserFail(err)));

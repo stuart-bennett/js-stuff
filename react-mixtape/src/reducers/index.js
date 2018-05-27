@@ -8,6 +8,7 @@ const initialState = {
     playlists: [],
     token: null,
     userId: null,
+    profileImage: null,
     isAuthenticated: false,
     shouldRedirect: false,
     isShowingMenu: true

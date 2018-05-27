@@ -3,11 +3,13 @@ import * as actions from '../actionTypes';
 export const initialState = { userId: null };
 export default function(state = initialState, action) {
     switch (action.type) {
-       case actions.FETCH_CURRENT_USER_SUCCESS:
+        case actions.FETCH_CURRENT_USER_SUCCESS:
             return {
                 ...state,
                 userId: action.userId,
-                profileImage: action.profileImage
+                profileImage: action.profileImage,
+                profileUrl: action.profileUrl,
+                numberOfFollowers: action.numberOfFollowers
             }
         default:
             return state;

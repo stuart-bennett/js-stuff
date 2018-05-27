@@ -13,12 +13,17 @@ describe('user reducer', () => {
     describe('when handling FETCH_CURRENT_USER_SUCCESS', () => {
         const userId = 'test.userId';
         const profileImage = 'test.png';
+        const profileUrl = 'http://test.local';
+        const numberOfFollowers = 101;
         const result = reducer(
             initialState,
-            action(FETCH_CURRENT_USER_SUCCESS, { userId, profileImage }));
+            action(
+                FETCH_CURRENT_USER_SUCCESS,
+                { userId, profileImage, profileUrl, numberOfFollowers }));
 
         test(
             'userId should be the value provided to the action',
-            () => expect(result).toEqual({ ...initialState, userId, profileImage }));
+            () => expect(result)
+                .toEqual({ ...initialState, userId, profileImage, profileUrl, numberOfFollowers }));
     });
 });

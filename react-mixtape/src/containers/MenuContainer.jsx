@@ -10,7 +10,7 @@ class MenuContainer extends React.Component {
     }
 
     render() {
-        return <User userId={this.state.userId} />;
+        return <User {...this.state} />;
     }
 }
 

@@ -21,6 +21,16 @@ const fetchPlaylistTracksFail = err => ({
     reason: err
 });
 
+const mapPlaylistResponse = response => ({
+    id: response.id,
+    name: response.name,
+    numberOfFollowers: response.followers.total,
+    numberOfTracks: response.tracks.total,
+    image: response.images[0].url,
+    url: response.external_urls.spotify,
+    isPublic: response.public
+});
+
 const mapTrack = t => ({
     id: t.track.id,
     songTitle: t.track.name,
@@ -31,18 +41,8 @@ export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
     spotify
         .get(`/users/${userId}/playlists/${playlistId}`, oAuthToken)
         .then(r => r.json())
-        .then(r => {
-            const playlist = {
-                id: r.id,
-                name: r.name,
-                numberOfFollowers: r.followers.total,
-                numberOfTracks: r.tracks.total,
-                image: r.images[0].url,
-                url: r.external_urls.spotify,
-                isPublic: r.public
-            };
-            dispatch(fetchPlaylistSuccess(playlist));
-        })
+        .then(r =>
+            dispatch(fetchPlaylistSuccess(mapPlaylistResponse(r))))
         .catch(err => dispatch(fetchPlaylistFail(err)));
 
 export const fetchPlaylistTracks = (userId, playlistId, oAuthToken) => dispatch =>

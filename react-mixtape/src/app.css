@@ -1,3 +1,7 @@
+@value variables: './styles/variables.css';
+@value blue from variables;
+@import url('https://fonts.googleapis.com/css?family=Bitter:400,700|Crimson+Text:400,700|Roboto+Condensed:400,700');
+
 html,
 body,
 body > div {
@@ -5,20 +9,5 @@ body > div {
 }
 
 body {
-    background-color: #EEE;
-}
-
-button {
-    border: none;
-    background: green;
-    color: white;
-    padding: 1rem 3rem;
-    text-transform: uppercase;
-    font-family: 'Bitter';
-    font-size: 1.2rem;
-    border-radius: 0.2rem;
-}
-
-button:hover {
-    cursor: pointer;
+    background-color: blue;
 }

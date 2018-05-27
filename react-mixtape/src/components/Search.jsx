@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './search.css';
 
 const Search = ({ searchTerm, onChange, onClear }) => (
     <div>
         <input
-            className={styles.searchBox}
             type="text"
             placeholder="Find & add new tracks..."
             value={searchTerm}

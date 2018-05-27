@@ -1,16 +1,8 @@
 @value variables: '../styles/variables.css';
-@value spacing, white from variables;
+@value spacing, yellow from variables;
 
 .container {
-    position: absolute;
+    margin-top: spacing;
     padding: spacing;
-    z-index: 200;
-}
-
-.container > svg {
-    fill: white;
-}
-
-.container > svg:hover {
-    cursor: pointer;
+    background-color: yellow;
 }

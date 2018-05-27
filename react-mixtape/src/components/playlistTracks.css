@@ -1,27 +1,2 @@
 @value variables: '../styles/variables.css';
 @value spacing, white from variables;
-
-.container > ol {
-    counter-reset: li;
-    font-family: 'Crimson text';
-    font-size: 2rem;
-}
-
-.container > ol > li {
-    position: relative;
-    list-style: none;
-    margin-bottom: 3rem;
-}
-
-.container > ol > li > div {
-    display: inline-block;
-    margin-left: spacing;
-}
-
-.container > ol > li:before {
-    content: '#'  counter(li);
-    counter-increment: li;
-    color: #EEE;
-    font-size: 4rem;
-    font-style: italic;
-}

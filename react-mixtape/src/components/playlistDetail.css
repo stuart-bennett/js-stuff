@@ -1,12 +1,8 @@
 @value variables: '../styles/variables.css';
-@value spacing, yellow from variables;
+@value yellow, playlistImageHeight, spacing from variables;
 
 .container {
     margin-top: spacing;
     padding: spacing;
     background-color: yellow;
-}
-
-.container > h1 {
-    margin-top: 0;
 }

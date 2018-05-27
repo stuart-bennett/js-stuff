@@ -3,8 +3,6 @@ import React from 'react';
 import { Icon } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 import PropTypes from 'prop-types';
-import OverlayImage from './OverlayImage.jsx';
-import styles from './selectedPlaylist.css';
 
 const SelectedPlaylist = ({
     name,
@@ -14,25 +12,25 @@ const SelectedPlaylist = ({
     image,
     isPublic
 }) => (
-<header className={styles.header}>
-    <OverlayImage imageUrl={image} altText={`Cover image for playlist '${name}'`} />
-    <div className={styles.metaData}>
+<header>
+    <image src={image} alt={`Cover image for playlist '${name}'`} />
+    <div>
         <h1>{name}</h1>
-        <span className={styles.numberOfFollowers}>
+        <span>
             Has <strong>{ numberOfFollowers }</strong> followers
         </span>
     </div>
-    <ul className={styles.statsBlock}>
-        <li className="url">
+    <ul>
+        <li>
             <Icon icon={IconNames.LINK} />
             <a href={url}>{url}</a>
         </li>
 
-        <li className="numTracks">
+        <li>
             <Icon icon={IconNames.MUSIC} />
             <strong>{ numberOfTracks }</strong> track(s)</li>
 
-        <li className="visibility">
+        <li>
             <Icon icon={ isPublic ? IconNames.UNLOCK : IconNames.LOCK } />
             Public
         </li>

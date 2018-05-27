@@ -1,8 +1,40 @@
 @value variables: '../styles/variables.css';
-@value spacing, yellow from variables;
+@value spacing, yellow, white from variables;
 
 .container {
     margin-top: spacing;
     padding: spacing;
     background-color: yellow;
+    font-family: 'Roboto Condensed';
+}
+
+.profile {
+    display: flex;
+    width: 100%;
+}
+
+.profile > .profileImage {
+    flex: 1;
+    border-radius: 50%;
+    background-color: green;
+    margin-right: spacing;
+    border: solid white 2px;
+}
+
+.profile > .stats > .userName {
+    display: block;
+}
+
+.profile > .stats > dl > dt {
+    display: none;
+}
+
+.profile > .stats > dl > dd {
+    font-size: 0.85rem;
+    margin: 0;
+    margin-bottom: 0.25rem;
+}
+
+.profile > .stats > dl > dd > svg {
+    margin-right: 0.25rem;
 }

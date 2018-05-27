@@ -9,6 +9,9 @@
 @value white: #FFF;
 @value blue: #324D5C;
 @value yellow: #F0CA4D;
+@value green: #46B29D;
+@value red: #DE5B49;
+@value orange: #E37B40;
 
 /* Fonts */
 @value primary-font: 'Roboto Condensed';

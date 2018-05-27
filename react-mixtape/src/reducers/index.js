@@ -8,7 +8,9 @@ const initialState = {
     playlists: [],
     token: null,
     userId: null,
-    profileImage: null,
+    profileImage: 'http://picsum.photos/100/100',
+    profileUrl: null,
+    numberOfFollowers: null,
     isAuthenticated: false,
     shouldRedirect: false,
     isShowingMenu: true
@@ -70,7 +72,9 @@ export function reducer(state = initialState, action) {
         case actions.FETCH_CURRENT_USER_SUCCESS:
             return {
                 ...state,
-                userId: action.userId
+                userId: action.userId,
+                profileUrl: action.profileUrl,
+                numberOfFollowers: action.numberOfFollowers
             }
         case actions.FETCH_PLAYLIST_TRACKS_SUCCESS:
             return {

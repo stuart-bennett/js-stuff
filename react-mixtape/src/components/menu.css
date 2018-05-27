@@ -1,8 +1,8 @@
 @value variables: '../styles/variables.css';
-@value spacing from variables;
+@value spacing, yellow from variables;
 
 .container {
     margin-top: spacing;
-    padding: 0;
-    background-color: #CCC;
+    padding: spacing;
+    background-color: yellow;
 }

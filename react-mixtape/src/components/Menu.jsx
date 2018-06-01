@@ -19,7 +19,9 @@ const Menu = ({ userId, profileImage, profileUrl, numberOfFollowers }) => {
                     alt={ `Profile image for Spotify User ${userId}` }
                 />
                 <div className={styles.stats}>
-                    <span className={styles.userName}>{ userId }</span>
+                    <a href={profileUrl} className={styles.userName}>
+                        { userId }
+                    </a>
                     <dl>
                         <dt>No. of Followers</dt>
                         <dd className={styles.numberofFollowers}>
@@ -27,13 +29,6 @@ const Menu = ({ userId, profileImage, profileUrl, numberOfFollowers }) => {
                                 icon={IconNames.FOLLOWER}
                                 title="Number of Followers" />
                             { numberOfFollowers }
-                        </dd>
-                        <dt>Profile URL</dt>
-                        <dd className={styles.profileUrl}>
-                            <Icon
-                                icon={IconNames.LINK}
-                                title="Spotify Profile" />
-                            <a href={ profileUrl }>{ profileUrl }</a>
                         </dd>
                     </dl>
                 </div>

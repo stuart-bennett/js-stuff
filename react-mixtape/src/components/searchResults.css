@@ -1,28 +1,30 @@
 @value variables: '../styles/variables.css';
-@value spacing from variables;
+@value primary-font, green, spacing, yellow from variables;
 
 .container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    background: yellow;
+    padding: spacing;
 }
 
 .container > li {
     list-style: none;
     margin: spacing;
-    width: 25%;
+    width: 50%;
+    margin: spacing 0;
 }
 
 .container > li > img {
-    border-radius: 50%;
     width: 15%;
     border: solid #EEE 1px;
     margin-right: 1rem;
 }
 
 .details {
-    font-family: 'Bitter';
+    font-family: primary-font;
     display: inline-block;
     vertical-align: top;
     margin-left: spacing;
@@ -39,4 +41,5 @@
 .artist {
     font-size: 1rem;
     font-weight: normal;
+    margin: 0;
 }

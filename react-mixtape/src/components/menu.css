@@ -2,30 +2,38 @@
 @value primary-font, spacing, red, yellow, white from variables;
 
 .container {
-    margin-top: spacing;
     padding: spacing;
-    background-color: yellow;
     font-family: primary-font;
 }
 
 .profile {
-    display: flex;
     width: 100%;
 }
 
 .profile > .profileImage {
-    flex: 1;
+    float: left;
     border-radius: 50%;
     background-color: green;
     margin-right: spacing;
     border: solid white 2px;
+    height: 30px;
+}
+
+.profile > .stats {
+    display: inline-block;
 }
 
 .profile > .stats > .userName {
-    display: block;
     font-weight: bold;
     font-size: 1.25rem;
-    color: red;
+    color: white;
+    text-decoration: none;
+
+}
+
+.profile > .stats > dl {
+    margin: 0;
+    display: none; /* temp - not sure whether to keep this */
 }
 
 .profile > .stats > dl > dt {

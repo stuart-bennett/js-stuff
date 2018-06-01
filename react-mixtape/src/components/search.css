@@ -1,2 +1,12 @@
 @value variables: '../styles/variables.css';
-@value spacing from variables;
+@value spacing, white from variables;
+
+.container > input {
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Roboto Condensed';
+    font-size: 1.75rem;
+    padding: spacing 0;
+    width: 90%;
+}

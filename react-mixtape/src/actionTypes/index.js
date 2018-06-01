@@ -17,6 +17,9 @@ export const FETCH_PLAYLIST_TRACKS_FAIL = 'fetchPlaylistTracksFail';
 export const FETCH_PLAYLIST_SUCCESS = 'fetchPlaylistSuccess';
 export const FETCH_PLAYLIST_FAIL = 'fetchPlaylistFail';
 
+// Plaulist Tracks
+export const PLAYLIST_TRACKS_ADD = 'playlistTracksAdd';
+
 // Search
 export const SEARCH_FETCHING = 'searchFetching';
 export const SEARCH_SUCCESS = 'searchSuccess';

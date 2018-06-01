@@ -22,7 +22,12 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 tracks: action.tracks
-            }
+            };
+        case actions.PLAYLIST_TRACKS_ADD:
+            return {
+                ...state,
+                tracks: [...state.tracks, action.track]
+            };
         default:
             return state;
     }

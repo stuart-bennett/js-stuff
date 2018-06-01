@@ -37,6 +37,12 @@ const mapTrack = t => ({
     artist: t.track.artists[0].name
 });
 
+export const addTrack = track => ({
+    type: actions.PLAYLIST_TRACKS_ADD,
+    track
+});
+
+
 export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
     spotify
         .get(`/users/${userId}/playlists/${playlistId}`, oAuthToken)

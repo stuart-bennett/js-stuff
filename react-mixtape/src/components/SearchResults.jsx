@@ -4,10 +4,10 @@ import styles from './searchResults.css';
 
 const getPrimaryArtist = artists => artists[0].name;
 
-const SearchResults = ({ results }) => (
+const SearchResults = ({ results, onSelect }) => (
     <ul className={styles.container}>
         { results.map(r =>
-            <li key={r.id}>
+            <li key={r.id} onClick={() => onSelect(r)}>
                 <img src={r.image} alt={`Track artwork for ${r.songTitle}`} />
                 <div className={styles.details}>
                     <h2 className={styles.songName}>{r.songTitle}</h2>
@@ -19,7 +19,8 @@ const SearchResults = ({ results }) => (
 );
 
 SearchResults.propTypes = {
-    results: PropTypes.array.isRequired
+    results: PropTypes.array.isRequired,
+    onSelect: PropTypes.func.isRequired
 }
 
 export default SearchResults;

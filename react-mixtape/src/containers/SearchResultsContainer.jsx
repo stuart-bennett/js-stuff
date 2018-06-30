@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import SearchResults from '../components/SearchResults.jsx';
 import RemoteData from '../components/RemoteData.jsx';
@@ -14,9 +15,15 @@ class SearchResultsContainer extends React.Component {
     render() {
         return <RemoteData
             data={this.state.searchResults}
-            success={data => <SearchResults results={data} />}
+            success={data => <SearchResults
+                results={data}
+                onSelect={this.searchResultSelected} />}
             fetching={<Spinner />}
             fail={msg => <div>{msg}</div>} />
+    }
+
+    searchResultSelected(item) {
+        console.log(item);
     }
 }
 

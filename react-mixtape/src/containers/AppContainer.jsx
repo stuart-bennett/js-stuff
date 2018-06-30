@@ -10,7 +10,7 @@ class AppContainer extends React.Component {
     }
 
     render() {
-        return <App isShowingMenu={this.state.isShowingMenu} />;
+        return <App />;
     }
 }
 

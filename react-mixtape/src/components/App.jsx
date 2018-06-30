@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import { hot } from 'react-hot-loader';
@@ -35,9 +34,5 @@ const App = () => (
     </Row>
 </Container>
 );
-
-App.propTypes = {
-    isShowingMenu: PropTypes.bool.isRequired
-}
 
 export default hot(module)(App);

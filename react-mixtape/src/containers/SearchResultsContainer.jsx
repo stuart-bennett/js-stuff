@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import SearchResults from '../components/SearchResults.jsx';
 import RemoteData from '../components/RemoteData.jsx';
@@ -20,11 +19,5 @@ class SearchResultsContainer extends React.Component {
             fail={msg => <div>{msg}</div>} />
     }
 }
-
-SearchResultsContainer.propTypes = {
-    searchResults: PropTypes.shape({
-        state: PropTypes.number.isRequired
-    }).isRequired,
-};
 
 export default SearchResultsContainer;

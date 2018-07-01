@@ -27,4 +27,17 @@ class SearchResultsContainer extends React.Component {
     }
 }
 
+const map = (searchResult) => {
+    const artists = searchResult.artists;
+    if (!Array.isArray(artists) || artists.length < 1) {
+        throw new `There were no artists for track '${searchResult.name} (${searchResult.id})`;
+    }
+
+    return {
+        id: searchResult.id,
+        songTitle: searchResult.songTitle,
+        artist: artists[0].name
+    };
+};
+
 export default SearchResultsContainer;

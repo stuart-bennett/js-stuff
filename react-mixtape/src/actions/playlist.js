@@ -42,7 +42,6 @@ export const addTrack = track => ({
     track
 });
 
-
 export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>
     spotify
         .get(`/users/${userId}/playlists/${playlistId}`, oAuthToken)

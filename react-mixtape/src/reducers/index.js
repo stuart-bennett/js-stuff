@@ -81,6 +81,11 @@ export function reducer(state = initialState, action) {
                 ...state,
                 tracks: action.tracks
             }
+        case actions.PLAYLIST_TRACKS_ADD:
+            return {
+                ...state,
+                tracks: [...state.tracks, action.track]
+            };
         case actions.TOGGLE_MENU:
             return {
                 ...state,

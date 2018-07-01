@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 import React from 'react';
+import { addTrack } from '../actions/playlist';
 import SearchResults from '../components/SearchResults.jsx';
 import RemoteData from '../components/RemoteData.jsx';
 import Spinner from '../components/Spinner.jsx';
@@ -22,8 +22,9 @@ class SearchResultsContainer extends React.Component {
             fail={msg => <div>{msg}</div>} />
     }
 
-    searchResultSelected(item) {
-        console.log(item);
+    searchResultSelected(searchResult) {
+        const track = map(searchResult);
+        store.dispatch(addTrack(track));
     }
 }
 

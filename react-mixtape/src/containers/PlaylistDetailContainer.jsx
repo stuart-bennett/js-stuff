@@ -51,7 +51,10 @@ class PlaylistDetailContainer extends React.Component {
         }
 
         return <PlaylistDetail
-            playlist={this.state.playlist}
+            playlist={{
+                ...this.state.playlist,
+                canSave: this.state.canSavePlaylist
+            }}
             searchResults={this.state.searchResults}
             tracks={this.state.tracks}
         />;

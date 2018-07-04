@@ -6,14 +6,14 @@ const initialState = {
     tracks: [],
     searchResults: remoteData.initial,
     playlists: [],
+    canSavePlaylist: false,
     token: null,
     userId: null,
     profileImage: 'http://picsum.photos/100/100',
     profileUrl: null,
     numberOfFollowers: null,
     isAuthenticated: false,
-    shouldRedirect: false,
-    isShowingMenu: true
+    shouldRedirect: false
 };
 
 export function reducer(state = initialState, action) {
@@ -47,7 +47,8 @@ export function reducer(state = initialState, action) {
         case actions.FETCH_PLAYLIST_SUCCESS:
             return {
                 ...state,
-                playlist: action.playlist
+                playlist: action.playlist,
+                canSavePlaylist: false
             }
         case actions.SEARCH_FETCHING:
             return {
@@ -84,7 +85,8 @@ export function reducer(state = initialState, action) {
         case actions.PLAYLIST_TRACKS_ADD:
             return {
                 ...state,
-                tracks: [...state.tracks, action.track]
+                tracks: [...state.tracks, action.track],
+                canSavePlaylist: true
             };
         case actions.TOGGLE_MENU:
             return {

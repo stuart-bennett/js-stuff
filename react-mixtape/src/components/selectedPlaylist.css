@@ -9,8 +9,19 @@
     width: 100%;
 }
 
-.container > h1 {
+.container > .title > h1 {
     margin-top: 0;
+    width: 80%;
+    display: inline-block;
+}
+
+.container > .title > button {
+    margin-top: 0;
+}
+
+.container > .title > button[disabled] {
+    cursor: not-allowed;
+    color: #CCC;
 }
 
 .container > ul {

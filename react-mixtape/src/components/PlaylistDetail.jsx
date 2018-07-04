@@ -15,7 +15,8 @@ PlaylistDetail.propTypes = {
     playlist: PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        numberOfFollowers: PropTypes.number.isRequired
+        numberOfFollowers: PropTypes.number.isRequired,
+        canSave: PropTypes.bool.isRequired
     }).isRequired,
     tracks: PropTypes.array.isRequired
 };

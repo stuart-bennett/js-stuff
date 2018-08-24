@@ -88,6 +88,11 @@ export function reducer(state = initialState, action) {
                 tracks: [...state.tracks, action.track],
                 canSavePlaylist: true
             };
+        case actions.PLAYLIST_TRACKS_SAVE_SUCCESS:
+            return {
+                ...state,
+                tracks: state.tracks.map(t => ({ ...t, isPersisted: true }))
+            };
         case actions.TOGGLE_MENU:
             return {
                 ...state,

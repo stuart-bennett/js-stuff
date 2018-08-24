@@ -2,7 +2,8 @@ import {
     FETCH_PLAYLISTS_SUCCESS,
     FETCH_PLAYLIST_SUCCESS,
     FETCH_PLAYLIST_TRACKS_SUCCESS,
-    PLAYLIST_TRACKS_ADD } from '../actionTypes';
+    PLAYLIST_TRACKS_ADD,
+    PLAYLIST_TRACKS_SAVE_SUCCESS } from '../actionTypes';
 import { default as reducer, initialState } from './playlists';
 import { action } from '../utils/testHelpers';
 
@@ -49,5 +50,22 @@ describe('playlists reducer', () => {
                 ...selectedPlaylistState,
                 tracks: [...tracks, track]
             }))
+    });
+
+    describe ('when handling PLAYLIST_TRACKS_SAVE_SUCCESS', () => {
+        const state = { ...initialState, tracks: [
+            { isPersisted: false },
+            { isPersisted: false }
+        ]};
+
+        const expected = { ...initialState, tracks: [
+            { isPersisted: true },
+            { isPersisted: true }
+        ]};
+
+
+        const result = reducer(state, action(PLAYLIST_TRACKS_SAVE_SUCCESS));
+        test('all tracks should be persisted', () =>
+            expect(result).toEqual(expected))
     });
 });

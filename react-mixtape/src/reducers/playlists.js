@@ -28,6 +28,11 @@ export default function(state = initialState, action) {
                 ...state,
                 tracks: [...state.tracks, action.track]
             };
+        case actions.PLAYLIST_TRACKS_SAVE_SUCCESS:
+            return {
+                ...state,
+                tracks: state.tracks.map(t => ({ ...t, isPersisted: true }))
+            };
         default:
             return state;
     }

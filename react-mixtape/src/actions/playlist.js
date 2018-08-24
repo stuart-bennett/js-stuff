@@ -34,7 +34,8 @@ const mapPlaylistResponse = response => ({
 const mapTrack = t => ({
     id: t.track.id,
     songTitle: t.track.name,
-    artist: t.track.artists[0].name
+    artist: t.track.artists[0].name,
+    uri: t.track.uri
 });
 
 export const addTrack = track => ({

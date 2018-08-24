@@ -37,6 +37,7 @@ const map = (searchResult) => {
     return {
         id: searchResult.id,
         songTitle: searchResult.songTitle,
+        uri: searchResult.uri,
         artist: artists[0].name
     };
 };

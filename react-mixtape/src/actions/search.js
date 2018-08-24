@@ -30,6 +30,7 @@ export const search = (searchTerm, oAuthToken) => dispatch => {
             const tracks = r.tracks.items.map(t => ({
                 id: t.id,
                 songTitle: t.name,
+                uri: t.uri,
                 artists: t.artists,
                 image: t.album && t.album.images.length >= 2 ? t.album.images[1].url : null
             }));

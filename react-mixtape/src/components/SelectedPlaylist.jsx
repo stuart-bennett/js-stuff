@@ -13,12 +13,13 @@ const SelectedPlaylist = ({
     image,
     isPublic,
     canSave,
+    savePlaylist
 }) => (
 <header className={styles.container}>
     <img src={image} alt={`Cover image for playlist '${name}'`} />
     <div className={styles.title}>
         <h1>{name}</h1>
-        <button disabled={!canSave}>Save</button>
+        <button disabled={!canSave} onClick={savePlaylist}>Save</button>
     </div>
     <span>
         Has <strong>{ numberOfFollowers }</strong> followers
@@ -48,7 +49,8 @@ SelectedPlaylist.propTypes = {
     image: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     isPublic: PropTypes.bool.isRequired,
-    canSave: PropTypes.bool.isRequired
+    canSave: PropTypes.bool.isRequired,
+    savePlaylist: PropTypes.func.isRequired
 }
 
 export default SelectedPlaylist;

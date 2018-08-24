@@ -4,9 +4,11 @@ import SelectedPlaylist from './SelectedPlaylist.jsx';
 import PlaylistTracks from './PlaylistTracks.jsx';
 import styles from './playlistDetail.css';
 
-const PlaylistDetail = ({ playlist, tracks }) => (
+const PlaylistDetail = ({ playlist, tracks, savePlaylist }) => (
     <div className={styles.container}>
-        <SelectedPlaylist {...playlist} />
+        <SelectedPlaylist
+            {...playlist}
+            savePlaylist={savePlaylist} />
         <PlaylistTracks tracks={tracks} />
     </div>
 );
@@ -18,7 +20,8 @@ PlaylistDetail.propTypes = {
         numberOfFollowers: PropTypes.number.isRequired,
         canSave: PropTypes.bool.isRequired
     }).isRequired,
-    tracks: PropTypes.array.isRequired
+    tracks: PropTypes.array.isRequired,
+    savePlaylist: PropTypes.func.isRequired
 };
 
 export default PlaylistDetail;

@@ -55,9 +55,16 @@ class PlaylistDetailContainer extends React.Component {
                 ...this.state.playlist,
                 canSave: this.state.canSavePlaylist
             }}
-            searchResults={this.state.searchResults}
             tracks={this.state.tracks}
-        />;
+            savePlaylist={() => this.savePlaylist() } />
+    }
+
+    savePlaylist() {
+        store.dispatch(actions.savePlaylistTracks(
+            this.state.userId,
+            this.state.playlist.id,
+            this.state.tracks.filter(t => !t.isPersisted),
+            this.state.token))
     }
 }
 

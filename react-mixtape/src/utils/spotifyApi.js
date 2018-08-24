@@ -15,3 +15,17 @@ export function get(url, token) {
 
     return fetch(`${baseUrl}${url}`, requestOptions);
 }
+
+export function post(url, body, token) {
+    if (!token) {
+        throw 'Parameter "token" is required';
+    }
+
+    const requestOptions = {
+        headers: createHeaders(token),
+        method: 'POST',
+        body: body
+    };
+
+    return fetch(`${baseUrl}${url}`, requestOptions);
+}

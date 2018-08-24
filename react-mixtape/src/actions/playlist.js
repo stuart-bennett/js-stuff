@@ -60,3 +60,27 @@ export const fetchPlaylistTracks = (userId, playlistId, oAuthToken) => dispatch 
             dispatch(fetchPlaylistTracksSuccess(tracks));
         })
         .catch(err => dispatch(fetchPlaylistTracksFail(err)));
+
+export const savePlaylistTracks = (
+    userId,
+    playlistId,
+    tracks,
+    oAuthToken) => dispatch =>
+
+    spotify
+        .post(
+            `/users/${userId}/playlists/${playlistId}/tracks/`,
+            JSON.stringify(tracks.map(t => t.uri)),
+            oAuthToken)
+        .then(r => r.json())
+        .then(() => dispatch(savePlaylistTracksSuccess()))
+        .catch(err => dispatch(savePlaylistTracksFail(err)));
+
+export const savePlaylistTracksSuccess = () => ({
+    type: actions.PLAYLIST_TRACKS_SAVE_SUCCESS
+});
+
+export const savePlaylistTracksFail = err => ({
+    type: actions.PLAYLIST_TRACKS_SAVE_FAIL,
+    reason: err
+});

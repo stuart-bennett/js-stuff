@@ -13,7 +13,7 @@ const fetchPlaylistFail = err => ({
 
 const fetchPlaylistTracksSuccess = tracks => ({
     type: actions.FETCH_PLAYLIST_TRACKS_SUCCESS,
-    tracks
+    tracks: tracks.map(t => ({ ...t, isPersisted: true }))
 });
 
 const fetchPlaylistTracksFail = err => ({
@@ -39,7 +39,7 @@ const mapTrack = t => ({
 
 export const addTrack = track => ({
     type: actions.PLAYLIST_TRACKS_ADD,
-    track
+    track: { ...track, isPersisted: false }
 });
 
 export const fetchPlaylist = (userId, playlistId, oAuthToken) => dispatch =>

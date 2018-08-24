@@ -3,12 +3,12 @@ import * as actions from '../actionTypes';
 
 describe("playlist action creators", () => {
     describe("calling addTrack", () => {
-        test("creates the action: PLAYLIST_TRACKS_ADD", () => {
-            const track = {};
-            expect(addTrack(track)).toEqual({
-                type: actions.PLAYLIST_TRACKS_ADD,
-                track
-            });
-        });
+        const track = {};
+        const result = addTrack(track);
+        test("creates the action: PLAYLIST_TRACKS_ADD", () =>
+            expect(result.type).toEqual(actions.PLAYLIST_TRACKS_ADD))
+
+        test("marks the track as not persisted", () =>
+            expect(result.track).toEqual({ ...track, isPersisted: false }))
     });
 });

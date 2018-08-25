@@ -17,7 +17,7 @@ class SearchContainer extends React.Component {
         if (searchTerm.length >= NUM_CHARS_BEFORE_SEARCH_BEGINS) {
             store.dispatch(actions.search(
                 searchTerm,
-                store.getState().token));
+                store.getState().login.token));
         }
     }
 

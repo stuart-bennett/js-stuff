@@ -11,7 +11,7 @@ class PlaylistSelectorContainer extends React.Component {
     }
 
     componentDidMount() {
-        store.dispatch(fetchPlaylists(store.getState().token));
+        store.dispatch(fetchPlaylists(this.state.login.token));
     }
 
     render() {

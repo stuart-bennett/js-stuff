@@ -24,11 +24,11 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        if (this.state.shouldRedirect) {
+        if (this.state.login.shouldRedirect) {
             return <ExternalRedirect to={url} />;
         }
 
-        if (!this.state.isAuthenticated) {
+        if (!this.state.login.isAuthenticated) {
             return <Login login={() => this.handleLogin()} />
         }
 

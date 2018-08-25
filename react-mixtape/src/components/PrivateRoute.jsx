@@ -11,7 +11,7 @@ class PrivateRoute extends React.Component {
     }
 
     render() {
-        if (this.state.isAuthenticated) {
+        if (this.state.login.isAuthenticated) {
             return <Route {...this.props} />;
         }
 

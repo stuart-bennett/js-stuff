@@ -19,7 +19,8 @@ export default function(state = initialState, action) {
                 ...state,
                 isAuthenticated: false,
                 token: null,
-                userId: null
+                userId: null,
+                shouldRedirect: false
             };
         case actions.LOGIN_SUCCESS:
             return {

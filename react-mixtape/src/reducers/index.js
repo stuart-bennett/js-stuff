@@ -1,42 +1,19 @@
 import { combineReducers } from 'redux';
 import playlists from './playlists';
+import login from './login';
 import * as actions from '../actionTypes';
 import * as remoteData from '../utils/remoteData';
 
 const initialState = {
     searchResults: remoteData.initial,
-    token: null,
-    userId: null,
     profileImage: 'http://picsum.photos/100/100',
     profileUrl: null,
     numberOfFollowers: null,
-    isAuthenticated: false,
-    shouldRedirect: false
 };
 
 const root = function reducer(state = initialState, action) {
 
     switch (action.type) {
-        case actions.LOGIN_REDIRECT:
-            return {
-                ...state,
-                shouldRedirect: true
-            };
-        case actions.LOGIN_NO_TOKEN:
-            return {
-                ...state,
-                isAuthenticated: false,
-                token: null,
-                userId: null,
-                shouldRedirect: false
-            };
-        case actions.LOGIN_SUCCESS:
-            return {
-                ...state,
-                isAuthenticated: true,
-                token: action.token,
-                shouldRedirect: false
-            };
         case actions.SEARCH_FETCHING:
             return {
                 ...state,
@@ -74,4 +51,8 @@ const root = function reducer(state = initialState, action) {
     }
 }
 
-export default combineReducers({ root, playlists });
+export default combineReducers({
+    root,
+    playlists,
+    login
+});

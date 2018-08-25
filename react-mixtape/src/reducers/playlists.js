@@ -34,7 +34,8 @@ export default function(state = initialState, action) {
         case actions.PLAYLIST_TRACKS_SAVE_SUCCESS:
             return {
                 ...state,
-                tracks: state.tracks.map(t => ({ ...t, isPersisted: true }))
+                tracks: state.tracks.map(t => ({ ...t, isPersisted: true })),
+                canSave: false
             };
         default:
             return state;

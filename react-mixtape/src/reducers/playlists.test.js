@@ -47,6 +47,10 @@ describe('playlists reducer', () => {
         test(
             'track should be added to the end of the selected playlist',
             () => expect(result.tracks).toEqual([...tracks, track]))
+
+        test(
+            'should be able to save playlist',
+            () => expect(result.canSave).toBe(true))
     });
 
     describe ('when handling PLAYLIST_TRACKS_SAVE_SUCCESS', () => {
@@ -60,9 +64,11 @@ describe('playlists reducer', () => {
             { isPersisted: true }
         ]};
 
-
         const result = reducer(state, action(PLAYLIST_TRACKS_SAVE_SUCCESS));
         test('all tracks should be persisted', () =>
             expect(result).toEqual(expected))
+
+        test('should not be able to save playlist', () =>
+            expect(result.canSave).toBe(false))
     });
 });

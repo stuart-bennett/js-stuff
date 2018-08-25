@@ -2,7 +2,7 @@ import * as actions from '../actionTypes';
 import * as remoteData from '../utils/remoteData';
 
 const initialState = {
-    searchResults: remoteData.initial
+    results: remoteData.initial
 };
 
 export default function search(state = initialState, action) {
@@ -10,22 +10,22 @@ export default function search(state = initialState, action) {
         case actions.SEARCH_FETCHING:
             return {
                 ...state,
-                searchResults: remoteData.fetching
+                results: remoteData.fetching
             }
         case actions.SEARCH_FAIL:
             return {
                 ...state,
-                searchResults: action.searchResults
+                results: action.searchResults
             }
         case actions.SEARCH_SUCCESS:
             return {
                 ...state,
-                searchResults: action.searchResults
+                results: action.searchResults
             }
         case actions.SEARCH_CLEAR:
             return {
                 ...state,
-                searchResults: remoteData.initial
+                results: remoteData.initial
             }
         default:
             return state;

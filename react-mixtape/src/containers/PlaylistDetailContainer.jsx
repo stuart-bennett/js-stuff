@@ -46,16 +46,16 @@ class PlaylistDetailContainer extends React.Component {
     // maybe this will render a <playlist> component instead
     // since this is just a container
     render() {
-        if (!this.state.playlist) {
+        if (!this.state.playlists.selected) {
             return null;
         }
 
         return <PlaylistDetail
             playlist={{
-                ...this.state.playlist,
-                canSave: this.state.canSavePlaylist
+                ...this.state.playlists.selected,
+                canSave: this.state.playlists.canSave
             }}
-            tracks={this.state.tracks}
+            tracks={this.state.playlists.tracks}
             savePlaylist={() => this.savePlaylist() } />
     }
 

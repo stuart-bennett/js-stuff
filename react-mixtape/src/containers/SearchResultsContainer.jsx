@@ -14,7 +14,7 @@ class SearchResultsContainer extends React.Component {
 
     render() {
         return <RemoteData
-            data={this.state.searchResults}
+            data={this.state.search.results}
             success={data => <SearchResults
                 results={data}
                 onSelect={this.searchResultSelected} />}

@@ -15,7 +15,7 @@ class PlaylistSelectorContainer extends React.Component {
     }
 
     render() {
-        return <PlaylistSelector playlists={this.state.playlists} />
+        return <PlaylistSelector playlists={this.state.playlists.list} />
     }
 }
 

@@ -8,12 +8,12 @@ import reducer from './search';
 import * as remoteData from '../utils/remoteData';
 
 const initialState = {
-    searchResults: remoteData.initial
+    results: remoteData.initial
 };
 
 const data = [1,2,3,4];
 const succeedState = {
-    searchResults: remoteData.success(data)
+    results: remoteData.success(data)
 };
 
 describe('search reducer', () => {
@@ -28,7 +28,7 @@ describe('search reducer', () => {
         const result = reducer(initialState, action(SEARCH_FETCHING));
         test(
             'should move search results to fetching state',
-            () => expect(result.searchResults).toEqual(remoteData.fetching));
+            () => expect(result.results).toEqual(remoteData.fetching));
     });
 
     describe('when handling SEARCH_FAIL', () => {
@@ -38,22 +38,22 @@ describe('search reducer', () => {
 
         test(
             'searchResults should be in failed state',
-            () => expect(remoteData.isFail(result.searchResults)).toBe(true));
+            () => expect(remoteData.isFail(result.results)).toBe(true));
     });
 
     describe('when handling SEARCH_SUCCESS', () => {
         const searchResults = [1,2,3];
-        const result = reducer(initialState, action(
+        const state = reducer(initialState, action(
             SEARCH_SUCCESS,
             { searchResults: remoteData.success(searchResults) }));
 
         test(
-            'searchResults should be have data',
-            () => expect(remoteData.hasData(result.searchResults)).toBeTruthy());
+            'results should be have data',
+            () => expect(remoteData.hasData(state.results)).toBeTruthy());
 
         test(
-            'searchResults should be the data it succeeded with',
-            () => expect(remoteData.hasData(result.searchResults)).toBe(searchResults));
+            'results should be the data it succeeded with',
+            () => expect(remoteData.hasData(state.results)).toBe(searchResults));
     });
 
     describe('when handling SEARCH_CLEAR', () => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import User from '../components/Menu.jsx';
 import store from '../store';
@@ -10,7 +11,7 @@ class MenuContainer extends React.Component {
     }
 
     render() {
-        return <User {...this.state} />;
+        return <User {...this.state.user} />;
     }
 }
 

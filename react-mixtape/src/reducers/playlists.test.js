@@ -20,7 +20,7 @@ describe('playlists reducer', () => {
         const result = reducer(initialState, action(FETCH_PLAYLISTS_SUCCESS, { playlists }));
         test(
             'playlists should be the array provided in the action',
-            () => expect(result).toEqual({ ...initialState, playlists }));
+            () => expect(result).toEqual({ ...initialState, list: playlists }));
     });
 
     describe('when handling FETCH_PLAYLIST_SUCCEED', () => {
@@ -28,7 +28,7 @@ describe('playlists reducer', () => {
         const result = reducer(initialState, action(FETCH_PLAYLIST_SUCCESS, { playlist }));
         test(
             'playlist should be the object provided in the action',
-            () => expect(result).toEqual({ ...initialState, playlist }));
+            () => expect(result).toEqual({ ...initialState, selected: playlist }));
     });
 
     describe('when handling FETCH_PLAYLIST_TRACKS_SUCCESS', () => {
@@ -46,10 +46,7 @@ describe('playlists reducer', () => {
         const result = reducer(selectedPlaylistState, action(PLAYLIST_TRACKS_ADD, { track }));
         test(
             'track should be added to the end of the selected playlist',
-            () => expect(result).toEqual({
-                ...selectedPlaylistState,
-                tracks: [...tracks, track]
-            }))
+            () => expect(result.tracks).toEqual([...tracks, track]))
     });
 
     describe ('when handling PLAYLIST_TRACKS_SAVE_SUCCESS', () => {

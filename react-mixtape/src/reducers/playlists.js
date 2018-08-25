@@ -1,9 +1,10 @@
 import * as actions from '../actionTypes';
 
 export const initialState = {
-    playlist: null,
-    playlists: [],
-    tracks: []
+    selected: null,
+    list: [],
+    tracks: [],
+    canSave: false
 };
 
 export default function(state = initialState, action) {
@@ -11,22 +12,24 @@ export default function(state = initialState, action) {
         case actions.FETCH_PLAYLISTS_SUCCESS:
             return {
                 ...state,
-               playlists: action.playlists
+               list: action.playlists
             };
         case actions.FETCH_PLAYLIST_SUCCESS:
             return {
                 ...state,
-                playlist: action.playlist
-            };
+                selected: action.playlist,
+                canSave: false
+            }
         case actions.FETCH_PLAYLIST_TRACKS_SUCCESS:
             return {
                 ...state,
                 tracks: action.tracks
-            };
+            }
         case actions.PLAYLIST_TRACKS_ADD:
             return {
                 ...state,
-                tracks: [...state.tracks, action.track]
+                tracks: [...state.tracks, action.track],
+                canSave: true
             };
         case actions.PLAYLIST_TRACKS_SAVE_SUCCESS:
             return {

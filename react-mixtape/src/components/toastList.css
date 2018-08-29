@@ -1,0 +1,16 @@
+@value variables: '../styles/variables.css';
+@value spacing-h, spacing-large, spacing, white from variables;
+
+.container {
+    position: absolute;
+    right: 0;
+    top: spacing;
+}
+
+.item {
+    list-style-type: none;
+    margin: spacing 0;
+    padding: spacing-h spacing-large;
+    background: green;
+    color: white;
+}

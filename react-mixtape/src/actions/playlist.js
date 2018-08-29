@@ -1,3 +1,4 @@
+import { raiseNotification } from './feedback';
 import * as actions from '../actionTypes';
 import * as spotify from '../utils/spotifyApi';
 
@@ -73,7 +74,10 @@ export const savePlaylistTracks = (
             JSON.stringify(tracks.map(t => t.uri)),
             oAuthToken)
         .then(r => r.json())
-        .then(() => dispatch(savePlaylistTracksSuccess()))
+        .then(() => {
+            dispatch(savePlaylistTracksSuccess());
+            dispatch(raiseNotification('Playlist saved'));
+        })
         .catch(err => dispatch(savePlaylistTracksFail(err)));
 
 export const savePlaylistTracksSuccess = () => ({
